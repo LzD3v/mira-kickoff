@@ -1,0 +1,12 @@
+:host {
+  display: block; /* host sempre ocupa largura correta */
+}
+
+.card {
+  width: 100%;
+  padding: var(--card-pad, 0px); /* controlado pelo host */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}

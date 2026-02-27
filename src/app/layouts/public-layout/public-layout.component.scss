@@ -1,0 +1,167 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.14);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+}
+
+/* ✅ Dark-only por enquanto (se alguém mudar o theme, ainda fica decente) */
+:root[data-theme='light'] .topbar {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+/* ✅ controla altura/resp do header aqui */
+:host {
+  --topbar-pad-y: 10px;
+  --logo-h: clamp(54px, 6.5vw, 90px);
+}
+
+.topbar__inner {
+  /* ✅ layout mais estável que grid aqui */
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--topbar-pad-y) 0;
+  min-height: calc(var(--logo-h) + (var(--topbar-pad-y) * 2));
+}
+
+/* ✅ “coluna” esquerda: ocupa o mesmo espaço da direita */
+.brand {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  line-height: 0;
+}
+
+/* ✅ trava um pouco pra logo não “puxar” a nav */
+.brand__logo {
+  height: var(--logo-h);
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 22px rgba(133, 94, 217, 0.22));
+  opacity: 0.98;
+}
+
+.nav {
+  /* fica realmente no centro porque brand/actions ocupam 1fr cada */
+  flex: 0 0 auto;
+  display: none;
+  margin-left: 116px;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.nav__link {
+  font-size: 14px;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-radius: 999px;
+  transition: background 180ms ease, color 180ms ease;
+  white-space: nowrap;
+}
+.nav__link:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+.nav__link.is-active {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* ✅ “coluna” direita: mesmo peso da esquerda */
+.actions {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* (se o botão de tema voltar a existir) */
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+.icon-btn:hover {
+  transform: translateY(-1px);
+  background: var(--surface-2);
+}
+
+.main {
+  min-height: calc(100svh - 140px);
+}
+
+.footer {
+  position: relative;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme='light'] .footer {
+  border-top: 1px solid rgba(17, 24, 39, 0.10);
+}
+
+/* “fade” suave pra costurar com o fundo */
+.footer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -56px;
+  height: 56px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.08));
+}
+
+:root[data-theme='light'] .footer::before {
+  background: linear-gradient(to bottom, transparent, rgba(17, 24, 39, 0.04));
+}
+
+.footer__inner {
+  padding: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+@media (min-width: 860px) {
+  .nav {
+    display: inline-flex;
+  }
+}
+
+/* ✅ mobile: reduz um pouco o header (sem matar tua logo) */
+@media (max-width: 520px) {
+  :host {
+    --topbar-pad-y: 8px;
+    --logo-h: 56px;
+  }
+}
+
+/* ✅ TEMP: dark-only (esconde toggle de tema) — escopado no header */
+.topbar .theme-toggle,
+.topbar [data-theme-toggle],
+.topbar button[aria-label*="tema"],
+.topbar button[aria-label*="Tema"] {
+  display: none !important;
+}

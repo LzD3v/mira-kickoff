@@ -1,0 +1,34 @@
+.toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease;
+  position: relative;
+}
+
+.thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateX(0);
+  transition: transform 180ms ease;
+}
+
+.toggle[aria-checked='true'] {
+  background: rgba(124, 92, 255, 0.22);
+  border-color: rgba(124, 92, 255, 0.5);
+}
+
+.toggle[aria-checked='true'] .thumb {
+  transform: translateX(18px);
+}
+
+.toggle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

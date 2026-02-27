@@ -1,0 +1,50 @@
+{
+  "name": "mira-kickoff",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "ng serve -c development",
+    "start:staging": "ng serve -c staging",
+    "build": "ng build -c production",
+    "build:dev": "ng build -c development",
+    "build:staging": "ng build -c staging",
+    "lint": "ng lint",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "test": "ng test --watch=false"
+  },
+  "dependencies": {
+    "@angular/animations": "^17.3.0",
+    "@angular/common": "^17.3.0",
+    "@angular/compiler": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/forms": "^17.3.0",
+    "@angular/platform-browser": "^17.3.0",
+    "@angular/platform-browser-dynamic": "^17.3.0",
+    "@angular/router": "^17.3.0",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.6.2",
+    "zone.js": "^0.14.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.0",
+    "@angular/cli": "^17.3.0",
+    "@angular/compiler-cli": "^17.3.0",
+    "@angular-eslint/builder": "^17.5.0",
+    "@angular-eslint/eslint-plugin": "^17.5.0",
+    "@angular-eslint/eslint-plugin-template": "^17.5.0",
+    "@angular-eslint/schematics": "^17.5.0",
+    "@angular-eslint/template-parser": "^17.5.0",
+    "@types/jasmine": "^5.1.4",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "jasmine-core": "^5.1.2",
+    "karma": "^6.4.2",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.1.0",
+    "prettier": "^3.2.5",
+    "typescript": "~5.4.5"
+  }
+}

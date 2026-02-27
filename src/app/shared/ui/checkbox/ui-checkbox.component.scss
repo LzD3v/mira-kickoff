@@ -1,0 +1,34 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.native {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  display: grid;
+  place-items: center;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.native:checked + .box {
+  border-color: rgba(124, 92, 255, 0.5);
+  background: rgba(124, 92, 255, 0.22);
+}
+
+.text {
+  color: var(--muted);
+  font-size: 13px;
+}

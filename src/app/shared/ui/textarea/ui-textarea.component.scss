@@ -1,0 +1,12 @@
+@import '../input/ui-input.component.scss';
+
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  resize: vertical;
+  min-height: 110px;
+}

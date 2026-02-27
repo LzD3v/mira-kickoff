@@ -1,0 +1,10 @@
+/* MIRA Brand Tokens (from brandbook screenshots)
+   Primary Purple: #855ED9
+   Cyan Accent:    #84D2F4
+   Deep Black:     #070707
+*/
+:root {
+  --bg: #070707;
+  --brand: #855ED9;
+  --brand-2: #84D2F4;
+}
