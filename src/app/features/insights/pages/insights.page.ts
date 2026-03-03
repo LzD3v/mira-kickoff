@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  signal,
+  computed,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UiCardComponent } from '@ui/card/ui-card.component';
 import { UiButtonComponent } from '@ui/button/ui-button.component';
@@ -6,13 +13,19 @@ import { UiSkeletonComponent } from '@ui/skeleton/ui-skeleton.component';
 import { UiEmptyStateComponent } from '@ui/empty-state/ui-empty-state.component';
 import { UiErrorStateComponent } from '@ui/error-state/ui-error-state.component';
 import { ToastService } from '@core/services/toast.service';
-import { inject } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type ViewState = 'loading' | 'ready' | 'empty' | 'error';
-
 type Period = 7 | 30 | 90;
 
-type SpendCategory = 'fastfood' | 'market' | 'transport' | 'subscriptions' | 'leisure' | 'other';
+type SpendCategory =
+  | 'fastfood'
+  | 'market'
+  | 'transport'
+  | 'subscriptions'
+  | 'leisure'
+  | 'other';
+
 type InsightKind = 'warning' | 'info' | 'positive';
 
 type SpendTx = {
@@ -25,11 +38,13 @@ type SpendTx = {
 
 type Insight = {
   id: string;
-  tag: string;
-  title: string;
-  body: string;
-  why: string;
-  actionLabel: string;
+  tagKey: string;
+  titleKey: string;
+  bodyKey: string;
+  bodyParams?: Record<string, any>;
+  whyKey: string;
+  whyParams?: Record<string, any>;
+  actionKey: string;
   kind: InsightKind;
   category: SpendCategory | 'general';
 };
@@ -43,43 +58,56 @@ type Insight = {
     UiSkeletonComponent,
     UiEmptyStateComponent,
     UiErrorStateComponent,
+    TranslateModule,
   ],
   template: `
     <div class="page">
       <header class="head">
         <div>
-          <div class="title">Dicas & Insights</div>
-          <div class="muted sub">Kick-off • conteúdo mock • visão clara do que dá pra ajustar</div>
+          <div class="title">{{ 'INSIGHTS.TITLE' | translate }}</div>
+          <div class="muted sub">{{ 'INSIGHTS.SUB' | translate }}</div>
         </div>
 
         <div class="head__actions">
-          <button class="pill focus-ring" type="button" (click)="state.set('loading')">Loading</button>
-          <button class="pill focus-ring" type="button" (click)="state.set('error')">Erro</button>
-          <button class="pill focus-ring" type="button" (click)="state.set('empty')">Vazio</button>
-          <button class="pill focus-ring" type="button" (click)="state.set('ready')">Normal</button>
+          <button class="pill focus-ring" type="button" (click)="state.set('loading')">
+            {{ 'INSIGHTS.DEV.LOADING' | translate }}
+          </button>
+          <button class="pill focus-ring" type="button" (click)="state.set('error')">
+            {{ 'INSIGHTS.DEV.ERROR' | translate }}
+          </button>
+          <button class="pill focus-ring" type="button" (click)="state.set('empty')">
+            {{ 'INSIGHTS.DEV.EMPTY' | translate }}
+          </button>
+          <button class="pill focus-ring" type="button" (click)="state.set('ready')">
+            {{ 'INSIGHTS.DEV.READY' | translate }}
+          </button>
         </div>
       </header>
 
-      <!-- Context “feito pra mim” + controles úteis -->
+      <!-- Context “feito pra mim” + controles -->
       <mira-ui-card *ngIf="state() === 'ready'" class="context">
         <div class="context__inner">
           <div class="context__left">
-            <div class="kicker">Resumo do período</div>
+            <div class="kicker">{{ 'INSIGHTS.CONTEXT.KICKER' | translate }}</div>
 
-            <div class="context__title">Pequenos ajustes, grande impacto.</div>
+            <div class="context__title">{{ 'INSIGHTS.CONTEXT.TITLE' | translate }}</div>
 
             <div class="muted context__desc">
-              Baseado no seu momento (mock): <b>{{ profile() }}</b> • foco: <b>{{ goal() }}</b>.
+              {{ 'INSIGHTS.CONTEXT.DESC_A' | translate }}
+              <b>{{ profile() | translate }}</b>
+              •
+              {{ 'INSIGHTS.CONTEXT.DESC_B' | translate }}
+              <b>{{ goal() | translate }}</b>.
             </div>
 
             <div class="stats">
               <div class="stat">
-                <div class="stat__k muted">Total no período</div>
+                <div class="stat__k muted">{{ 'INSIGHTS.CONTEXT.STATS.TOTAL' | translate }}</div>
                 <div class="stat__v">{{ money(summary().total) }}</div>
               </div>
 
               <div class="stat">
-                <div class="stat__k muted">Maior categoria</div>
+                <div class="stat__k muted">{{ 'INSIGHTS.CONTEXT.STATS.TOP' | translate }}</div>
                 <div class="stat__v">
                   {{ categoryLabel(summary().topCategory) }}
                   <span class="muted stat__sub">({{ money(summary().topAmount) }})</span>
@@ -87,7 +115,7 @@ type Insight = {
               </div>
 
               <div class="stat">
-                <div class="stat__k muted">Economia possível</div>
+                <div class="stat__k muted">{{ 'INSIGHTS.CONTEXT.STATS.POTENTIAL' | translate }}</div>
                 <div class="stat__v">{{ money(summary().potentialSaving) }}</div>
               </div>
             </div>
@@ -95,8 +123,8 @@ type Insight = {
 
           <div class="controls">
             <div class="control">
-              <div class="control__label muted">Período</div>
-              <div class="seg" role="tablist" aria-label="Período">
+              <div class="control__label muted">{{ 'INSIGHTS.CONTEXT.PERIOD_LABEL' | translate }}</div>
+              <div class="seg" role="tablist" [attr.aria-label]="'INSIGHTS.CONTEXT.PERIOD_ARIA' | translate">
                 <button class="segBtn focus-ring" type="button" (click)="period.set(7)"  [class.is-active]="period() === 7">7d</button>
                 <button class="segBtn focus-ring" type="button" (click)="period.set(30)" [class.is-active]="period() === 30">30d</button>
                 <button class="segBtn focus-ring" type="button" (click)="period.set(90)" [class.is-active]="period() === 90">90d</button>
@@ -104,15 +132,15 @@ type Insight = {
             </div>
 
             <label class="field">
-              <span class="field__label muted">Categoria</span>
+              <span class="field__label muted">{{ 'INSIGHTS.CONTEXT.CATEGORY_LABEL' | translate }}</span>
               <select class="select focus-ring" [value]="categoryFilter()" (change)="onCategoryChange($any($event.target).value)">
-                <option value="all">Todas</option>
-                <option value="fastfood">Fast-food</option>
-                <option value="market">Mercado</option>
-                <option value="transport">Transporte</option>
-                <option value="subscriptions">Assinaturas</option>
-                <option value="leisure">Lazer</option>
-                <option value="other">Outros</option>
+                <option value="all">{{ 'INSIGHTS.CONTEXT.CATEGORY_ALL' | translate }}</option>
+                <option value="fastfood">{{ 'INSIGHTS.CATS.FASTFOOD' | translate }}</option>
+                <option value="market">{{ 'INSIGHTS.CATS.MARKET' | translate }}</option>
+                <option value="transport">{{ 'INSIGHTS.CATS.TRANSPORT' | translate }}</option>
+                <option value="subscriptions">{{ 'INSIGHTS.CATS.SUBSCRIPTIONS' | translate }}</option>
+                <option value="leisure">{{ 'INSIGHTS.CATS.LEISURE' | translate }}</option>
+                <option value="other">{{ 'INSIGHTS.CATS.OTHER' | translate }}</option>
               </select>
             </label>
           </div>
@@ -129,59 +157,59 @@ type Insight = {
 
         <div *ngSwitchCase="'empty'" class="state">
           <mira-ui-empty-state
-            title="Sem insights por enquanto"
-            description="No Kick-off isso é simulado. Depois, a API traz recomendações personalizadas pelos seus gastos."
-            actionLabel="Recarregar"
+            [title]="'INSIGHTS.STATES.EMPTY.TITLE' | translate"
+            [description]="'INSIGHTS.STATES.EMPTY.DESC' | translate"
+            [actionLabel]="'INSIGHTS.STATES.EMPTY.ACTION' | translate"
             [action]="reload"
           />
         </div>
 
         <div *ngSwitchCase="'error'" class="state">
           <mira-ui-error-state
-            title="Não foi possível carregar"
-            description="Simulação de erro (Kick-off). Em produção virá da API."
-            actionLabel="Tentar novamente"
+            [title]="'INSIGHTS.STATES.ERROR.TITLE' | translate"
+            [description]="'INSIGHTS.STATES.ERROR.DESC' | translate"
+            [actionLabel]="'INSIGHTS.STATES.ERROR.ACTION' | translate"
             [action]="reload"
           />
         </div>
 
         <div *ngSwitchDefault class="grid">
           <mira-ui-card class="ins-card" *ngFor="let i of visible(); let idx = index; trackBy: trackById">
-            <div
-              class="ins-inner"
-              [attr.data-kind]="i.kind"
-              [style.animationDelay.ms]="idx * 45"
-            >
+            <div class="ins-inner" [attr.data-kind]="i.kind" [style.animationDelay.ms]="idx * 45">
               <div class="topline">
-                <div class="tag">{{ i.tag }}</div>
+                <div class="tag">{{ i.tagKey | translate }}</div>
                 <div class="kpi muted" *ngIf="i.category !== 'general'">
                   {{ categoryLabel(i.category) }}
                 </div>
               </div>
 
-              <div class="h3">{{ i.title }}</div>
-              <div class="muted body">{{ i.body }}</div>
+              <div class="h3">{{ i.titleKey | translate }}</div>
+              <div class="muted body">{{ i.bodyKey | translate:i.bodyParams }}</div>
 
               <div class="why">
-                <div class="why__k">Por que isso ajuda</div>
-                <div class="muted why__t">{{ i.why }}</div>
+                <div class="why__k">{{ 'INSIGHTS.GRID.WHY_TITLE' | translate }}</div>
+                <div class="muted why__t">{{ i.whyKey | translate:i.whyParams }}</div>
               </div>
 
               <div class="actions">
-                <mira-ui-button variant="secondary" (click)="save(i)">Salvar</mira-ui-button>
-                <mira-ui-button variant="primary" (click)="doNow(i)">{{ i.actionLabel }}</mira-ui-button>
+                <mira-ui-button variant="secondary" (click)="save(i)">
+                  {{ 'INSIGHTS.GRID.SAVE' | translate }}
+                </mira-ui-button>
+                <mira-ui-button variant="primary" (click)="doNow(i)">
+                  {{ i.actionKey | translate }}
+                </mira-ui-button>
               </div>
             </div>
           </mira-ui-card>
 
           <div class="muted hint" *ngIf="visible().length === 0">
-            Nenhum insight nessa categoria no período selecionado.
+            {{ 'INSIGHTS.GRID.HINT_NONE' | translate }}
           </div>
         </div>
       </ng-container>
 
       <div class="note muted" *ngIf="state() === 'ready'">
-        TODO (pós Kick-off): conectar API de transações/insights, limites por categoria, e histórico (comparar com mês anterior).
+        {{ 'INSIGHTS.NOTE' | translate }}
       </div>
     </div>
   `,
@@ -228,7 +256,6 @@ type Insight = {
         background: rgba(255,255,255,0.07);
       }
 
-      /* Context */
       .context{
         border-radius: 22px;
         border: 1px solid rgba(255,255,255,0.10);
@@ -362,7 +389,6 @@ type Insight = {
         color: rgba(255,255,255,0.92);
       }
 
-      /* Grid */
       .grid{
         display:grid;
         grid-template-columns: 1fr;
@@ -389,7 +415,6 @@ type Insight = {
         border-color: rgba(255,255,255,0.14);
       }
 
-      /* tons por “kind” (bem leve e mais sério) */
       .ins-inner[data-kind='warning']{
         background: linear-gradient(180deg, rgba(255,92,122,0.10), rgba(255,255,255,0.02));
         border-color: rgba(255,92,122,0.18);
@@ -482,12 +507,16 @@ type Insight = {
 })
 export class InsightsPage {
   private readonly toast = inject(ToastService);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  readonly locale = signal<string>('pt-BR');
 
   readonly state = signal<ViewState>('ready');
 
-  // mock “perfil”
-  readonly profile = signal('controle leve');
-  readonly goal = signal('reduzir ansiedade financeira');
+  // mock “perfil” (como key)
+  readonly profile = signal('INSIGHTS.PROFILE.LIGHT_CONTROL');
+  readonly goal = signal('INSIGHTS.GOAL.REDUCE_ANXIETY');
 
   // controles
   readonly period = signal<Period>(30);
@@ -495,21 +524,18 @@ export class InsightsPage {
 
   // mock “transações”
   readonly tx = signal<SpendTx[]>([
-    // últimos dias (mock)
-    { id: 't1', date: this.daysAgoIso(2),  category: 'fastfood',      label: 'Burger',          amount: 48.9 },
-    { id: 't2', date: this.daysAgoIso(3),  category: 'market',        label: 'Mercado',         amount: 212.4 },
-    { id: 't3', date: this.daysAgoIso(4),  category: 'subscriptions', label: 'Streaming',       amount: 39.9 },
-    { id: 't4', date: this.daysAgoIso(6),  category: 'transport',     label: 'Uber',            amount: 26.5 },
-    { id: 't5', date: this.daysAgoIso(9),  category: 'fastfood',      label: 'Pizza',           amount: 72.0 },
-    { id: 't6', date: this.daysAgoIso(11), category: 'leisure',       label: 'Cinema',          amount: 54.0 },
-    { id: 't7', date: this.daysAgoIso(15), category: 'market',        label: 'Mercado',         amount: 178.2 },
-    { id: 't8', date: this.daysAgoIso(18), category: 'fastfood',      label: 'Delivery',        amount: 36.9 },
-    { id: 't9', date: this.daysAgoIso(22), category: 'subscriptions', label: 'App',             amount: 19.9 },
-    { id: 't10',date: this.daysAgoIso(28), category: 'other',         label: 'Farmácia',        amount: 63.4 },
-
-    // mais antigo (entra no 90d)
-    { id: 't11',date: this.daysAgoIso(46), category: 'fastfood',      label: 'Fast-food',       amount: 89.0 },
-    { id: 't12',date: this.daysAgoIso(63), category: 'transport',     label: 'Transporte',      amount: 110.0 },
+    { id: 't1', date: this.daysAgoIso(2),  category: 'fastfood',      label: 'Burger',     amount: 48.9 },
+    { id: 't2', date: this.daysAgoIso(3),  category: 'market',        label: 'Mercado',    amount: 212.4 },
+    { id: 't3', date: this.daysAgoIso(4),  category: 'subscriptions', label: 'Streaming',  amount: 39.9 },
+    { id: 't4', date: this.daysAgoIso(6),  category: 'transport',     label: 'Uber',       amount: 26.5 },
+    { id: 't5', date: this.daysAgoIso(9),  category: 'fastfood',      label: 'Pizza',      amount: 72.0 },
+    { id: 't6', date: this.daysAgoIso(11), category: 'leisure',       label: 'Cinema',     amount: 54.0 },
+    { id: 't7', date: this.daysAgoIso(15), category: 'market',        label: 'Mercado',    amount: 178.2 },
+    { id: 't8', date: this.daysAgoIso(18), category: 'fastfood',      label: 'Delivery',   amount: 36.9 },
+    { id: 't9', date: this.daysAgoIso(22), category: 'subscriptions', label: 'App',        amount: 19.9 },
+    { id: 't10',date: this.daysAgoIso(28), category: 'other',         label: 'Farmácia',   amount: 63.4 },
+    { id: 't11',date: this.daysAgoIso(46), category: 'fastfood',      label: 'Fast-food',  amount: 89.0 },
+    { id: 't12',date: this.daysAgoIso(63), category: 'transport',     label: 'Transporte', amount: 110.0 },
   ]);
 
   private readonly limits = {
@@ -557,7 +583,6 @@ export class InsightsPage {
       }
     });
 
-    // “economia possível” mock: 25% do que estiver acima do limite, somado
     let potentialSaving = 0;
     (Object.keys(by) as SpendCategory[]).forEach((k) => {
       const over = Math.max(0, by[k] - this.limits[k]);
@@ -568,9 +593,11 @@ export class InsightsPage {
   });
 
   readonly insights = computed<Insight[]>(() => {
+    // força recompute quando muda idioma
+    this.locale();
+
     const by = this.byCategory();
     const days = this.period();
-
     const makeId = (x: string) => `i_${x}_${days}`;
 
     const list: Insight[] = [];
@@ -578,25 +605,28 @@ export class InsightsPage {
     // 1) Fast-food
     const ff = by.fastfood;
     if (ff > this.limits.fastfood) {
-      const over = ff - this.limits.fastfood;
+      const cut = (ff - this.limits.fastfood) * 0.25;
+
       list.push({
         id: makeId('fastfood_over'),
-        tag: 'Ajuste direto',
-        title: `Fast-food acima do ideal no período`,
-        body: `Você gastou ${this.money(ff)} em fast-food nos últimos ${days} dias. Um corte leve de ${this.money(over * 0.25)} já melhora o mês sem “apertar”.`,
-        why: `Fast-food costuma ser um gasto invisível (pequeno e recorrente). Ajustar só uma parte já reduz o total com pouco esforço.`,
-        actionLabel: 'Criar limite',
+        tagKey: 'INSIGHTS.TAGS.DIRECT',
+        titleKey: 'INSIGHTS.CARDS.FASTFOOD_OVER.TITLE',
+        bodyKey: 'INSIGHTS.CARDS.FASTFOOD_OVER.BODY',
+        bodyParams: { total: this.money(ff), days, cut: this.money(cut) },
+        whyKey: 'INSIGHTS.CARDS.FASTFOOD_OVER.WHY',
+        actionKey: 'INSIGHTS.ACTIONS.CREATE_LIMIT',
         kind: 'warning',
         category: 'fastfood',
       });
     } else {
       list.push({
         id: makeId('fastfood_ok'),
-        tag: 'Bom sinal',
-        title: `Fast-food sob controle`,
-        body: `Seu gasto em fast-food está em ${this.money(ff)} no período. Mantendo assim, você evita “vazamentos” no orçamento.`,
-        why: `Quando essa categoria fica estável, você ganha previsibilidade e diminui a chance de estourar o mês.`,
-        actionLabel: 'Salvar dica',
+        tagKey: 'INSIGHTS.TAGS.GOOD',
+        titleKey: 'INSIGHTS.CARDS.FASTFOOD_OK.TITLE',
+        bodyKey: 'INSIGHTS.CARDS.FASTFOOD_OK.BODY',
+        bodyParams: { total: this.money(ff) },
+        whyKey: 'INSIGHTS.CARDS.FASTFOOD_OK.WHY',
+        actionKey: 'INSIGHTS.ACTIONS.SAVE_TIP',
         kind: 'positive',
         category: 'fastfood',
       });
@@ -606,36 +636,38 @@ export class InsightsPage {
     const subs = by.subscriptions;
     list.push({
       id: makeId('subs'),
-      tag: 'Revisão rápida',
-      title: `Assinaturas: vale checar 10 minutos`,
-      body: `Assinaturas somaram ${this.money(subs)} no período. Se tiver 1 serviço pouco usado, trocar/pausar já libera espaço.`,
-      why: `Assinaturas são silenciosas e acumulam. Uma revisão curta evita pagar por coisa parada.`,
-      actionLabel: 'Revisar assinaturas',
+      tagKey: 'INSIGHTS.TAGS.QUICK_REVIEW',
+      titleKey: 'INSIGHTS.CARDS.SUBS.TITLE',
+      bodyKey: 'INSIGHTS.CARDS.SUBS.BODY',
+      bodyParams: { total: this.money(subs) },
+      whyKey: 'INSIGHTS.CARDS.SUBS.WHY',
+      actionKey: 'INSIGHTS.ACTIONS.REVIEW_SUBS',
       kind: subs > this.limits.subscriptions ? 'warning' : 'info',
       category: 'subscriptions',
     });
 
-    // 3) Mercado (dica prática)
+    // 3) Mercado
     const mk = by.market;
     list.push({
       id: makeId('market'),
-      tag: 'Praticidade',
-      title: `Mercado: 1 regra simples pra reduzir desperdício`,
-      body: `Mercado está em ${this.money(mk)} no período. Antes de ir, liste 6 itens essenciais + 2 “livres”. Isso reduz compras por impulso.`,
-      why: `Uma lista curta mantém o foco e diminui gasto por “aproveitar promoção” sem necessidade.`,
-      actionLabel: 'Salvar regra',
+      tagKey: 'INSIGHTS.TAGS.PRACTICAL',
+      titleKey: 'INSIGHTS.CARDS.MARKET.TITLE',
+      bodyKey: 'INSIGHTS.CARDS.MARKET.BODY',
+      bodyParams: { total: this.money(mk) },
+      whyKey: 'INSIGHTS.CARDS.MARKET.WHY',
+      actionKey: 'INSIGHTS.ACTIONS.SAVE_RULE',
       kind: 'info',
       category: 'market',
     });
 
-    // 4) Geral: revisão semanal
+    // 4) Geral
     list.push({
       id: makeId('weekly'),
-      tag: 'Rotina',
-      title: `Check-in de 8 minutos (1x/semana)`,
-      body: `Escolha um dia fixo: veja o total gasto, a maior categoria e 1 ajuste simples pra próxima semana.`,
-      why: `Revisão curta evita surpresa e aumenta sensação de controle sem virar “planilha eterna”.`,
-      actionLabel: 'Criar lembrete',
+      tagKey: 'INSIGHTS.TAGS.ROUTINE',
+      titleKey: 'INSIGHTS.CARDS.WEEKLY.TITLE',
+      bodyKey: 'INSIGHTS.CARDS.WEEKLY.BODY',
+      whyKey: 'INSIGHTS.CARDS.WEEKLY.WHY',
+      actionKey: 'INSIGHTS.ACTIONS.CREATE_REMINDER',
       kind: 'positive',
       category: 'general',
     });
@@ -650,6 +682,17 @@ export class InsightsPage {
     return arr.filter((i) => i.category === f);
   });
 
+  constructor() {
+    const setLocale = () => {
+      const l = (this.translate.currentLang || this.translate.defaultLang || 'pt-BR') as string;
+      this.locale.set(l);
+    };
+    setLocale();
+
+    const sub = this.translate.onLangChange.subscribe(() => setLocale());
+    this.destroyRef.onDestroy(() => sub.unsubscribe());
+  }
+
   onCategoryChange(v: string) {
     const next = (v || 'all') as 'all' | SpendCategory;
     this.categoryFilter.set(next);
@@ -663,29 +706,38 @@ export class InsightsPage {
   trackById = (_: number, it: Insight) => it.id;
 
   save(i: Insight) {
-    this.toast.push({ type: 'success', title: 'Salvo', message: `“${i.title}” foi salvo (mock).` });
+    this.toast.push({
+      type: 'success',
+      title: this.translate.instant('INSIGHTS.TOAST.SAVED_TITLE'),
+      message: this.translate.instant('INSIGHTS.TOAST.SAVED_MSG', {
+        title: this.translate.instant(i.titleKey),
+      }),
+    });
   }
 
   doNow(i: Insight) {
     this.toast.push({
       type: 'success',
-      title: 'Boa!',
-      message: `Ação “${i.actionLabel}” (mock) registrada.`,
+      title: this.translate.instant('INSIGHTS.TOAST.DONE_TITLE'),
+      message: this.translate.instant('INSIGHTS.TOAST.DONE_MSG', {
+        action: this.translate.instant(i.actionKey),
+      }),
     });
   }
 
   money(v: number) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v || 0);
+    const n = v || 0;
+    try {
+      return new Intl.NumberFormat(this.locale(), { style: 'currency', currency: 'BRL' }).format(n);
+    } catch {
+      return `R$ ${n.toFixed(2)}`;
+    }
   }
 
   categoryLabel(c: SpendCategory | 'general') {
-    if (c === 'general') return 'Geral';
-    if (c === 'fastfood') return 'Fast-food';
-    if (c === 'market') return 'Mercado';
-    if (c === 'transport') return 'Transporte';
-    if (c === 'subscriptions') return 'Assinaturas';
-    if (c === 'leisure') return 'Lazer';
-    return 'Outros';
+    this.locale(); // garante atualização quando troca idioma
+    const key = c === 'general' ? 'INSIGHTS.CATS.GENERAL' : `INSIGHTS.CATS.${c.toUpperCase()}`;
+    return this.translate.instant(key);
   }
 
   private daysAgoIso(n: number) {

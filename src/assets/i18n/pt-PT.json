@@ -1,0 +1,716 @@
+{
+  "APP": {
+    "WELCOME": "Bem-vindo 👋",
+    "LOGOUT": "Terminar sessão",
+    "SESSION": "Sessão"
+  },
+  "NAV": {
+    "DASHBOARD": "Painel",
+    "TASKS": "Tarefas",
+    "CHAT": "Chat",
+    "INSIGHTS": "Insights",
+    "SETTINGS": "Definições"
+  },
+  "LANG": {
+    "LABEL": "Idioma",
+    "PT_BR": "Português (Brasil)",
+    "PT_PT": "Português (Portugal)",
+    "EN": "Inglês",
+    "ES": "Espanhol"
+  },
+
+  "MARKETING": {
+    "HERO": {
+      "PILL": "MIRA • Assistente pessoal financeiro",
+      "TITLE": {
+        "A": "Clareza no seu dinheiro.",
+        "B": "Sem folha de cálculo",
+        "C": ", sem culpa."
+      },
+      "SUB": {
+        "A": "Regista em segundos, a MIRA organiza por ti e devolve-te ",
+        "B": "controlo",
+        "C": " com uma experiência bonita, simples e agradável de usar."
+      },
+      "TRUST": {
+        "T1": { "K": "Começa rápido", "V": "em poucos minutos" },
+        "T2": { "K": "Mobile-first", "V": "360–1920" },
+        "T3": { "K": "Acessível", "V": "Foco e teclado" }
+      },
+      "CTA": {
+        "PRIMARY": "Contratar a MIRA agora",
+        "SECONDARY": "Ver como funciona",
+        "ARIA_PRIMARY": "Conhecer o plano MIRA"
+      },
+      "BULLETS": {
+        "B1": "Regista gastos e entradas sem esforço",
+        "B2": "Insights que acalmam e mostram prioridade",
+        "B3": "Painel claro — percebes o mês rapidamente"
+      }
+    },
+
+    "MOCK": {
+      "TITLE": "MIRA • Demo",
+      "LIVE": "ao vivo",
+      "PANEL": { "K": "Visão do mês" },
+      "CHAT": {
+        "ME1": { "TEXT": "gastei 52 no supermercado", "META": "agora" },
+        "BOT1": {
+          "TEXT_HTML": "Registado ✅ <b>Supermercado</b> • 52 €<br />Queres que eu categorize como “alimentação”?",
+          "META": "MIRA"
+        },
+        "ME2": { "TEXT": "sim, e lembra-me da renda no dia 10", "META": "agora" },
+        "BOT2": {
+          "TEXT_HTML": "Fechado 😌<br />Lembrete criado • <b>10</b> • 9:00",
+          "META": "MIRA"
+        }
+      }
+    },
+
+    "STORIES": {
+      "TITLE": "Vê a MIRA em ação",
+      "SUB": "Uma prévia rápida do “ambiente” do produto — leve, bonita e direta.",
+      "HINT": "Mantém pressionado para pausar • Clica nas laterais para voltar/avançar",
+      "ALT1": "Story MIRA 01",
+      "ALT2": "Story MIRA 02",
+      "ALT3": "Story MIRA 03"
+    },
+
+    "HOW": {
+      "TITLE": "Como a MIRA te dá controlo — sem virar mais uma obrigação.",
+      "SUB": "Tu conversas, a MIRA organiza. Tu decides. Simples assim.",
+      "STEPS": {
+        "S1": { "T": "Regista em segundos", "D": "Texto, áudio, à tua maneira. O importante é não desistires." },
+        "S2": { "T": "Organização automática", "D": "Categorias, lembretes e resumos — tudo leve e fácil de acompanhar." },
+        "S3": { "T": "Vês o mês", "D": "Painel claro, gráficos bonitos e dicas que parecem feitas para ti." }
+      }
+    },
+
+    "BENEFITS": {
+      "TITLE": "Feito para te dar paz — e não mais ansiedade.",
+      "SUB": "Design premium, leitura fácil e microinterações que transmitem confiança.",
+      "ITEMS": {
+        "FRICTION": {
+          "TITLE": "Registos sem fricção",
+          "DESC": "Registas à tua maneira. A MIRA mantém a consistência — sem te “castigar” por falhares um dia."
+        },
+        "CONTEXT": {
+          "TITLE": "Insights com contexto",
+          "DESC": "Dicas que falam contigo: menos culpa, mais clareza e uma próxima ação simples."
+        },
+        "PANEL": {
+          "TITLE": "Painel limpo e premium",
+          "DESC": "Gráficos e cartões com hierarquia visual. Bate o olho e percebes."
+        },
+        "REMINDERS": {
+          "TITLE": "Lembretes que ajudam",
+          "DESC": "Sem barulho. Só o que importa — na hora certa."
+        },
+        "AUTO": {
+          "TITLE": "Organização automática",
+          "DESC": "Categorias, resumos e padrões — para decidires com mais calma."
+        },
+        "A11Y": {
+          "TITLE": "Acessibilidade a sério",
+          "DESC": "Foco visível, teclado e responsividade bem resolvida."
+        }
+      }
+    },
+
+    "PROOF": {
+      "TITLE": "Percebes o valor em segundos.",
+      "SUB": "Sem ecrãs confusos. Só o essencial — bonito e direto.",
+      "BULLETS": {
+        "B1": "Texto claro e forte hierarquia visual",
+        "B2": "Navegação simples e fluida",
+        "B3": "Rotina leve (a sério)"
+      },
+      "CARDS": {
+        "C1": "min para começar",
+        "C2": "passos para perceber o mês",
+        "C3": "folhas de cálculo necessárias"
+      }
+    },
+
+    "TESTIMONIALS": {
+      "TITLE": "Gente real. Vida real. Controlo real.",
+      "SUB": "O tipo de feedback que queremos ouvir todos os dias.",
+      "VERIFIED": "Cliente verificado",
+      "ARIA": "Ver testemunho {{n}}",
+      "ITEMS": {
+        "T1": {
+          "NAME": "Marina",
+          "ROLE": "Trabalhadora independente",
+          "CITY": "Curitiba • PR",
+          "QUOTE": "Parece que alguém finalmente traduziu finanças para linguagem humana. Abro e percebo logo."
+        },
+        "T2": {
+          "NAME": "Carlos",
+          "ROLE": "Trabalhador por conta de outrem",
+          "CITY": "São Paulo • SP",
+          "QUOTE": "O painel é direto. Sem “poluição”. Dá uma calma real ver o mês assim."
+        },
+        "T3": {
+          "NAME": "Patrícia",
+          "ROLE": "Empreendedora",
+          "CITY": "Belo Horizonte • MG",
+          "QUOTE": "As microinterações fazem diferença. Parece produto premium — e dá vontade de usar."
+        },
+        "T4": {
+          "NAME": "Renato",
+          "ROLE": "Freelancer",
+          "CITY": "Recife • PE",
+          "QUOTE": "Eu abandono sempre apps de finanças. Este aqui… sinto que consigo manter."
+        }
+      }
+    },
+
+    "FAQ": {
+      "TITLE": "Perguntas frequentes",
+      "SUB": "Tudo claro — como gostamos.",
+      "Q1": {
+        "Q": "A MIRA é para mim?",
+        "A": "Se queres organizar o mês sem folha de cálculo e sem stress, sim. A MIRA ajuda-te a registar, perceber e decidir com mais calma."
+      },
+      "Q2": {
+        "Q": "Preciso de saber “mexer em finanças”?",
+        "A": "Não. A ideia é manter simples: tu falas à tua maneira e a MIRA devolve-te clareza e próximos passos."
+      },
+      "Q3": {
+        "Q": "Dá para usar no telemóvel?",
+        "A": "Sim. A experiência é pensada para mobile: rápida, confortável e agradável de navegar."
+      }
+    },
+
+    "CTA_FINAL": {
+      "TITLE": "Pronto para sentir “o meu dinheiro está sob controlo”?",
+      "SUB": "Contrata a MIRA e começa de forma leve. O resto organizamos contigo.",
+      "BUTTON": "Contratar a MIRA agora"
+    },
+
+    "PLAN": {
+      "TITLE": "Conhece o nosso plano",
+      "H": "Tudo o que precisas para cuidar do mês — sem folha de cálculo.",
+      "P": "A MIRA foi feita para registares rápido, perceberes o que está a acontecer e tomares melhores decisões com calma. Sem ecrãs confusos. Sem “peso”. Só clareza.",
+      "ITEMS": {
+        "I1": "Insights essenciais (o que importa agora)",
+        "I2": "Painel do dinheiro (visão clara do mês)",
+        "I3": "Metas e comparativos (evolução sem ansiedade)",
+        "I4": "Lembretes (na hora certa)",
+        "I5": "Visão e organização automática (categorias e padrões)"
+      },
+      "FINE": "Cobrança mensal • Cancela quando quiseres",
+      "CONTINUE": "Continuar",
+      "BACK": "Voltar"
+    }
+  },
+
+  "COMMON": {
+    "CLOSE": "Fechar"
+  },
+
+  "PUBLIC": {
+  "HEADER": {
+    "ARIA_HOME": "Ir para a página inicial da MIRA",
+    "ARIA_NAV": "Navegação principal",
+    "HOME": "Home",
+    "HOW": "Como funciona",
+    "FAQ": "FAQ",
+    "LOGIN": "Entrar"
+  },
+  "FOOTER": {
+    "COPY": "© {{year}} MIRA",
+    "SOCIAL": "Redes sociais",
+    "INSTAGRAM": "Instagram",
+    "FACEBOOK": "Facebook",
+    "TAGLINE": "Acessível • Responsivo • Feito para ti"
+  }
+},
+  "APP_SHELL": {
+    "ARIA": {
+    "GO_DASHBOARD": "Ir para o painel",
+    "TOGGLE_MENU": "Alternar menu",
+    "APP_NAV": "Navegação da app",
+    "OPEN_MENU": "Abrir menu",
+    "CLOSE_MENU": "Fechar menu"
+  }
+},
+"AUTH": {
+  "LOGIN": {
+    "KICKER": "Acesso",
+    "TITLE": "Entrar na MIRA",
+    "DESC_HTML": "Mock login (Kick-off): use <b>demo@mira.app</b> e palavra-passe <b>mira123</b>.",
+    "EMAIL_LABEL": "E-mail",
+    "EMAIL_PLACEHOLDER": "voce@exemplo.com",
+    "PASS_LABEL": "Palavra-passe",
+    "PASS_PLACEHOLDER": "••••••••",
+    "TIP": "Dica: este fluxo será trocado por endpoint real quando for enviado.",
+    "BUTTON": "Entrar"
+  },
+  "ERRORS": {
+    "EMAIL_REQUIRED": "Indique o seu e-mail.",
+    "EMAIL_INVALID": "E-mail inválido.",
+    "PASS_REQUIRED": "Indique a sua palavra-passe.",
+    "PASS_SHORT": "Palavra-passe demasiado curta.",
+    "REVIEW_TITLE": "Revise os campos",
+    "REVIEW_MSG": "Verifique e tente novamente.",
+    "FAIL_TITLE": "Falha no login",
+    "FAIL_MSG": "Tente novamente."
+  },
+  "TOASTS": {
+    "WELCOME_TITLE": "Bem-vindo!",
+    "WELCOME_MSG": "Login mock efetuado."
+  }
+},
+"DASHBOARD": {
+  "TOP": {
+    "MONTH_ARIA": "Selecionar mês",
+    "PREV_MONTH": "Mês anterior",
+    "NEXT_MONTH": "Mês seguinte",
+    "MONTH": "Mês",
+    "PRESETS_ARIA": "Atalhos de período",
+    "PRESETS": { "WEEK": "Semana", "MONTH": "Mês", "TODAY": "Hoje" },
+    "DATES_ARIA": "Selecionar datas",
+    "DATE_START_SR": "Data inicial",
+    "DATE_END_SR": "Data final"
+  },
+  "DEV": { "LOADING": "Loading", "ERROR": "Erro", "NORMAL": "Normal" },
+  "ERROR": {
+    "SUMMARY_TITLE": "Resumo",
+    "SIM_FAIL": "Falha simulada (Kick-off)",
+    "STATE_TITLE": "Não foi possível carregar",
+    "STATE_DESC": "No Kick-off isto é simulado. Depois, o erro vem da API.",
+    "STATE_ACTION": "Tentar novamente"
+  },
+  "CARDS": {
+    "PERIOD_RESULT": { "TITLE": "Resultado do Período" },
+    "INCOME": { "TITLE": "Entradas" },
+    "EXPENSE": { "TITLE": "Saídas" }
+  },
+  "LABELS": {
+    "REALIZED": "Realizado",
+    "PROJECTED": "Previsto",
+    "PROJECTED_RECEIVE": "Previsto (A Receber)",
+    "PROJECTED_PAY": "Previsto (A Pagar)"
+  },
+  "BALANCE": {
+    "TITLE": "Evolução do Saldo no Período",
+    "SUB": "Comparando realizado vs projetado",
+    "MODE_ARIA": "Modo do gráfico",
+    "MODE": { "REALIZED": "Realizado", "PROJECTED": "Projetado" },
+    "CHART_ARIA": "Gráfico de saldo (mock)",
+    "LEGEND": { "REALIZED": "Saldo Realizado", "PROJECTED": "Saldo Projetado" }
+  },
+  "EXPENSES": {
+    "TITLE": "Despesas",
+    "SUB": "Pagas vs A pagar • Detalhes por categoria",
+    "TAB_ARIA": "Despesas pagas ou a pagar",
+    "TAB": { "PAID": "Pagas", "DUE": "A pagar" },
+    "PIE_ARIA": "Repetir animação do gráfico de despesas",
+    "TOTAL": "Total",
+    "TOTAL_PAID": "pago",
+    "TOTAL_DUE": "a pagar",
+    "CLICK_REANIMATE": "Clica para reanimar",
+    "CATS_TITLE": "Detalhes por Categoria",
+    "REPLAY_BTN": "Repetir animação"
+  },
+  "CATS": {
+    "HOME": "Casa",
+    "OTHERS": "Outros",
+    "UTILITIES": "Utilidades",
+    "TRANSPORT": "Transportes"
+  }
+},
+"TASKS": {
+  "TITLE": "Tarefas & Lembretes",
+  "SUB": "Kick-off: CRUD mock + prioridades + categorias + agenda + concluir por seleção.",
+  "ACTIONS": {
+    "SIM_LOADING": "Simular loading",
+    "SIM_ERROR": "Simular erro",
+    "COMPLETE_SELECTED": "Concluir selecionadas ({{n}})",
+    "DELETE_SELECTED": "Apagar selecionadas",
+    "CREATE": "Criar tarefa"
+  },
+  "STATES": {
+    "ERROR": {
+      "TITLE": "Não foi possível carregar",
+      "DESC": "No Kick-off, isto é apenas simulado. Depois, será um erro real vindo do backend.",
+      "ACTION": "Tentar novamente"
+    },
+    "EMPTY": {
+      "TITLE": "Sem tarefas por enquanto",
+      "DESC": "Crie a sua primeira tarefa. (No produto final, isto vem do endpoint.)",
+      "ACTION": "Criar tarefa"
+    }
+  },
+  "TOOLBAR": { "FILTER_ARIA": "Filtro" },
+  "FILTER": { "ALL": "Todas", "OPEN": "Abertas", "DONE": "Concluídas" },
+  "BULK": {
+    "SELECT_VISIBLE": "Selecionar visíveis",
+    "CLEAR": "Limpar seleção ({{n}})"
+  },
+  "TOOLS": {
+    "SEARCH": "Pesquisar",
+    "SEARCH_PH": "Pesquisar por título, notas ou categoria…",
+    "SORT": "Ordenar"
+  },
+  "SORT": {
+    "SMART": "Inteligente (prioridade + prazo)",
+    "DUE": "Prazo (mais próximo)",
+    "NEWEST": "Mais recentes"
+  },
+  "LIST": {
+    "SELECT": "Selecionar",
+    "OPEN_DETAILS_ARIA": "Abrir detalhes da tarefa",
+    "DUE": "Prazo",
+    "NOTES": "Notas",
+    "EDIT": "Editar",
+    "DELETE": "Apagar",
+    "NONE": "Nenhuma tarefa neste filtro/pesquisa."
+  },
+  "STATUS": {
+    "OPEN": "Aberta",
+    "DONE": "Concluída",
+    "OPEN_HINT": "Aberta (selecione e conclua)"
+  },
+  "AGENDA": {
+    "TITLE": "Agenda (7 dias)",
+    "SUB": "Visão rápida do que está a chegar.",
+    "TODAY": "Hoje",
+    "DAYS_ARIA": "Dias",
+    "EMPTY": "Sem itens neste dia.",
+    "NOTE": "TODO (API): obter prazos reais, horários, recorrência e notificações."
+  },
+  "EDITOR": {
+    "TITLE_LABEL": "Título",
+    "DUE_LABEL": "Prazo",
+    "PRIORITY": "Prioridade",
+    "CATEGORY": "Categoria",
+    "TIP": "Dica: use “Urgente” só quando for mesmo prioridade do dia (ajuda a não virar ansiedade).",
+    "NOTES_LABEL": "Notas",
+    "NOTES_PH": "Detalhes, lembretes, links, contexto…",
+    "TODO": "TODO (pós Kick-off): integrar CRUD real via API, ordenação no backend, recorrência e notificações.",
+    "SAVE_MOCK": "Guardar (mock)",
+    "UPDATE_MOCK": "Atualizar (mock)"
+  },
+  "DELETE": {
+    "ONE_TITLE": "Apagar tarefa?",
+    "ONE_DESC": "Isto remove a tarefa do mock local. (No produto final, será delete no backend.)",
+    "BULK_TITLE": "Apagar selecionadas?",
+    "BULK_DESC_HTML": "Selecionou <b>{{n}}</b> tarefa(s). Isto remove do mock local.",
+    "DELETE": "Apagar"
+  },
+  "DETAIL": { "DUE": "Prazo", "STATUS": "Estado", "CATEGORY": "Categoria", "NOTES": "Notas" },
+  "MODAL": {
+    "CREATE_TITLE": "Criar tarefa (mock)",
+    "EDIT_TITLE": "Editar tarefa (mock)",
+    "DELETE_TITLE": "Apagar tarefa",
+    "BULK_DELETE_TITLE": "Apagar selecionadas",
+    "DETAIL_TITLE": "Detalhes da tarefa"
+  },
+  "PRIORITY": { "LOW": "Baixa", "NORMAL": "Normal", "URGENT": "Urgente" },
+  "CATEGORY": { "FINANCE": "Financeiro", "PERSONAL": "Pessoal", "WORK": "Trabalho" },
+  "TOAST": {
+    "REVIEW_TITLE": "Revise os campos",
+    "REVIEW_MSG": "Preencha título, prazo, prioridade e categoria.",
+    "CREATED_TITLE": "Criado (mock)",
+    "CREATED_MSG": "Tarefa adicionada localmente.",
+    "UPDATED_TITLE": "Atualizado (mock)",
+    "UPDATED_MSG": "Alterações guardadas localmente.",
+    "NOTHING_TITLE": "Nada para concluir",
+    "NOTHING_MSG": "Selecione tarefas abertas.",
+    "COMPLETED_TITLE": "Concluídas (mock)",
+    "COMPLETED_MSG": "{{n}} tarefa(s) marcada(s) como concluída(s).",
+    "REMOVED_TITLE": "Removido (mock)",
+    "REMOVED_MSG": "Tarefa apagada localmente.",
+    "BULK_REMOVED_TITLE": "Removidas (mock)",
+    "BULK_REMOVED_MSG": "{{n}} tarefa(s) apagada(s)."
+  }
+},
+"COMMON": {
+  "CLOSE": "Fechar",
+  "CANCEL": "Cancelar",
+  "CLOSE_MODAL": "Fechar modal",
+  "MODAL": "Modal"
+},
+  "CHAT": {
+    "BRAND_ARIA": "MIRA",
+    "HELLO": "Olá, {{name}}",
+    "HEADLINE": "Por onde começamos?",
+    "USER_FALLBACK": "por aqui",
+
+    "PLACEHOLDER_EMPTY": "Peça à MIRA…",
+    "PLACEHOLDER_CHAT": "Escreva a sua mensagem…",
+
+    "SEND": "Enviar",
+
+    "MORE_ARIA": "Mais opções",
+    "MORE_TITLE": "Mais opções",
+
+    "MIC_ARIA": "Usar microfone",
+    "MIC_TITLE": "Usar microfone",
+
+    "SIM_ARIA": "Conversa simultânea",
+    "SIM_TITLE": "Conversa simultânea",
+
+    "MODE": {
+      "QUICK": "Rápido",
+      "DETAILED": "Detalhado"
+    },
+
+    "CHIPS": {
+      "ADJ": "3 ajustes rápidos",
+      "SAVE": "Poupar sem dor",
+      "PLAN": "Plano 30 dias",
+      "CAP": "Tecto por categoria",
+      "PROMPTS": {
+        "ADJ": "Analisa os meus gastos dos últimos 30 dias e diz-me 3 ajustes práticos.",
+        "SAVE": "Onde posso poupar sem impactar a minha rotina?",
+        "PLAN": "Cria um plano simples de 30 dias para controlar o meu orçamento.",
+        "CAP": "Identifica “fugas” e cria um tecto semanal por categoria."
+      }
+    },
+
+    "TOAST": {
+      "ACTIONS_TITLE": "Acções rápidas (mock)",
+      "ACTIONS_MSG": "Aqui entra um menu de acções (em breve).",
+
+      "MODE_TITLE": "Modo (mock)",
+      "MODE_MSG": "Modo: {{mode}}.",
+
+      "VOICE_TITLE": "Voz (mock)",
+      "VOICE_ON": "Captação de voz activada (simulado).",
+      "VOICE_OFF": "Captação de voz desactivada (simulado).",
+      "VOICE_TRANSCRIBED": "Transcrição simulada adicionada ao campo.",
+
+      "SIM_TITLE": "Simultâneo (mock)",
+      "SIM_ON": "Ligado (simulado).",
+      "SIM_OFF": "Desligado (simulado)."
+    },
+
+    "VOICE": {
+      "TRANSCRIPT": "Analisa os meus gastos e diz-me onde posso poupar esta semana."
+    },
+
+    "REPLY": {
+      "QUICK": "Boa. (Mock) Vou devolver-te 3 acções rápidas e claras para aplicares hoje.",
+      "DETAILED": "Perfeito. (Mock) Vou analisar por categoria e sugerir ajustes com metas semanais + próximos passos."
+    }
+  },
+  "INSIGHTS": {
+    "TITLE": "Dicas & Insights",
+    "SUB": "Kick-off • conteúdo mock • visão clara do que dá para ajustar",
+
+    "DEV": {
+      "LOADING": "Carregar",
+      "ERROR": "Erro",
+      "EMPTY": "Vazio",
+      "READY": "Normal"
+    },
+
+    "PROFILE": {
+      "LIGHT_CONTROL": "controlo leve"
+    },
+    "GOAL": {
+      "REDUCE_ANXIETY": "reduzir ansiedade financeira"
+    },
+
+    "CONTEXT": {
+      "KICKER": "Resumo do período",
+      "TITLE": "Pequenos ajustes, grande impacto.",
+      "DESC_A": "Com base no seu momento (mock):",
+      "DESC_B": "foco:",
+      "STATS": {
+        "TOTAL": "Total no período",
+        "TOP": "Categoria principal",
+        "POTENTIAL": "Poupança possível"
+      },
+      "PERIOD_LABEL": "Período",
+      "PERIOD_ARIA": "Selecionar período",
+      "CATEGORY_LABEL": "Categoria",
+      "CATEGORY_ALL": "Todas"
+    },
+
+    "STATES": {
+      "EMPTY": {
+        "TITLE": "Sem insights por enquanto",
+        "DESC": "No Kick-off isto é simulado. Depois, a API traz recomendações personalizadas com base nos seus gastos.",
+        "ACTION": "Recarregar"
+      },
+      "ERROR": {
+        "TITLE": "Não foi possível carregar",
+        "DESC": "Simulação de erro (Kick-off). Em produção virá da API.",
+        "ACTION": "Tentar novamente"
+      }
+    },
+
+    "GRID": {
+      "WHY_TITLE": "Porque isto ajuda",
+      "SAVE": "Guardar",
+      "HINT_NONE": "Sem insights nesta categoria no período selecionado."
+    },
+
+    "NOTE": "TODO (pós Kick-off): ligar API de transações/insights, limites por categoria e histórico (comparar com o mês anterior).",
+
+    "CATS": {
+      "GENERAL": "Geral",
+      "FASTFOOD": "Fast-food",
+      "MARKET": "Supermercado",
+      "TRANSPORT": "Transporte",
+      "SUBSCRIPTIONS": "Assinaturas",
+      "LEISURE": "Lazer",
+      "OTHER": "Outros"
+    },
+
+    "TAGS": {
+      "DIRECT": "Ajuste direto",
+      "GOOD": "Bom sinal",
+      "QUICK_REVIEW": "Revisão rápida",
+      "PRACTICAL": "Praticidade",
+      "ROUTINE": "Rotina"
+    },
+
+    "ACTIONS": {
+      "CREATE_LIMIT": "Criar limite",
+      "SAVE_TIP": "Guardar dica",
+      "REVIEW_SUBS": "Rever assinaturas",
+      "SAVE_RULE": "Guardar regra",
+      "CREATE_REMINDER": "Criar lembrete"
+    },
+
+    "CARDS": {
+      "FASTFOOD_OVER": {
+        "TITLE": "Fast-food acima do ideal no período",
+        "BODY": "Gastou {{total}} em fast-food nos últimos {{days}} dias. Um corte leve de {{cut}} já melhora o mês sem apertar.",
+        "WHY": "Fast-food tende a ser um gasto invisível (pequeno e recorrente). Ajustar só uma parte já reduz o total com pouco esforço."
+      },
+      "FASTFOOD_OK": {
+        "TITLE": "Fast-food sob controlo",
+        "BODY": "O seu gasto em fast-food está em {{total}} no período. Mantendo assim, evita fugas no orçamento.",
+        "WHY": "Quando esta categoria fica estável, ganha previsibilidade e reduz a hipótese de estourar o mês."
+      },
+      "SUBS": {
+        "TITLE": "Assinaturas: vale a pena rever 10 minutos",
+        "BODY": "Assinaturas somaram {{total}} no período. Se houver 1 serviço pouco usado, trocar/pausar já liberta espaço.",
+        "WHY": "Assinaturas são silenciosas e acumulam. Uma revisão curta evita pagar por coisas paradas."
+      },
+      "MARKET": {
+        "TITLE": "Supermercado: 1 regra simples para reduzir desperdício",
+        "BODY": "Supermercado está em {{total}} no período. Antes de ir, liste 6 itens essenciais + 2 livres. Isto reduz compras por impulso.",
+        "WHY": "Uma lista curta mantém o foco e reduz gasto por aproveitar promoções sem necessidade."
+      },
+      "WEEKLY": {
+        "TITLE": "Check-in de 8 minutos (1x/semana)",
+        "BODY": "Escolha um dia fixo: veja o total gasto, a maior categoria e 1 ajuste simples para a próxima semana.",
+        "WHY": "Uma revisão curta evita surpresas e aumenta a sensação de controlo sem virar uma planilha eterna."
+      }
+    },
+
+    "TOAST": {
+      "SAVED_TITLE": "Guardado",
+      "SAVED_MSG": "“{{title}}” foi guardado (mock).",
+      "DONE_TITLE": "Boa!",
+      "DONE_MSG": "Ação “{{action}}” (mock) registada."
+    }
+  },
+  "SETTINGS": {
+    "TITLE": "Perfil & Definições",
+    "SUB": "Kick-off • preferências locais (sem backend)",
+    "ACTIONS": { "SAVE": "Guardar" },
+
+    "PROFILE": {
+      "NAME_LABEL": "Nome (mock)",
+      "NAME_PH": "O seu nome",
+      "EMAIL_LABEL": "E-mail (mock)",
+      "EMAIL_PH": "voce@exemplo.com",
+      "HINT": "TODO: guardar via API quando os endpoints chegarem (ANEXO I)."
+    },
+
+    "FINANCE": {
+      "TITLE": "Financeiro",
+      "SUB": "Base para limites, alertas e recomendações (mock). Depois vem da API.",
+      "CURRENCY": "Moeda",
+      "CURRENCY_BRL": "BRL (R$)",
+      "CURRENCY_USD": "USD ($)",
+      "CURRENCY_EUR": "EUR (€)",
+      "MONTHLY_BUDGET": "Orçamento mensal (mock)",
+      "MONTHLY_BUDGET_PH": "Ex.: 3500",
+      "SAVINGS_GOAL": "Meta de poupança/mês (mock)",
+      "SAVINGS_GOAL_PH": "Ex.: 500",
+      "PAYDAY": "Dia de pagamento (mock)",
+      "PAYDAY_PH": "Ex.: 5",
+      "HINT": "Dica: mesmo valores aproximados tornam os insights muito mais úteis."
+    },
+
+    "PREFS": {
+      "TITLE": "Preferências",
+      "GROUP_NOTIFS": "Notificações & Resumos",
+      "GROUP_INSIGHTS": "Insights",
+      "GROUP_APPEARANCE": "Aparência",
+
+      "NOTIFS": { "NAME": "Notificações", "DESC": "Lembretes de tarefas e check-ins semanais (mock).", "ARIA": "Ativar notificações" },
+      "WEEKLY": { "NAME": "Resumo semanal", "DESC": "Um resumo simples de gastos/entradas (mock).", "ARIA": "Ativar resumo semanal" },
+      "WEEKLY_EMAIL": { "NAME": "Enviar resumo por e-mail", "DESC": "Receber um e-mail com os pontos-chave (mock).", "ARIA": "Ativar resumo por e-mail" },
+
+      "WEEK_START": {
+        "NAME": "A semana começa em",
+        "DESC": "Ajusta agenda e agrupamentos (mock).",
+        "MON": "Segunda-feira",
+        "SUN": "Domingo"
+      },
+
+      "INSIGHTS_PERIOD": {
+        "NAME": "Período padrão",
+        "DESC": "Define como o painel começa (ex.: 30 dias).",
+        "D7": "7 dias",
+        "D30": "30 dias",
+        "D90": "90 dias"
+      },
+
+      "AUTO_CAT": { "NAME": "Auto-categorização", "DESC": "Ajuda a agrupar gastos automaticamente (mock).", "ARIA": "Ativar auto-categorização" },
+      "ROUNDING": { "NAME": "Arredondar poupança sugerida", "DESC": "Torna recomendações mais práticas (ex.: 47€ → 50€).", "ARIA": "Arredondar poupança sugerida" },
+
+      "THEME": {
+        "NAME": "Tema",
+        "DESC": "Sistema, escuro ou claro.",
+        "SYSTEM": "Sistema",
+        "DARK": "Escuro",
+        "LIGHT": "Claro"
+      },
+
+      "DEFAULTS": {
+        "NAME": "Padrões",
+        "DESC": "Voltar às definições recomendadas.",
+        "RESTORE": "Restaurar"
+      }
+    },
+
+    "SESSION": {
+      "TITLE": "Sessão",
+      "LOGGED_AS": "Sessão iniciada como",
+      "LOGOUT_TITLE": "Sair",
+      "LOGOUT_DESC": "Termina a sessão mock e volta ao login.",
+      "LOGOUT_BTN": "Sair"
+    },
+
+    "DATA": {
+      "TITLE": "Dados",
+      "SUB": "Ferramentas locais (mock). Depois vira exportação real / RGPD.",
+      "EXPORT": { "TITLE": "Exportar preferências", "DESC": "Gera um JSON simples com o seu setup (mock).", "BTN": "Exportar" },
+      "CLEAR": { "TITLE": "Limpar dados locais", "DESC": "Remove preferências e perfil guardados neste navegador.", "BTN": "Limpar" }
+    },
+
+    "TOAST": {
+      "REVIEW_TITLE": "Reveja os campos",
+      "REVIEW_MSG": "Confirme e tente novamente.",
+      "SAVED_TITLE": "Guardado",
+      "SAVED_MSG": "Preferências guardadas (mock).",
+      "RESTORED_TITLE": "Restaurado",
+      "RESTORED_MSG": "Definições recomendadas aplicadas (mock).",
+      "EXPORTED_TITLE": "Exportado (mock)",
+      "EXPORTED_MSG": "Preferências exportadas (simulado).",
+      "CLEARED_TITLE": "Limpo",
+      "CLEARED_MSG": "Dados locais removidos (mock)."
+    }
+  }
+}

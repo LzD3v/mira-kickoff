@@ -36,6 +36,10 @@ export const routes: Routes = [
         loadChildren: () => import('@features/tasks/tasks.routes').then((m) => m.TASKS_ROUTES),
       },
       {
+        path: 'chat',
+        loadChildren: () => import('@features/chat/chat.routes').then((m) => m.CHAT_ROUTES),
+      },
+      {
         path: 'insights',
         loadChildren: () =>
           import('@features/insights/insights.routes').then((m) => m.INSIGHTS_ROUTES),

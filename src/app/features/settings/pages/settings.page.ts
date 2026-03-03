@@ -6,6 +6,7 @@ import { UiInputComponent } from '@ui/input/ui-input.component';
 import { UiButtonComponent } from '@ui/button/ui-button.component';
 import { ToastService } from '@core/services/toast.service';
 import { AuthService } from '@core/services/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type ThemePref = 'system' | 'dark' | 'light';
 type WeekStart = 'mon' | 'sun';
@@ -16,8 +17,7 @@ type Prefs = {
   notifications: boolean;
   weekly: boolean;
   weeklyEmail: boolean;
-  hideAmounts: boolean;
-  compact: boolean;
+
   autoCategorize: boolean;
   roundingSavings: boolean;
 
@@ -29,17 +29,31 @@ type Prefs = {
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UiCardComponent, UiInputComponent, UiButtonComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    UiCardComponent,
+    UiInputComponent,
+    UiButtonComponent,
+    TranslateModule,
+  ],
   template: `
     <div class="wrap">
       <header class="head">
         <div>
-          <div class="title">Perfil & Config</div>
-          <div class="muted sub">Kick-off • preferências locais (sem backend)</div>
+          <div class="title">{{ 'SETTINGS.TITLE' | translate }}</div>
+          <div class="muted sub">{{ 'SETTINGS.SUB' | translate }}</div>
         </div>
 
         <div class="head__actions">
-          <mira-ui-button type="button" variant="primary" [loading]="saving()" (click)="save()">Salvar</mira-ui-button>
+          <mira-ui-button
+            type="button"
+            variant="primary"
+            [loading]="saving()"
+            (click)="save()"
+          >
+            {{ 'SETTINGS.ACTIONS.SAVE' | translate }}
+          </mira-ui-button>
         </div>
       </header>
 
@@ -56,17 +70,22 @@ type Prefs = {
             </div>
 
             <div class="fields">
-              <mira-ui-input label="Nome (mock)" formControlName="name" placeholder="Seu nome" />
               <mira-ui-input
-                label="E-mail (mock)"
+                [label]="'SETTINGS.PROFILE.NAME_LABEL' | translate"
+                formControlName="name"
+                [placeholder]="'SETTINGS.PROFILE.NAME_PH' | translate"
+              />
+
+              <mira-ui-input
+                [label]="'SETTINGS.PROFILE.EMAIL_LABEL' | translate"
                 type="email"
                 formControlName="email"
-                placeholder="voce@exemplo.com"
+                [placeholder]="'SETTINGS.PROFILE.EMAIL_PH' | translate"
               />
             </div>
 
             <div class="hint muted">
-              TODO: persistir via API quando endpoints chegarem (ANEXO I).
+              {{ 'SETTINGS.PROFILE.HINT' | translate }}
             </div>
           </div>
         </mira-ui-card>
@@ -74,64 +93,64 @@ type Prefs = {
         <!-- Financeiro -->
         <mira-ui-card class="panel">
           <div class="card">
-            <div class="sectionTitle">Financeiro</div>
-            <div class="muted sectionSub">
-              Base para limites, alertas e recomendações (mock). Depois vem da API.
-            </div>
+            <div class="sectionTitle">{{ 'SETTINGS.FINANCE.TITLE' | translate }}</div>
+            <div class="muted sectionSub">{{ 'SETTINGS.FINANCE.SUB' | translate }}</div>
 
             <div class="fields">
               <label class="field">
-                <span class="field__label">Moeda</span>
-                <select class="select focus-ring" [value]="prefs().currency" (change)="setCurrency($any($event.target).value)">
-                  <option value="BRL">BRL (R$)</option>
-                  <option value="USD">USD ($)</option>
-                  <option value="EUR">EUR (€)</option>
+                <span class="field__label">{{ 'SETTINGS.FINANCE.CURRENCY' | translate }}</span>
+                <select
+                  class="select focus-ring"
+                  [value]="prefs().currency"
+                  (change)="setCurrency($any($event.target).value)"
+                >
+                  <option value="BRL">{{ 'SETTINGS.FINANCE.CURRENCY_BRL' | translate }}</option>
+                  <option value="USD">{{ 'SETTINGS.FINANCE.CURRENCY_USD' | translate }}</option>
+                  <option value="EUR">{{ 'SETTINGS.FINANCE.CURRENCY_EUR' | translate }}</option>
                 </select>
               </label>
 
               <mira-ui-input
-                label="Orçamento mensal (mock)"
+                [label]="'SETTINGS.FINANCE.MONTHLY_BUDGET' | translate"
                 type="number"
                 formControlName="monthlyBudget"
-                placeholder="Ex.: 3500"
+                [placeholder]="'SETTINGS.FINANCE.MONTHLY_BUDGET_PH' | translate"
               />
 
               <mira-ui-input
-                label="Meta de economia/mês (mock)"
+                [label]="'SETTINGS.FINANCE.SAVINGS_GOAL' | translate"
                 type="number"
                 formControlName="savingsGoal"
-                placeholder="Ex.: 500"
+                [placeholder]="'SETTINGS.FINANCE.SAVINGS_GOAL_PH' | translate"
               />
 
               <mira-ui-input
-                label="Dia do pagamento (mock)"
+                [label]="'SETTINGS.FINANCE.PAYDAY' | translate"
                 type="number"
                 formControlName="payday"
-                placeholder="Ex.: 5"
+                [placeholder]="'SETTINGS.FINANCE.PAYDAY_PH' | translate"
               />
             </div>
 
-            <div class="hint muted">
-              Dica: mesmo valores aproximados já deixam os insights muito mais úteis.
-            </div>
+            <div class="hint muted">{{ 'SETTINGS.FINANCE.HINT' | translate }}</div>
           </div>
         </mira-ui-card>
 
         <!-- Preferências -->
         <mira-ui-card class="panel">
           <div class="card">
-            <div class="sectionTitle">Preferências</div>
+            <div class="sectionTitle">{{ 'SETTINGS.PREFS.TITLE' | translate }}</div>
 
             <div class="group">
-              <div class="groupTitle">Notificações & Resumos</div>
+              <div class="groupTitle">{{ 'SETTINGS.PREFS.GROUP_NOTIFS' | translate }}</div>
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Notificações</div>
-                  <div class="muted pref__desc">Lembretes de tarefas e check-ins semanais (mock).</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.NOTIFS.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.NOTIFS.DESC' | translate }}</div>
                 </div>
 
-                <label class="switch" aria-label="Ativar notificações">
+                <label class="switch" [attr.aria-label]="'SETTINGS.PREFS.NOTIFS.ARIA' | translate">
                   <input
                     type="checkbox"
                     role="switch"
@@ -145,11 +164,11 @@ type Prefs = {
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Resumo semanal</div>
-                  <div class="muted pref__desc">Um overview simples de gastos/entradas (mock).</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.WEEKLY.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.WEEKLY.DESC' | translate }}</div>
                 </div>
 
-                <label class="switch" aria-label="Ativar resumo semanal">
+                <label class="switch" [attr.aria-label]="'SETTINGS.PREFS.WEEKLY.ARIA' | translate">
                   <input
                     type="checkbox"
                     role="switch"
@@ -163,11 +182,11 @@ type Prefs = {
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Enviar resumo por e-mail</div>
-                  <div class="muted pref__desc">Receber um e-mail com os pontos-chave (mock).</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.WEEKLY_EMAIL.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.WEEKLY_EMAIL.DESC' | translate }}</div>
                 </div>
 
-                <label class="switch" aria-label="Ativar resumo por e-mail">
+                <label class="switch" [attr.aria-label]="'SETTINGS.PREFS.WEEKLY_EMAIL.ARIA' | translate">
                   <input
                     type="checkbox"
                     role="switch"
@@ -181,26 +200,30 @@ type Prefs = {
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Semana começa em</div>
-                  <div class="muted pref__desc">Ajusta agenda e agrupamentos (mock).</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.WEEK_START.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.WEEK_START.DESC' | translate }}</div>
                 </div>
 
                 <div class="pref__right">
-                  <select class="select focus-ring" [value]="prefs().weekStart" (change)="setWeekStart($any($event.target).value)">
-                    <option value="mon">Segunda-feira</option>
-                    <option value="sun">Domingo</option>
+                  <select
+                    class="select focus-ring"
+                    [value]="prefs().weekStart"
+                    (change)="setWeekStart($any($event.target).value)"
+                  >
+                    <option value="mon">{{ 'SETTINGS.PREFS.WEEK_START.MON' | translate }}</option>
+                    <option value="sun">{{ 'SETTINGS.PREFS.WEEK_START.SUN' | translate }}</option>
                   </select>
                 </div>
               </div>
             </div>
 
             <div class="group">
-              <div class="groupTitle">Insights</div>
+              <div class="groupTitle">{{ 'SETTINGS.PREFS.GROUP_INSIGHTS' | translate }}</div>
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Período padrão</div>
-                  <div class="muted pref__desc">Define como o painel começa (ex.: 30 dias).</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.INSIGHTS_PERIOD.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.INSIGHTS_PERIOD.DESC' | translate }}</div>
                 </div>
 
                 <div class="pref__right">
@@ -209,20 +232,20 @@ type Prefs = {
                     [value]="prefs().defaultInsightPeriod.toString()"
                     (change)="setDefaultInsightPeriod($any($event.target).value)"
                   >
-                    <option value="7">7 dias</option>
-                    <option value="30">30 dias</option>
-                    <option value="90">90 dias</option>
+                    <option value="7">{{ 'SETTINGS.PREFS.INSIGHTS_PERIOD.D7' | translate }}</option>
+                    <option value="30">{{ 'SETTINGS.PREFS.INSIGHTS_PERIOD.D30' | translate }}</option>
+                    <option value="90">{{ 'SETTINGS.PREFS.INSIGHTS_PERIOD.D90' | translate }}</option>
                   </select>
                 </div>
               </div>
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Auto-categorização</div>
-                  <div class="muted pref__desc">Ajuda a agrupar gastos automaticamente (mock).</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.AUTO_CAT.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.AUTO_CAT.DESC' | translate }}</div>
                 </div>
 
-                <label class="switch" aria-label="Ativar auto-categorização">
+                <label class="switch" [attr.aria-label]="'SETTINGS.PREFS.AUTO_CAT.ARIA' | translate">
                   <input
                     type="checkbox"
                     role="switch"
@@ -236,11 +259,11 @@ type Prefs = {
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Arredondar economia sugerida</div>
-                  <div class="muted pref__desc">Deixa recomendações mais “práticas” (ex.: R$ 47 → R$ 50).</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.ROUNDING.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.ROUNDING.DESC' | translate }}</div>
                 </div>
 
-                <label class="switch" aria-label="Arredondar economia sugerida">
+                <label class="switch" [attr.aria-label]="'SETTINGS.PREFS.ROUNDING.ARIA' | translate">
                   <input
                     type="checkbox"
                     role="switch"
@@ -254,67 +277,31 @@ type Prefs = {
             </div>
 
             <div class="group">
-              <div class="groupTitle">Aparência & Privacidade</div>
+              <div class="groupTitle">{{ 'SETTINGS.PREFS.GROUP_APPEARANCE' | translate }}</div>
 
               <div class="pref">
                 <div>
-                  <div class="pref__name">Tema</div>
-                  <div class="muted pref__desc">Sistema, escuro ou claro.</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.THEME.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.THEME.DESC' | translate }}</div>
                 </div>
 
                 <div class="pref__right">
                   <select class="select focus-ring" [value]="prefs().theme" (change)="setTheme($any($event.target).value)">
-                    <option value="system">Sistema</option>
-                    <option value="dark">Escuro</option>
-                    <option value="light">Claro</option>
+                    <option value="system">{{ 'SETTINGS.PREFS.THEME.SYSTEM' | translate }}</option>
+                    <option value="dark">{{ 'SETTINGS.PREFS.THEME.DARK' | translate }}</option>
+                    <option value="light">{{ 'SETTINGS.PREFS.THEME.LIGHT' | translate }}</option>
                   </select>
                 </div>
               </div>
 
-              <div class="pref">
-                <div>
-                  <div class="pref__name">Ocultar valores</div>
-                  <div class="muted pref__desc">Útil pra usar em público (mock).</div>
-                </div>
-
-                <label class="switch" aria-label="Ocultar valores">
-                  <input
-                    type="checkbox"
-                    role="switch"
-                    [checked]="prefs().hideAmounts"
-                    [attr.aria-checked]="prefs().hideAmounts"
-                    (change)="toggle('hideAmounts', $event)"
-                  />
-                  <span class="track" aria-hidden="true"></span>
-                </label>
-              </div>
-
-              <div class="pref">
-                <div>
-                  <div class="pref__name">Modo compacto</div>
-                  <div class="muted pref__desc">Menos espaçamento, mais informação por tela (mock).</div>
-                </div>
-
-                <label class="switch" aria-label="Modo compacto">
-                  <input
-                    type="checkbox"
-                    role="switch"
-                    [checked]="prefs().compact"
-                    [attr.aria-checked]="prefs().compact"
-                    (change)="toggle('compact', $event)"
-                  />
-                  <span class="track" aria-hidden="true"></span>
-                </label>
-              </div>
-
               <div class="pref pref--actions">
                 <div>
-                  <div class="pref__name">Padrões</div>
-                  <div class="muted pref__desc">Voltar para as configurações recomendadas.</div>
+                  <div class="pref__name">{{ 'SETTINGS.PREFS.DEFAULTS.NAME' | translate }}</div>
+                  <div class="muted pref__desc">{{ 'SETTINGS.PREFS.DEFAULTS.DESC' | translate }}</div>
                 </div>
 
                 <mira-ui-button type="button" variant="secondary" (click)="restoreDefaults()">
-                  Restaurar
+                  {{ 'SETTINGS.PREFS.DEFAULTS.RESTORE' | translate }}
                 </mira-ui-button>
               </div>
             </div>
@@ -324,15 +311,21 @@ type Prefs = {
         <!-- Sessão -->
         <mira-ui-card class="panel wide">
           <div class="card">
-            <div class="sectionTitle">Sessão</div>
-            <div class="muted">Logado como: <b>{{ auth.session()?.user?.email ?? '—' }}</b></div>
+            <div class="sectionTitle">{{ 'SETTINGS.SESSION.TITLE' | translate }}</div>
+            <div class="muted">
+              {{ 'SETTINGS.SESSION.LOGGED_AS' | translate }}:
+              <b>{{ auth.session()?.user?.email ?? '—' }}</b>
+            </div>
 
             <div class="danger">
               <div>
-                <div class="danger__t">Sair</div>
-                <div class="muted danger__d">Encerra a sessão mock e volta pro login.</div>
+                <div class="danger__t">{{ 'SETTINGS.SESSION.LOGOUT_TITLE' | translate }}</div>
+                <div class="muted danger__d">{{ 'SETTINGS.SESSION.LOGOUT_DESC' | translate }}</div>
               </div>
-              <mira-ui-button type="button" variant="secondary" (click)="auth.logout()">Sair</mira-ui-button>
+
+              <mira-ui-button type="button" variant="secondary" (click)="auth.logout()">
+                {{ 'SETTINGS.SESSION.LOGOUT_BTN' | translate }}
+              </mira-ui-button>
             </div>
           </div>
         </mira-ui-card>
@@ -340,29 +333,34 @@ type Prefs = {
         <!-- Dados -->
         <mira-ui-card class="panel wide">
           <div class="card">
-            <div class="sectionTitle">Dados</div>
-            <div class="muted">Ferramentas locais (mock). Depois vira export real / LGPD.</div>
+            <div class="sectionTitle">{{ 'SETTINGS.DATA.TITLE' | translate }}</div>
+            <div class="muted">{{ 'SETTINGS.DATA.SUB' | translate }}</div>
 
             <div class="dataRow">
               <div>
-                <div class="dataRow__t">Exportar preferências</div>
-                <div class="muted dataRow__d">Gera um JSON simples com seu setup (mock).</div>
+                <div class="dataRow__t">{{ 'SETTINGS.DATA.EXPORT.TITLE' | translate }}</div>
+                <div class="muted dataRow__d">{{ 'SETTINGS.DATA.EXPORT.DESC' | translate }}</div>
               </div>
-              <mira-ui-button type="button" variant="secondary" (click)="exportPrefs()">Exportar</mira-ui-button>
+              <mira-ui-button type="button" variant="secondary" (click)="exportPrefs()">
+                {{ 'SETTINGS.DATA.EXPORT.BTN' | translate }}
+              </mira-ui-button>
             </div>
 
             <div class="dataRow dangerRow">
               <div>
-                <div class="dataRow__t">Limpar dados locais</div>
-                <div class="muted dataRow__d">Remove preferências e perfil salvos nesse navegador.</div>
+                <div class="dataRow__t">{{ 'SETTINGS.DATA.CLEAR.TITLE' | translate }}</div>
+                <div class="muted dataRow__d">{{ 'SETTINGS.DATA.CLEAR.DESC' | translate }}</div>
               </div>
-              <mira-ui-button type="button" variant="secondary" (click)="clearLocalData()">Limpar</mira-ui-button>
+              <mira-ui-button type="button" variant="secondary" (click)="clearLocalData()">
+                {{ 'SETTINGS.DATA.CLEAR.BTN' | translate }}
+              </mira-ui-button>
             </div>
           </div>
         </mira-ui-card>
       </form>
     </div>
   `,
+  styleUrls: [],
   styles: [
     `
       :host { display: block; }
@@ -398,7 +396,6 @@ type Prefs = {
         gap: 12px;
       }
 
-      /* card premium (mesmo vibe das outras telas) */
       mira-ui-card.panel{
         padding: 0;
         border-radius: 24px;
@@ -459,7 +456,6 @@ type Prefs = {
 
       .hint{ font-size: 12px; }
 
-      /* grupos dentro de preferências */
       .group{
         display:grid;
         gap: 10px;
@@ -501,7 +497,6 @@ type Prefs = {
         padding-top: 2px;
       }
 
-      /* select premium */
       .field{ display:grid; gap: 7px; min-width: 0; }
       .field__label{
         font-size: 12px;
@@ -530,7 +525,6 @@ type Prefs = {
         color: rgba(255,255,255,0.92);
       }
 
-      /* switch acessível e “premium” */
       .switch{ position: relative; display: inline-flex; align-items: center; flex: 0 0 auto; }
 
       .switch input{
@@ -570,27 +564,6 @@ type Prefs = {
         transform: translateX(22px);
         background: rgba(35,209,195,0.90);
         border-color: rgba(35,209,195,0.35);
-      }
-
-      :root[data-theme='light'] .switch input{
-        background: rgba(17, 24, 39, 0.06);
-        border-color: rgba(17, 24, 39, 0.18);
-      }
-
-      :root[data-theme='light'] .switch .track{
-        background: rgba(17, 24, 39, 0.28);
-        border-color: rgba(17, 24, 39, 0.10);
-        box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
-      }
-
-      :root[data-theme='light'] .switch input:checked{
-        background: rgba(124,92,255,0.18);
-        border-color: rgba(124,92,255,0.35);
-      }
-
-      :root[data-theme='light'] .switch input:checked + .track{
-        background: rgba(35,209,195,0.90);
-        border-color: rgba(35,209,195,0.30);
       }
 
       .danger{
@@ -652,6 +625,7 @@ export class SettingsPage {
   readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   private readonly fb = inject(FormBuilder);
+  private readonly t = inject(TranslateService);
 
   readonly saving = signal(false);
 
@@ -721,8 +695,7 @@ export class SettingsPage {
       notifications: true,
       weekly: false,
       weeklyEmail: false,
-      hideAmounts: false,
-      compact: false,
+
       autoCategorize: true,
       roundingSavings: true,
 
@@ -739,7 +712,7 @@ export class SettingsPage {
         return { ...fallback, ...p } as Prefs;
       }
 
-      // migra do v1 (ignorando "tone" antigo)
+      // migra do v1
       const rawV1 = localStorage.getItem(this.PREFS_OLD_KEY);
       if (rawV1) {
         const old = JSON.parse(rawV1) as any;
@@ -764,7 +737,7 @@ export class SettingsPage {
     } catch {}
   }
 
-  toggle(key: 'notifications' | 'weekly' | 'weeklyEmail' | 'hideAmounts' | 'compact' | 'autoCategorize' | 'roundingSavings', ev: Event) {
+  toggle(key: 'notifications' | 'weekly' | 'weeklyEmail' | 'autoCategorize' | 'roundingSavings', ev: Event) {
     const checked = (ev.target as HTMLInputElement).checked;
     this.prefs.update((p) => {
       const next = { ...p, [key]: checked } as Prefs;
@@ -809,14 +782,10 @@ export class SettingsPage {
   }
 
   restoreDefaults() {
-    const next = this.loadPrefs(); // fallback + migração (se existir)
-    // força defaults recomendados (sem reaproveitar storage antigo)
     const clean: Prefs = {
       notifications: true,
       weekly: false,
       weeklyEmail: false,
-      hideAmounts: false,
-      compact: false,
       autoCategorize: true,
       roundingSavings: true,
       theme: 'system',
@@ -824,16 +793,24 @@ export class SettingsPage {
       currency: 'BRL',
       defaultInsightPeriod: 30,
     };
+
     this.prefs.set(clean);
     this.persistPrefs(clean);
     this.applyTheme(clean.theme);
-    this.toast.push({ type: 'success', title: 'Restaurado', message: 'Configurações recomendadas aplicadas (mock).' });
-    void next;
+
+    this.toast.push({
+      type: 'success',
+      title: this.t.instant('SETTINGS.TOAST.RESTORED_TITLE'),
+      message: this.t.instant('SETTINGS.TOAST.RESTORED_MSG'),
+    });
   }
 
   exportPrefs() {
-    // mock: não faz download real, só confirma
-    this.toast.push({ type: 'success', title: 'Exportado (mock)', message: 'Preferências exportadas (simulado).' });
+    this.toast.push({
+      type: 'success',
+      title: this.t.instant('SETTINGS.TOAST.EXPORTED_TITLE'),
+      message: this.t.instant('SETTINGS.TOAST.EXPORTED_MSG'),
+    });
   }
 
   clearLocalData() {
@@ -845,6 +822,7 @@ export class SettingsPage {
 
     this.prefs.set(this.loadPrefs());
     const sessionEmail = this.auth.session()?.user?.email ?? 'demo@mira.app';
+
     this.form.reset(
       {
         name: 'Demo User',
@@ -858,7 +836,11 @@ export class SettingsPage {
 
     this.applyTheme(this.prefs().theme);
 
-    this.toast.push({ type: 'success', title: 'Limpo', message: 'Dados locais removidos (mock).' });
+    this.toast.push({
+      type: 'success',
+      title: this.t.instant('SETTINGS.TOAST.CLEARED_TITLE'),
+      message: this.t.instant('SETTINGS.TOAST.CLEARED_MSG'),
+    });
   }
 
   private applyTheme(theme: ThemePref) {
@@ -869,7 +851,6 @@ export class SettingsPage {
         return;
       }
 
-      // system
       const isLight =
         window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
       root.setAttribute('data-theme', isLight ? 'light' : 'dark');
@@ -879,7 +860,11 @@ export class SettingsPage {
   async save() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.toast.push({ type: 'warning', title: 'Revise os campos', message: 'Confira e tente novamente.' });
+      this.toast.push({
+        type: 'warning',
+        title: this.t.instant('SETTINGS.TOAST.REVIEW_TITLE'),
+        message: this.t.instant('SETTINGS.TOAST.REVIEW_MSG'),
+      });
       return;
     }
 
@@ -890,6 +875,10 @@ export class SettingsPage {
     this.persistProfile();
     this.persistPrefs(this.prefs());
 
-    this.toast.push({ type: 'success', title: 'Salvo', message: 'Preferências salvas (mock).' });
+    this.toast.push({
+      type: 'success',
+      title: this.t.instant('SETTINGS.TOAST.SAVED_TITLE'),
+      message: this.t.instant('SETTINGS.TOAST.SAVED_MSG'),
+    });
   }
 }

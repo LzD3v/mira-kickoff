@@ -10,14 +10,15 @@ import { CommonModule } from '@angular/common';
 import { UiCardComponent } from '@ui/card/ui-card.component';
 import { UiSkeletonComponent } from '@ui/skeleton/ui-skeleton.component';
 import { UiErrorStateComponent } from '@ui/error-state/ui-error-state.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type ViewState = 'loading' | 'ready' | 'error';
 
 type Preset = 'week' | 'month' | 'today';
-type BalanceView = 'realized' | 'projected'; // segment no chart de saldo
+type BalanceView = 'realized' | 'projected';
 type PayTab = 'paid' | 'due';
 
-type Cat = { label: string; value: number; color: string };
+type Cat = { labelKey: string; value: number; color: string };
 
 @Component({
   standalone: true,
@@ -26,50 +27,63 @@ type Cat = { label: string; value: number; color: string };
     UiCardComponent,
     UiSkeletonComponent,
     UiErrorStateComponent,
+    TranslateModule,
   ],
   template: `
     <div class="dash">
       <!-- TOP TOOLBAR -->
       <div class="topbar">
-        <div class="monthNav" aria-label="Selecionar mês">
-          <button class="navBtn focus-ring" type="button" (click)="prevMonth()" aria-label="Mês anterior">‹</button>
+        <div class="monthNav" [attr.aria-label]="'DASHBOARD.TOP.MONTH_ARIA' | translate">
+          <button
+            class="navBtn focus-ring"
+            type="button"
+            (click)="prevMonth()"
+            [attr.aria-label]="'DASHBOARD.TOP.PREV_MONTH' | translate"
+          >‹</button>
+
           <div class="monthLabel">
-            <div class="monthLabel__k muted">Mês</div>
+            <div class="monthLabel__k muted">{{ 'DASHBOARD.TOP.MONTH' | translate }}</div>
             <div class="monthLabel__v">{{ monthLabel() }}</div>
           </div>
-          <button class="navBtn focus-ring" type="button" (click)="nextMonth()" aria-label="Próximo mês">›</button>
+
+          <button
+            class="navBtn focus-ring"
+            type="button"
+            (click)="nextMonth()"
+            [attr.aria-label]="'DASHBOARD.TOP.NEXT_MONTH' | translate"
+          >›</button>
         </div>
 
         <div class="filters">
-          <div class="seg" role="tablist" aria-label="Atalhos de período">
+          <div class="seg" role="tablist" [attr.aria-label]="'DASHBOARD.TOP.PRESETS_ARIA' | translate">
             <button class="seg__btn focus-ring" type="button" (click)="setPreset('week')" [class.is-active]="preset() === 'week'">
-              Semana
+              {{ 'DASHBOARD.TOP.PRESETS.WEEK' | translate }}
             </button>
             <button class="seg__btn focus-ring" type="button" (click)="setPreset('month')" [class.is-active]="preset() === 'month'">
-              Mês
+              {{ 'DASHBOARD.TOP.PRESETS.MONTH' | translate }}
             </button>
             <button class="seg__btn focus-ring" type="button" (click)="setPreset('today')" [class.is-active]="preset() === 'today'">
-              Hoje
+              {{ 'DASHBOARD.TOP.PRESETS.TODAY' | translate }}
             </button>
           </div>
 
-          <div class="dates" aria-label="Selecionar datas">
+          <div class="dates" [attr.aria-label]="'DASHBOARD.TOP.DATES_ARIA' | translate">
             <label class="dateField">
-              <span class="sr-only">Data inicial</span>
+              <span class="sr-only">{{ 'DASHBOARD.TOP.DATE_START_SR' | translate }}</span>
               <input class="dateInput focus-ring" type="date" [value]="dateStart()" (change)="onDateStart($any($event.target).value)" />
             </label>
             <span class="muted dates__sep">→</span>
             <label class="dateField">
-              <span class="sr-only">Data final</span>
+              <span class="sr-only">{{ 'DASHBOARD.TOP.DATE_END_SR' | translate }}</span>
               <input class="dateInput focus-ring" type="date" [value]="dateEnd()" (change)="onDateEnd($any($event.target).value)" />
             </label>
           </div>
 
           <!-- DEV: toggle de estado (pode tirar depois) -->
           <div class="dev">
-            <button class="pill focus-ring" type="button" (click)="setState('loading')">Loading</button>
-            <button class="pill focus-ring" type="button" (click)="setState('error')">Erro</button>
-            <button class="pill focus-ring" type="button" (click)="setState('ready')">Normal</button>
+            <button class="pill focus-ring" type="button" (click)="setState('loading')">{{ 'DASHBOARD.DEV.LOADING' | translate }}</button>
+            <button class="pill focus-ring" type="button" (click)="setState('error')">{{ 'DASHBOARD.DEV.ERROR' | translate }}</button>
+            <button class="pill focus-ring" type="button" (click)="setState('ready')">{{ 'DASHBOARD.DEV.NORMAL' | translate }}</button>
           </div>
         </div>
       </div>
@@ -95,8 +109,8 @@ type Cat = { label: string; value: number; color: string };
           <div class="left">
             <mira-ui-card class="card">
               <div class="cardPad">
-                <div class="cardTitle">Resumo</div>
-                <div class="muted">Falha simulada (Kick-off)</div>
+                <div class="cardTitle">{{ 'DASHBOARD.ERROR.SUMMARY_TITLE' | translate }}</div>
+                <div class="muted">{{ 'DASHBOARD.ERROR.SIM_FAIL' | translate }}</div>
               </div>
             </mira-ui-card>
           </div>
@@ -105,9 +119,9 @@ type Cat = { label: string; value: number; color: string };
             <mira-ui-card class="card">
               <div class="cardPad">
                 <mira-ui-error-state
-                  title="Não foi possível carregar"
-                  description="No Kick-off isso é simulado. Depois, o erro vem da API."
-                  actionLabel="Tentar novamente"
+                  [title]="'DASHBOARD.ERROR.STATE_TITLE' | translate"
+                  [description]="'DASHBOARD.ERROR.STATE_DESC' | translate"
+                  [actionLabel]="'DASHBOARD.ERROR.STATE_ACTION' | translate"
                   [action]="retry"
                 />
               </div>
@@ -124,7 +138,7 @@ type Cat = { label: string; value: number; color: string };
               <div class="cardPad">
                 <div class="rowTop">
                   <div>
-                    <div class="muted tiny">Resultado do Período</div>
+                    <div class="muted tiny">{{ 'DASHBOARD.CARDS.PERIOD_RESULT.TITLE' | translate }}</div>
                     <div class="big">{{ formatBRL(periodResultAnim()) }}</div>
                     <div class="muted tiny">{{ dateRangeLabel() }}</div>
                   </div>
@@ -148,16 +162,16 @@ type Cat = { label: string; value: number; color: string };
             <!-- Entradas -->
             <mira-ui-card class="card">
               <div class="cardPad">
-                <div class="cardTitle">Entradas</div>
+                <div class="cardTitle">{{ 'DASHBOARD.CARDS.INCOME.TITLE' | translate }}</div>
 
                 <div class="miniRows">
                   <div class="miniRow">
-                    <div class="muted tiny">Realizado</div>
+                    <div class="muted tiny">{{ 'DASHBOARD.LABELS.REALIZED' | translate }}</div>
                     <div class="miniV ok">{{ formatBRL(incomeRealAnim()) }}</div>
                   </div>
 
                   <div class="miniRow">
-                    <div class="muted tiny">Previsto (A Receber)</div>
+                    <div class="muted tiny">{{ 'DASHBOARD.LABELS.PROJECTED_RECEIVE' | translate }}</div>
                     <div class="miniV">{{ formatBRL(incomeProjAnim()) }}</div>
                   </div>
                 </div>
@@ -167,16 +181,16 @@ type Cat = { label: string; value: number; color: string };
             <!-- Saídas -->
             <mira-ui-card class="card">
               <div class="cardPad">
-                <div class="cardTitle">Saídas</div>
+                <div class="cardTitle">{{ 'DASHBOARD.CARDS.EXPENSE.TITLE' | translate }}</div>
 
                 <div class="miniRows">
                   <div class="miniRow">
-                    <div class="muted tiny">Realizado</div>
+                    <div class="muted tiny">{{ 'DASHBOARD.LABELS.REALIZED' | translate }}</div>
                     <div class="miniV danger">{{ formatBRL(expenseRealAnim()) }}</div>
                   </div>
 
                   <div class="miniRow">
-                    <div class="muted tiny">Previsto (A Pagar)</div>
+                    <div class="muted tiny">{{ 'DASHBOARD.LABELS.PROJECTED_PAY' | translate }}</div>
                     <div class="miniV">{{ formatBRL(expenseProjAnim()) }}</div>
                   </div>
                 </div>
@@ -191,22 +205,22 @@ type Cat = { label: string; value: number; color: string };
               <div class="cardPad">
                 <div class="cardHead">
                   <div>
-                    <div class="cardTitle">Evolução do Saldo no Período</div>
-                    <div class="muted tiny">Comparando realizado vs projetado</div>
+                    <div class="cardTitle">{{ 'DASHBOARD.BALANCE.TITLE' | translate }}</div>
+                    <div class="muted tiny">{{ 'DASHBOARD.BALANCE.SUB' | translate }}</div>
                   </div>
 
-                  <div class="seg" role="tablist" aria-label="Modo do gráfico">
+                  <div class="seg" role="tablist" [attr.aria-label]="'DASHBOARD.BALANCE.MODE_ARIA' | translate">
                     <button class="seg__btn focus-ring" type="button" (click)="setBalanceView('realized')" [class.is-active]="balanceView() === 'realized'">
-                      Realizado
+                      {{ 'DASHBOARD.BALANCE.MODE.REALIZED' | translate }}
                     </button>
                     <button class="seg__btn focus-ring" type="button" (click)="setBalanceView('projected')" [class.is-active]="balanceView() === 'projected'">
-                      Projetado
+                      {{ 'DASHBOARD.BALANCE.MODE.PROJECTED' | translate }}
                     </button>
                   </div>
                 </div>
 
                 <div class="chartBox">
-                  <svg class="line" viewBox="0 0 520 190" aria-label="Gráfico de saldo (mock)">
+                  <svg class="line" viewBox="0 0 520 190" [attr.aria-label]="'DASHBOARD.BALANCE.CHART_ARIA' | translate">
                     <defs>
                       <linearGradient id="gradA" x1="0" x2="1">
                         <stop offset="0" stop-color="rgba(132,210,244,0.95)" />
@@ -226,7 +240,6 @@ type Cat = { label: string; value: number; color: string };
 
                     <path class="gridLine" d="M20 160H500 M20 120H500 M20 80H500 M20 40H500" />
 
-                    <!-- projected (fundo) -->
                     <path
                       class="lineProj"
                       [class.is-dim]="balanceView() === 'realized'"
@@ -236,7 +249,6 @@ type Cat = { label: string; value: number; color: string };
                       [style.strokeDashoffset]="(1 - lineReveal()) * 100"
                     />
 
-                    <!-- realized (frente) -->
                     <path
                       class="lineReal"
                       [class.is-dim]="balanceView() === 'projected'"
@@ -248,7 +260,6 @@ type Cat = { label: string; value: number; color: string };
 
                     <path class="lineFill" [attr.d]="lineFill(balanceRealized())" [style.opacity]="lineFillOpacity()" />
 
-                    <!-- labels X -->
                     <g class="axisX muted">
                       <text x="20" y="182">1</text>
                       <text x="140" y="182">7</text>
@@ -261,10 +272,10 @@ type Cat = { label: string; value: number; color: string };
 
                 <div class="legendLine">
                   <div class="legItem">
-                    <span class="dot dot--real"></span><span class="muted tiny">Saldo Realizado</span>
+                    <span class="dot dot--real"></span><span class="muted tiny">{{ 'DASHBOARD.BALANCE.LEGEND.REALIZED' | translate }}</span>
                   </div>
                   <div class="legItem">
-                    <span class="dot dot--proj"></span><span class="muted tiny">Saldo Projetado</span>
+                    <span class="dot dot--proj"></span><span class="muted tiny">{{ 'DASHBOARD.BALANCE.LEGEND.PROJECTED' | translate }}</span>
                   </div>
                 </div>
               </div>
@@ -275,16 +286,16 @@ type Cat = { label: string; value: number; color: string };
               <div class="cardPad">
                 <div class="cardHead">
                   <div>
-                    <div class="cardTitle">Despesas</div>
-                    <div class="muted tiny">Pagas vs A pagar • Detalhes por categoria</div>
+                    <div class="cardTitle">{{ 'DASHBOARD.EXPENSES.TITLE' | translate }}</div>
+                    <div class="muted tiny">{{ 'DASHBOARD.EXPENSES.SUB' | translate }}</div>
                   </div>
 
-                  <div class="seg" role="tablist" aria-label="Despesas pagas ou a pagar">
+                  <div class="seg" role="tablist" [attr.aria-label]="'DASHBOARD.EXPENSES.TAB_ARIA' | translate">
                     <button class="seg__btn focus-ring" type="button" (click)="setPayTab('paid')" [class.is-active]="payTab() === 'paid'">
-                      Pagas
+                      {{ 'DASHBOARD.EXPENSES.TAB.PAID' | translate }}
                     </button>
                     <button class="seg__btn focus-ring" type="button" (click)="setPayTab('due')" [class.is-active]="payTab() === 'due'">
-                      A pagar
+                      {{ 'DASHBOARD.EXPENSES.TAB.DUE' | translate }}
                     </button>
                   </div>
                 </div>
@@ -296,28 +307,33 @@ type Cat = { label: string; value: number; color: string };
                     (click)="replayPie()"
                     [style.background]="pieBackground()"
                     [style.--reveal]="pieReveal()"
-                    aria-label="Repetir animação do gráfico de despesas"
+                    [attr.aria-label]="'DASHBOARD.EXPENSES.PIE_ARIA' | translate"
                   >
                     <div class="pie__center">
                       <div class="pie__value">{{ formatBRL(expenseTotalAnim()) }}</div>
-                      <div class="muted tiny">Total {{ payTab() === 'paid' ? 'pago' : 'a pagar' }}</div>
-                      <div class="muted tiny" style="margin-top:6px;">Clique para reanimar</div>
+                      <div class="muted tiny">
+                        {{ 'DASHBOARD.EXPENSES.TOTAL' | translate }}
+                        {{ (payTab() === 'paid' ? 'DASHBOARD.EXPENSES.TOTAL_PAID' : 'DASHBOARD.EXPENSES.TOTAL_DUE') | translate }}
+                      </div>
+                      <div class="muted tiny" style="margin-top:6px;">{{ 'DASHBOARD.EXPENSES.CLICK_REANIMATE' | translate }}</div>
                     </div>
                   </button>
 
                   <div class="cats">
                     <div class="cats__head">
-                      <div class="cats__title">Detalhes por Categoria</div>
-                      <div class="muted tiny">{{ payTab() === 'paid' ? 'Realizado' : 'Previsto' }}</div>
+                      <div class="cats__title">{{ 'DASHBOARD.EXPENSES.CATS_TITLE' | translate }}</div>
+                      <div class="muted tiny">
+                        {{ (payTab() === 'paid' ? 'DASHBOARD.LABELS.REALIZED' : 'DASHBOARD.LABELS.PROJECTED') | translate }}
+                      </div>
                     </div>
 
                     <div class="cat" *ngFor="let c of expenseCats(); trackBy: trackByLabel">
                       <span class="sw" [style.background]="c.color"></span>
-                      <span class="cat__label">{{ c.label }}</span>
+                      <span class="cat__label">{{ c.labelKey | translate }}</span>
                       <span class="cat__value">{{ formatBRL(c.value) }}</span>
                     </div>
 
-                    <button class="replayBtn focus-ring" type="button" (click)="replayPie()">Repetir animação</button>
+                    <button class="replayBtn focus-ring" type="button" (click)="replayPie()">{{ 'DASHBOARD.EXPENSES.REPLAY_BTN' | translate }}</button>
                   </div>
                 </div>
               </div>
@@ -674,6 +690,10 @@ type Cat = { label: string; value: number; color: string };
 })
 export class DashboardPage {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly t = inject(TranslateService);
+
+  // locale reativo (pra monthLabel/dateRange/format)
+  readonly locale = signal<string>('pt-BR');
 
   // view state
   readonly state = signal<ViewState>('loading');
@@ -681,7 +701,7 @@ export class DashboardPage {
   // top controls
   readonly preset = signal<Preset>('month');
 
-  readonly month = signal<number>(3); // Abril (0=Jan)
+  readonly month = signal<number>(3);
   readonly year = signal<number>(2025);
 
   readonly dateStart = signal<string>('2025-04-01');
@@ -690,7 +710,7 @@ export class DashboardPage {
   readonly balanceView = signal<BalanceView>('realized');
   readonly payTab = signal<PayTab>('paid');
 
-  // ===== mock base (não animado)
+  // ===== mock base
   private periodResult = 53414.71;
   private incomeReal = 62000;
   private incomeProj = 22000;
@@ -713,7 +733,6 @@ export class DashboardPage {
   readonly pieReveal = signal(0);
   readonly expenseTotalAnim = signal(0);
 
-  // motion preference
   private readonly reduceMotion =
     typeof window !== 'undefined' &&
     window.matchMedia &&
@@ -724,48 +743,46 @@ export class DashboardPage {
 
   // ===== labels
   readonly monthLabel = computed(() => {
-    const months = [
-      'Janeiro','Fevereiro','Março','Abril','Maio','Junho',
-      'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro',
-    ];
-    return `${months[this.month()] ?? '—'} ${this.year()}`;
+    const d = new Date(this.year(), this.month(), 1);
+    try {
+      return new Intl.DateTimeFormat(this.locale(), { month: 'long', year: 'numeric' }).format(d);
+    } catch {
+      return `${d.getMonth() + 1}/${d.getFullYear()}`;
+    }
   });
 
   readonly dateRangeLabel = computed(() => {
-    // “1 abr — 30 abr”
     const a = this.prettyShort(this.dateStart());
     const b = this.prettyShort(this.dateEnd());
     return `${a} — ${b}`;
   });
 
-  // ===== series (mock) — 12 pontos
+  // ===== series
   readonly balanceRealized = computed(() => this.makeBalanceSeries('realized'));
   readonly balanceProjected = computed(() => this.makeBalanceSeries('projected'));
 
   // pie cats
   readonly expenseCats = computed(() => {
     const basePaid: Cat[] = [
-      { label: 'Casa', color: 'rgba(255, 92, 122, 0.95)', value: this.money(37000.11) },
-      { label: 'Outros', color: 'rgba(255,255,255,0.22)', value: this.money(17200.00) },
-      { label: 'Utilidades', color: 'rgba(132,210,244,0.95)', value: this.money(12200.00) },
-      { label: 'Transporte', color: 'rgba(133,94,217,0.95)', value: this.money(10200.00) },
+      { labelKey: 'DASHBOARD.CATS.HOME', color: 'rgba(255, 92, 122, 0.95)', value: this.money(37000.11) },
+      { labelKey: 'DASHBOARD.CATS.OTHERS', color: 'rgba(255,255,255,0.22)', value: this.money(17200.00) },
+      { labelKey: 'DASHBOARD.CATS.UTILITIES', color: 'rgba(132,210,244,0.95)', value: this.money(12200.00) },
+      { labelKey: 'DASHBOARD.CATS.TRANSPORT', color: 'rgba(133,94,217,0.95)', value: this.money(10200.00) },
     ];
 
     const baseDue: Cat[] = [
-      { label: 'Casa', color: 'rgba(255, 92, 122, 0.95)', value: this.money(21400.00) },
-      { label: 'Outros', color: 'rgba(255,255,255,0.22)', value: this.money(9800.00) },
-      { label: 'Utilidades', color: 'rgba(132,210,244,0.95)', value: this.money(6200.00) },
-      { label: 'Transporte', color: 'rgba(133,94,217,0.95)', value: this.money(4200.00) },
+      { labelKey: 'DASHBOARD.CATS.HOME', color: 'rgba(255, 92, 122, 0.95)', value: this.money(21400.00) },
+      { labelKey: 'DASHBOARD.CATS.OTHERS', color: 'rgba(255,255,255,0.22)', value: this.money(9800.00) },
+      { labelKey: 'DASHBOARD.CATS.UTILITIES', color: 'rgba(132,210,244,0.95)', value: this.money(6200.00) },
+      { labelKey: 'DASHBOARD.CATS.TRANSPORT', color: 'rgba(133,94,217,0.95)', value: this.money(4200.00) },
     ];
 
-    // varia um pouco com o preset/range pra “parecer vivo”
     const mult = this.preset() === 'week' ? 0.62 : this.preset() === 'today' ? 0.28 : 1;
     const cats = (this.payTab() === 'paid' ? basePaid : baseDue).map((c) => ({
       ...c,
       value: this.money(c.value * mult),
     }));
 
-    // normaliza pra bater com total mock
     const totalTarget = this.payTab() === 'paid' ? this.expenseReal : this.expenseProj;
     const sum = cats.reduce((a, b) => a + b.value, 0) || 1;
     const k = totalTarget / sum;
@@ -789,7 +806,15 @@ export class DashboardPage {
   });
 
   constructor() {
-    // inicial loading -> ready
+    // sync locale
+    const setLocale = () => {
+      const l = (this.t.currentLang || this.t.defaultLang || 'pt-BR') as string;
+      this.locale.set(l);
+    };
+    setLocale();
+    const sub = this.t.onLangChange.subscribe(() => setLocale());
+    this.destroyRef.onDestroy(() => sub.unsubscribe());
+
     const t = window.setTimeout(() => {
       this.state.set('ready');
       this.refreshMocks(true);
@@ -805,9 +830,6 @@ export class DashboardPage {
     });
   }
 
-  // =============================
-  // Actions
-  // =============================
   setState(s: ViewState) {
     this.state.set(s);
     if (s === 'ready') this.refreshMocks(true);
@@ -866,7 +888,6 @@ export class DashboardPage {
 
   setBalanceView(v: BalanceView) {
     this.balanceView.set(v);
-    // só “enfatiza”; não precisa re-gerar dados
   }
 
   setPayTab(t: PayTab) {
@@ -879,11 +900,7 @@ export class DashboardPage {
     if (this.state() === 'ready') this.animatePie(false);
   }
 
-  // =============================
-  // Mock generator + animations
-  // =============================
   private refreshMocks(first: boolean) {
-    // regenera valores de forma determinística com base em mês/preset/datas
     const seed = this.seedFrom(
       this.year(),
       this.month(),
@@ -918,7 +935,6 @@ export class DashboardPage {
       return;
     }
 
-    // reset + animate
     this.periodResultAnim.set(0);
     this.incomeRealAnim.set(0);
     this.incomeProjAnim.set(0);
@@ -970,35 +986,32 @@ export class DashboardPage {
     this.animateNumber(0, total, first ? 980 : 820, (v) => this.expenseTotalAnim.set(v));
   }
 
-  // =============================
-  // Derived UI
-  // =============================
   periodDeltaLabel() {
-    // só mock “bonito”
     const v = this.periodResult;
     const pct = Math.max(-9.9, Math.min(16.5, (v % 1650) / 100));
     const sign = pct >= 0 ? '+' : '';
-    return `${sign}${pct.toFixed(1)}%`;
+    try {
+      const n = new Intl.NumberFormat(this.locale(), { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(pct);
+      return `${sign}${n}%`;
+    } catch {
+      return `${sign}${pct.toFixed(1)}%`;
+    }
   }
+
   periodDeltaType() {
-    const n = Number(this.periodDeltaLabel().replace('%', ''));
+    const n = Number(String(this.periodDeltaLabel()).replace('%', '').replace(',', '.'));
     if (n > 0.2) return 'up';
     if (n < -0.2) return 'down';
     return 'flat';
   }
 
-  // =============================
-  // Series / Charts
-  // =============================
   private makeBalanceSeries(kind: 'realized' | 'projected') {
     const seed = this.seedFrom(this.year(), this.month(), this.preset(), kind, this.dateStart(), this.dateEnd());
     const mult = this.preset() === 'week' ? 0.72 : this.preset() === 'today' ? 0.35 : 1;
 
-    // base e variação
     const base = 34000 * mult + (seed % 4200);
     const amp = (kind === 'projected' ? 6200 : 7600) * mult;
 
-    // 12 pontos
     const pts = Array.from({ length: 12 }, (_, i) => {
       const t = i / 11;
       const wave = Math.sin((t * Math.PI) * 1.2) * 0.55 + Math.sin(t * Math.PI * 2.2) * 0.25;
@@ -1008,7 +1021,6 @@ export class DashboardPage {
       return this.money(v);
     });
 
-    // suaviza “queda” leve no final pra ficar parecido com exemplo
     if (kind === 'projected') pts[9] = this.money(pts[9] * 0.96);
     pts[10] = this.money(pts[10] * 1.02);
     pts[11] = this.money(pts[11] * 1.01);
@@ -1041,7 +1053,6 @@ export class DashboardPage {
     });
   }
 
-  // spark (12 pontos)
   periodSpark() {
     const seed = this.seedFrom(this.year(), this.month(), this.preset(), this.dateStart(), this.dateEnd(), 'spark');
     const base = 18 + (seed % 6);
@@ -1078,9 +1089,6 @@ export class DashboardPage {
     });
   }
 
-  // =============================
-  // Helpers: dates/preset
-  // =============================
   private applyPresetToDates(p: Preset) {
     const y = this.year();
     const m = this.month();
@@ -1101,33 +1109,32 @@ export class DashboardPage {
     }
 
     if (p === 'today') {
-      // “hoje” dentro do mês selecionado: usa dia 14 como referência (bonito pro mock)
       const d = new Date(y, m, Math.min(14, last.getDate()));
       this.dateStart.set(toISO(d));
       this.dateEnd.set(toISO(d));
       return;
     }
 
-    // week
     const end = last;
     const start = new Date(y, m, Math.max(1, end.getDate() - 6));
     this.dateStart.set(toISO(start));
     this.dateEnd.set(toISO(end));
   }
 
+  private parseISO(iso: string) {
+    const [yy, mm, dd] = iso.split('-').map((n) => Number(n));
+    return new Date(yy, (mm || 1) - 1, dd || 1);
+  }
+
   private prettyShort(iso: string) {
     try {
-      const d = new Date(iso);
-      const months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-      return `${d.getDate()} ${months[d.getMonth()]}`;
+      const d = this.parseISO(iso);
+      return new Intl.DateTimeFormat(this.locale(), { day: 'numeric', month: 'short' }).format(d);
     } catch {
       return iso;
     }
   }
 
-  // =============================
-  // Helpers: animation
-  // =============================
   private animateNumber(from: number, to: number, ms: number, onUpdate: (v: number) => void, onDone?: () => void) {
     const start = performance.now();
     const ease = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -1151,13 +1158,10 @@ export class DashboardPage {
     this.rafIds.add(id);
   }
 
-  // =============================
-  // Helpers: formatting / seed
-  // =============================
   formatBRL(n: number) {
     const v = Math.round((n || 0) * 100) / 100;
     try {
-      return new Intl.NumberFormat('pt-BR', {
+      return new Intl.NumberFormat(this.locale(), {
         style: 'currency',
         currency: 'BRL',
         minimumFractionDigits: 2,
@@ -1182,5 +1186,5 @@ export class DashboardPage {
     return Math.abs(h);
   }
 
-  trackByLabel = (_: number, c: Cat) => c.label;
+  trackByLabel = (_: number, c: Cat) => c.labelKey;
 }

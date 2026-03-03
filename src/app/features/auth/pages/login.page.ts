@@ -6,10 +6,11 @@ import { UiInputComponent } from '@ui/input/ui-input.component';
 import { UiCardComponent } from '@ui/card/ui-card.component';
 import { ToastService } from '@core/services/toast.service';
 import { AuthService } from '@core/services/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
-  imports: [ReactiveFormsModule, UiButtonComponent, UiInputComponent, UiCardComponent],
+  imports: [ReactiveFormsModule, UiButtonComponent, UiInputComponent, UiCardComponent, TranslateModule],
   animations: [
     trigger('enter', [
       transition(':enter', [
@@ -23,39 +24,37 @@ import { AuthService } from '@core/services/auth.service';
       <mira-ui-card class="card" @enter>
         <div class="inner">
           <div class="head">
-            <div class="kicker">Acesso</div>
-            <h1 class="title">Entrar no MIRA</h1>
-            <p class="muted desc">
-              Mock login (Kick-off): use <b>demo&#64;mira.app</b> e senha <b>mira123</b>.
-            </p>
+            <div class="kicker">{{ 'AUTH.LOGIN.KICKER' | translate }}</div>
+            <h1 class="title">{{ 'AUTH.LOGIN.TITLE' | translate }}</h1>
+            <p class="muted desc" [innerHTML]="'AUTH.LOGIN.DESC_HTML' | translate"></p>
           </div>
 
           <form class="form" [formGroup]="form" (ngSubmit)="submit()">
             <mira-ui-input
-              label="E-mail"
+              [label]="'AUTH.LOGIN.EMAIL_LABEL' | translate"
               type="email"
               autocomplete="email"
-              placeholder="voce@exemplo.com"
+              [placeholder]="'AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate"
               formControlName="email"
               [error]="emailError()"
             />
 
             <mira-ui-input
-              label="Senha"
+              [label]="'AUTH.LOGIN.PASS_LABEL' | translate"
               type="password"
               autocomplete="current-password"
-              placeholder="••••••••"
+              [placeholder]="'AUTH.LOGIN.PASS_PLACEHOLDER' | translate"
               formControlName="password"
               [error]="passError()"
             />
 
             <div class="muted tip">
-              Dica: este fluxo será trocado por endpoint real quando enviado.
+              {{ 'AUTH.LOGIN.TIP' | translate }}
             </div>
 
             <div class="actions">
               <mira-ui-button type="submit" variant="primary" size="lg" [loading]="loading()">
-                Entrar
+                {{ 'AUTH.LOGIN.BUTTON' | translate }}
               </mira-ui-button>
             </div>
           </form>
@@ -151,6 +150,7 @@ export class LoginPage {
   private readonly fb = inject(FormBuilder);
   private readonly toast = inject(ToastService);
   private readonly auth = inject(AuthService);
+  private readonly t = inject(TranslateService);
 
   readonly loading = signal(false);
 
@@ -162,23 +162,27 @@ export class LoginPage {
   emailError() {
     const c = this.form.controls.email;
     if (!c.touched) return '';
-    if (c.hasError('required')) return 'Informe seu e-mail.';
-    if (c.hasError('email')) return 'E-mail inválido.';
+    if (c.hasError('required')) return this.t.instant('AUTH.ERRORS.EMAIL_REQUIRED');
+    if (c.hasError('email')) return this.t.instant('AUTH.ERRORS.EMAIL_INVALID');
     return '';
   }
 
   passError() {
     const c = this.form.controls.password;
     if (!c.touched) return '';
-    if (c.hasError('required')) return 'Informe sua senha.';
-    if (c.hasError('minlength')) return 'Senha muito curta.';
+    if (c.hasError('required')) return this.t.instant('AUTH.ERRORS.PASS_REQUIRED');
+    if (c.hasError('minlength')) return this.t.instant('AUTH.ERRORS.PASS_SHORT');
     return '';
   }
 
   async submit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.toast.push({ type: 'warning', title: 'Revise os campos', message: 'Confira e tente novamente.' });
+      this.toast.push({
+        type: 'warning',
+        title: this.t.instant('AUTH.ERRORS.REVIEW_TITLE'),
+        message: this.t.instant('AUTH.ERRORS.REVIEW_MSG'),
+      });
       return;
     }
 
@@ -186,9 +190,17 @@ export class LoginPage {
     try {
       const { email, password } = this.form.getRawValue();
       await this.auth.login(email!, password!);
-      this.toast.push({ type: 'success', title: 'Bem-vindo!', message: 'Login mock efetuado.' });
+      this.toast.push({
+        type: 'success',
+        title: this.t.instant('AUTH.TOASTS.WELCOME_TITLE'),
+        message: this.t.instant('AUTH.TOASTS.WELCOME_MSG'),
+      });
     } catch (e: any) {
-      this.toast.push({ type: 'danger', title: 'Falha no login', message: e?.message ?? 'Tente novamente.' });
+      this.toast.push({
+        type: 'danger',
+        title: this.t.instant('AUTH.ERRORS.FAIL_TITLE'),
+        message: e?.message ?? this.t.instant('AUTH.ERRORS.FAIL_MSG'),
+      });
     } finally {
       this.loading.set(false);
     }

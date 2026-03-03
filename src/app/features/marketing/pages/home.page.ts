@@ -12,6 +12,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { UiButtonComponent } from '@ui/button/ui-button.component';
 import { UiCardComponent } from '@ui/card/ui-card.component';
 import { RevealOnScrollDirective } from '@core/directives/reveal-on-scroll.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 type Testimonial = {
   name: string;
@@ -31,6 +32,7 @@ type Testimonial = {
     RevealOnScrollDirective,
     NgFor,
     NgIf,
+    TranslateModule,
   ],
   animations: [
     // ✅ depoimento “passando pro lado”
@@ -69,31 +71,30 @@ type Testimonial = {
         <div class="hero__copy" @fadeUp>
           <div class="pill">
             <span class="dot"></span>
-            <span>MIRA • Assistente pessoal financeiro</span>
+            <span>{{ 'MARKETING.HERO.PILL' | translate }}</span>
           </div>
 
           <h1 class="h1">
-            Clareza no seu dinheiro.
-            <span class="grad">Sem planilha</span>, sem culpa.
+            {{ 'MARKETING.HERO.TITLE.A' | translate }}
+            <span class="grad">{{ 'MARKETING.HERO.TITLE.B' | translate }}</span>{{ 'MARKETING.HERO.TITLE.C' | translate }}
           </h1>
 
           <p class="sub muted">
-            Você registra em segundos, o MIRA organiza por você e te devolve
-            <b>controle</b> com uma experiência bonita, simples e prazerosa de usar.
+            {{ 'MARKETING.HERO.SUB.A' | translate }}<b>{{ 'MARKETING.HERO.SUB.B' | translate }}</b>{{ 'MARKETING.HERO.SUB.C' | translate }}
           </p>
 
           <div class="trust">
             <div class="trust__item">
-              <span class="trust__k">Comece rápido</span>
-              <span class="trust__v">em poucos minutos</span>
+              <span class="trust__k">{{ 'MARKETING.HERO.TRUST.T1.K' | translate }}</span>
+              <span class="trust__v">{{ 'MARKETING.HERO.TRUST.T1.V' | translate }}</span>
             </div>
             <div class="trust__item">
-              <span class="trust__k">Mobile-first</span>
-              <span class="trust__v">360–1920</span>
+              <span class="trust__k">{{ 'MARKETING.HERO.TRUST.T2.K' | translate }}</span>
+              <span class="trust__v">{{ 'MARKETING.HERO.TRUST.T2.V' | translate }}</span>
             </div>
             <div class="trust__item">
-              <span class="trust__k">Acessível</span>
-              <span class="trust__v">Foco e teclado</span>
+              <span class="trust__k">{{ 'MARKETING.HERO.TRUST.T3.K' | translate }}</span>
+              <span class="trust__v">{{ 'MARKETING.HERO.TRUST.T3.V' | translate }}</span>
             </div>
           </div>
 
@@ -103,20 +104,20 @@ type Testimonial = {
               class="cta-primary focus-ring"
               type="button"
               (click)="openPlan()"
-              aria-label="Conhecer o plano Mira"
+              [attr.aria-label]="'MARKETING.HERO.CTA.ARIA_PRIMARY' | translate"
             >
               <span class="cta-primary__shine" aria-hidden="true"></span>
-              <span class="cta-primary__text">Contratar Mira Agora</span>
+              <span class="cta-primary__text">{{ 'MARKETING.HERO.CTA.PRIMARY' | translate }}</span>
               <span class="cta-primary__arrow" aria-hidden="true">→</span>
             </button>
 
-            <a class="cta-secondary focus-ring" href="#como-funciona">Ver como funciona</a>
+            <a class="cta-secondary focus-ring" href="#como-funciona">{{ 'MARKETING.HERO.CTA.SECONDARY' | translate }}</a>
           </div>
 
           <div class="bullets">
-            <div class="b"><span class="b__ic" aria-hidden="true">✓</span> Registre gastos e entradas sem esforço</div>
-            <div class="b"><span class="b__ic" aria-hidden="true">↗</span> Insights que acalmam e mostram prioridade</div>
-            <div class="b"><span class="b__ic" aria-hidden="true">◆</span> Painel claro — você entende o mês rápido</div>
+            <div class="b"><span class="b__ic" aria-hidden="true">✓</span> {{ 'MARKETING.HERO.BULLETS.B1' | translate }}</div>
+            <div class="b"><span class="b__ic" aria-hidden="true">↗</span> {{ 'MARKETING.HERO.BULLETS.B2' | translate }}</div>
+            <div class="b"><span class="b__ic" aria-hidden="true">◆</span> {{ 'MARKETING.HERO.BULLETS.B3' | translate }}</div>
           </div>
         </div>
 
@@ -126,39 +127,36 @@ type Testimonial = {
               <div class="dots">
                 <span></span><span></span><span></span>
               </div>
-              <div class="mock__title">MIRA • Demo</div>
-              <div class="mock__chip">ao vivo</div>
+              <div class="mock__title">{{ 'MARKETING.MOCK.TITLE' | translate }}</div>
+              <div class="mock__chip">{{ 'MARKETING.MOCK.LIVE' | translate }}</div>
             </div>
 
             <div class="mock__body">
               <div class="chat">
                 <div class="msg me">
-                  <div class="msg__bubble">gastei 52 no mercado</div>
-                  <div class="msg__meta">agora</div>
+                  <div class="msg__bubble">{{ 'MARKETING.MOCK.CHAT.ME1.TEXT' | translate }}</div>
+                  <div class="msg__meta">{{ 'MARKETING.MOCK.CHAT.ME1.META' | translate }}</div>
                 </div>
+
                 <div class="msg bot">
-                  <div class="msg__bubble">
-                    Anotado ✅ <b>Mercado</b> • R$ 52<br />
-                    Quer que eu separe em “alimentação”?
-                  </div>
-                  <div class="msg__meta">MIRA</div>
+                  <div class="msg__bubble" [innerHTML]="'MARKETING.MOCK.CHAT.BOT1.TEXT_HTML' | translate"></div>
+                  <div class="msg__meta">{{ 'MARKETING.MOCK.CHAT.BOT1.META' | translate }}</div>
                 </div>
+
                 <div class="msg me">
-                  <div class="msg__bubble">sim, e me lembra do aluguel dia 10</div>
-                  <div class="msg__meta">agora</div>
+                  <div class="msg__bubble">{{ 'MARKETING.MOCK.CHAT.ME2.TEXT' | translate }}</div>
+                  <div class="msg__meta">{{ 'MARKETING.MOCK.CHAT.ME2.META' | translate }}</div>
                 </div>
+
                 <div class="msg bot">
-                  <div class="msg__bubble">
-                    Fechado 😌<br />
-                    Lembrete criado • <b>10</b> • 9:00
-                  </div>
-                  <div class="msg__meta">MIRA</div>
+                  <div class="msg__bubble" [innerHTML]="'MARKETING.MOCK.CHAT.BOT2.TEXT_HTML' | translate"></div>
+                  <div class="msg__meta">{{ 'MARKETING.MOCK.CHAT.BOT2.META' | translate }}</div>
                 </div>
               </div>
 
               <div class="mini-panel">
                 <div class="mini-panel__head">
-                  <div class="mini-panel__k muted">Visão do mês</div>
+                  <div class="mini-panel__k muted">{{ 'MARKETING.MOCK.PANEL.K' | translate }}</div>
                   <div class="mini-panel__n">R$ 4.820</div>
                 </div>
                 <div class="mini-bars">
@@ -182,12 +180,12 @@ type Testimonial = {
     <!-- ✅ STORIES -->
     <section id="stories" class="section container" miraRevealOnScroll>
       <div class="section__head">
-        <h2 class="h2">Veja o MIRA em ação (stories)</h2>
-        <p class="muted">Uma prévia rápida do “clima” do produto — leve, bonito e direto.</p>
+        <h2 class="h2">{{ 'MARKETING.STORIES.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.STORIES.SUB' | translate }}</p>
       </div>
 
       <div class="storiesOne" *ngIf="stories().length">
-        <div class="storyStage" aria-label="Stories do Mira">
+        <div class="storyStage" [attr.aria-label]="'MARKETING.STORIES.TITLE' | translate">
           <div
             class="storyCard"
             [class.is-paused]="storyPaused()"
@@ -198,7 +196,7 @@ type Testimonial = {
             (pointercancel)="resumeStories()"
             (click)="onStoryClick($event)"
             role="group"
-            aria-label="Story do Mira"
+            [attr.aria-label]="'MARKETING.STORIES.TITLE' | translate"
           >
             <div class="storyTop" aria-hidden="true">
               <div class="bars" [style.gridTemplateColumns]="'repeat(' + stories().length + ', 1fr)'">
@@ -216,7 +214,7 @@ type Testimonial = {
             <img
               class="storyImg"
               [src]="stories()[storyIndex()].src"
-              [alt]="stories()[storyIndex()].alt"
+              [alt]="stories()[storyIndex()].alt | translate"
               loading="eager"
               draggable="false"
             />
@@ -225,39 +223,39 @@ type Testimonial = {
           </div>
         </div>
 
-        <div class="storiesHint muted">Segure para pausar • Clique nas laterais para voltar/avançar</div>
+        <div class="storiesHint muted">{{ 'MARKETING.STORIES.HINT' | translate }}</div>
       </div>
     </section>
 
     <!-- COMO FUNCIONA -->
     <section id="como-funciona" class="section container" miraRevealOnScroll>
       <div class="section__head">
-        <h2 class="h2">Como o MIRA te dá controle — sem virar mais uma obrigação.</h2>
-        <p class="muted">Você conversa, o MIRA organiza. Você decide. Simples assim.</p>
+        <h2 class="h2">{{ 'MARKETING.HOW.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.HOW.SUB' | translate }}</p>
       </div>
 
       <div class="steps">
         <mira-ui-card class="step">
           <div class="step__inner">
             <div class="step__n">01</div>
-            <div class="step__t">Registre em segundos</div>
-            <div class="step__d muted">Texto, áudio, do seu jeito. O importante é você não desistir.</div>
+            <div class="step__t">{{ 'MARKETING.HOW.STEPS.S1.T' | translate }}</div>
+            <div class="step__d muted">{{ 'MARKETING.HOW.STEPS.S1.D' | translate }}</div>
           </div>
         </mira-ui-card>
 
         <mira-ui-card class="step">
           <div class="step__inner">
             <div class="step__n">02</div>
-            <div class="step__t">Organização automática</div>
-            <div class="step__d muted">Categorias, lembretes e resumos — tudo leve e fácil de acompanhar.</div>
+            <div class="step__t">{{ 'MARKETING.HOW.STEPS.S2.T' | translate }}</div>
+            <div class="step__d muted">{{ 'MARKETING.HOW.STEPS.S2.D' | translate }}</div>
           </div>
         </mira-ui-card>
 
         <mira-ui-card class="step">
           <div class="step__inner">
             <div class="step__n">03</div>
-            <div class="step__t">Você enxerga o mês</div>
-            <div class="step__d muted">Painel claro, gráficos bonitos e dicas que parecem feitas pra você.</div>
+            <div class="step__t">{{ 'MARKETING.HOW.STEPS.S3.T' | translate }}</div>
+            <div class="step__d muted">{{ 'MARKETING.HOW.STEPS.S3.D' | translate }}</div>
           </div>
         </mira-ui-card>
       </div>
@@ -266,14 +264,14 @@ type Testimonial = {
     <!-- BENEFÍCIOS -->
     <section class="section container" miraRevealOnScroll>
       <div class="section__head">
-        <h2 class="h2">Feito pra te dar paz — e não mais ansiedade.</h2>
-        <p class="muted">Design premium, leitura fácil e microinterações que passam confiança.</p>
+        <h2 class="h2">{{ 'MARKETING.BENEFITS.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.BENEFITS.SUB' | translate }}</p>
       </div>
 
       <div class="benefits">
         <mira-ui-card class="benefit" *ngFor="let b of benefits(); let i = index">
           <div class="benefit__inner">
-            <div class="benefit__ic" [attr.aria-label]="b.title">
+            <div class="benefit__ic" [attr.aria-label]="b.title | translate">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   [attr.d]="b.path"
@@ -284,8 +282,8 @@ type Testimonial = {
                 ></path>
               </svg>
             </div>
-            <div class="benefit__t">{{ b.title }}</div>
-            <div class="benefit__d muted">{{ b.desc }}</div>
+            <div class="benefit__t">{{ b.title | translate }}</div>
+            <div class="benefit__d muted">{{ b.desc | translate }}</div>
           </div>
         </mira-ui-card>
       </div>
@@ -295,28 +293,28 @@ type Testimonial = {
     <section id="prova" class="section container" miraRevealOnScroll>
       <div class="proof">
         <div class="proof__copy">
-          <h2 class="h2">Você entende o valor em segundos.</h2>
-          <p class="muted">Sem telas confusas. Só o essencial — bonito e direto.</p>
+          <h2 class="h2">{{ 'MARKETING.PROOF.TITLE' | translate }}</h2>
+          <p class="muted">{{ 'MARKETING.PROOF.SUB' | translate }}</p>
 
           <div class="proof__bullets">
-            <div class="pb"><span class="pb__dot"></span> Texto claro e hierarquia visual forte</div>
-            <div class="pb"><span class="pb__dot"></span> Navegação simples e fluida</div>
-            <div class="pb"><span class="pb__dot"></span> Rotina leve (de verdade)</div>
+            <div class="pb"><span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B1' | translate }}</div>
+            <div class="pb"><span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B2' | translate }}</div>
+            <div class="pb"><span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B3' | translate }}</div>
           </div>
         </div>
 
         <div class="proof__grid">
           <mira-ui-card class="proofCard">
             <div class="pc__n">{{ proofA() }}</div>
-            <div class="muted pc__t">min para começar</div>
+            <div class="muted pc__t">{{ 'MARKETING.PROOF.CARDS.C1' | translate }}</div>
           </mira-ui-card>
           <mira-ui-card class="proofCard">
             <div class="pc__n">{{ proofB() }}</div>
-            <div class="muted pc__t">passos para entender o mês</div>
+            <div class="muted pc__t">{{ 'MARKETING.PROOF.CARDS.C2' | translate }}</div>
           </mira-ui-card>
           <mira-ui-card class="proofCard">
             <div class="pc__n">{{ proofC() }}</div>
-            <div class="muted pc__t">planilhas necessárias</div>
+            <div class="muted pc__t">{{ 'MARKETING.PROOF.CARDS.C3' | translate }}</div>
           </mira-ui-card>
         </div>
       </div>
@@ -325,8 +323,8 @@ type Testimonial = {
     <!-- DEPOIMENTOS -->
     <section id="avaliacoes" class="section container" miraRevealOnScroll>
       <div class="section__head">
-        <h2 class="h2">Gente real. Vida real. Controle real.</h2>
-        <p class="muted">O tipo de feedback que a gente quer ouvir todos os dias.</p>
+        <h2 class="h2">{{ 'MARKETING.TESTIMONIALS.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.TESTIMONIALS.SUB' | translate }}</p>
       </div>
 
       <mira-ui-card class="testi">
@@ -334,27 +332,30 @@ type Testimonial = {
           <div class="stars" aria-hidden="true">★★★★★</div>
 
           <div class="swap" [@slideSwap]="active()">
-            <div class="quote">“{{ testimonials()[active()].quote }}”</div>
+            <div class="quote">“{{ testimonials()[active()].quote | translate }}”</div>
 
             <div class="who">
               <div class="who__name">
-                {{ testimonials()[active()].name }}
-                <span class="badge" *ngIf="testimonials()[active()].verified">✓ Cliente verificado</span>
+                {{ testimonials()[active()].name | translate }}
+                <span class="badge" *ngIf="testimonials()[active()].verified">
+                  ✓ {{ 'MARKETING.TESTIMONIALS.VERIFIED' | translate }}
+                </span>
               </div>
+
               <div class="who__role muted">
-                {{ testimonials()[active()].role }} • {{ testimonials()[active()].city }}
+                {{ testimonials()[active()].role | translate }} • {{ testimonials()[active()].city | translate }}
               </div>
             </div>
           </div>
 
-          <div class="dots" role="tablist" aria-label="Depoimentos">
+          <div class="dots" role="tablist" [attr.aria-label]="'MARKETING.TESTIMONIALS.TITLE' | translate">
             <button
               *ngFor="let t of testimonials(); let i = index"
               class="dot-btn focus-ring"
               type="button"
               [class.is-active]="i === active()"
               (click)="active.set(i)"
-              [attr.aria-label]="'Ver depoimento ' + (i + 1)"
+              [attr.aria-label]="('MARKETING.TESTIMONIALS.ARIA' | translate:{ n: i + 1 })"
             ></button>
           </div>
         </div>
@@ -364,35 +365,29 @@ type Testimonial = {
     <!-- FAQ -->
     <section id="faq" class="section container" miraRevealOnScroll>
       <div class="section__head">
-        <h2 class="h2">Perguntas Frequentes</h2>
-        <p class="muted">Tudo claro — do jeito que a gente gosta.</p>
+        <h2 class="h2">{{ 'MARKETING.FAQ.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.FAQ.SUB' | translate }}</p>
       </div>
 
       <div class="faq">
         <details class="qa">
-          <summary>O MIRA é pra mim?</summary>
+          <summary>{{ 'MARKETING.FAQ.Q1.Q' | translate }}</summary>
           <div class="qa__content">
-            <p class="muted">
-              Se você quer organizar o mês sem planilha e sem stress, sim. O MIRA te ajuda a registrar, entender e decidir com mais calma.
-            </p>
+            <p class="muted">{{ 'MARKETING.FAQ.Q1.A' | translate }}</p>
           </div>
         </details>
 
         <details class="qa">
-          <summary>Preciso saber “mexer com finanças”?</summary>
+          <summary>{{ 'MARKETING.FAQ.Q2.Q' | translate }}</summary>
           <div class="qa__content">
-            <p class="muted">
-              Não. A ideia é deixar simples: você fala do seu jeito e o MIRA te devolve clareza e próximos passos.
-            </p>
+            <p class="muted">{{ 'MARKETING.FAQ.Q2.A' | translate }}</p>
           </div>
         </details>
 
         <details class="qa">
-          <summary>Dá pra usar no celular?</summary>
+          <summary>{{ 'MARKETING.FAQ.Q3.Q' | translate }}</summary>
           <div class="qa__content">
-            <p class="muted">
-              Sim. A experiência é pensada pra mobile: rápida, confortável e gostosa de navegar.
-            </p>
+            <p class="muted">{{ 'MARKETING.FAQ.Q3.A' | translate }}</p>
           </div>
         </details>
       </div>
@@ -403,14 +398,14 @@ type Testimonial = {
       <mira-ui-card class="ctaCard">
         <div class="ctaCard__inner">
           <div class="cta__copy">
-            <div class="cta__title">Pronto pra sentir “meu dinheiro tá sob controle”?</div>
-            <div class="muted">Contrate o MIRA e comece leve. O resto a gente organiza com você.</div>
+            <div class="cta__title">{{ 'MARKETING.CTA_FINAL.TITLE' | translate }}</div>
+            <div class="muted">{{ 'MARKETING.CTA_FINAL.SUB' | translate }}</div>
           </div>
 
           <!-- ✅ agora abre o “Conheça nosso plano” -->
           <button class="cta-primary focus-ring" type="button" (click)="openPlan()">
             <span class="cta-primary__shine" aria-hidden="true"></span>
-            <span class="cta-primary__text">Contratar Mira Agora</span>
+            <span class="cta-primary__text">{{ 'MARKETING.CTA_FINAL.BUTTON' | translate }}</span>
             <span class="cta-primary__arrow" aria-hidden="true">→</span>
           </button>
         </div>
@@ -424,42 +419,39 @@ type Testimonial = {
       (click)="closePlan()"
       role="dialog"
       aria-modal="true"
-      aria-label="Conheça nosso plano"
+      [attr.aria-label]="'MARKETING.PLAN.TITLE' | translate"
     >
       <mira-ui-card class="planModal__card" (click)="$event.stopPropagation()">
-        <button class="planModal__close focus-ring" type="button" (click)="closePlan()" aria-label="Fechar">
+        <button class="planModal__close focus-ring" type="button" (click)="closePlan()" [attr.aria-label]="'COMMON.CLOSE' | translate">
           ×
         </button>
 
         <div class="planModal__inner">
           <div class="planModal__head">
-            <div class="planModal__k">Conheça nosso plano</div>
-            <div class="planModal__h">Tudo que você precisa pra cuidar do mês — sem planilha.</div>
-            <div class="planModal__p muted">
-              O MIRA foi feito pra você registrar rápido, entender o que está acontecendo e tomar decisões melhores com calma.
-              Sem telas confusas. Sem “peso”. Só clareza.
-            </div>
+            <div class="planModal__k">{{ 'MARKETING.PLAN.TITLE' | translate }}</div>
+            <div class="planModal__h">{{ 'MARKETING.PLAN.H' | translate }}</div>
+            <div class="planModal__p muted">{{ 'MARKETING.PLAN.P' | translate }}</div>
           </div>
 
           <div class="planModal__grid">
             <div class="planModal__list">
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">Insights essenciais (o que importa agora)</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">Painel do dinheiro (visão clara do mês)</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">Metas e comparativos (evolução sem ansiedade)</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">Lembretes (no tempo certo)</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">Visão e organização automática (categorias e padrão)</span></div>
+              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I1' | translate }}</span></div>
+              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I2' | translate }}</span></div>
+              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I3' | translate }}</span></div>
+              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I4' | translate }}</span></div>
+              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I5' | translate }}</span></div>
             </div>
 
             <div class="planModal__side">
               <div class="planModal__price">{{ offerPrice }}</div>
-              <div class="planModal__fine muted">Cobrança mensal • Cancele quando quiser</div>
+              <div class="planModal__fine muted">{{ 'MARKETING.PLAN.FINE' | translate }}</div>
 
               <a class="planModal__cta focus-ring" routerLink="/login">
-                <span>Continuar</span><span aria-hidden="true">→</span>
+                <span>{{ 'MARKETING.PLAN.CONTINUE' | translate }}</span><span aria-hidden="true">→</span>
               </a>
 
               <button class="planModal__ghost focus-ring" type="button" (click)="closePlan()">
-                Voltar
+                {{ 'MARKETING.PLAN.BACK' | translate }}
               </button>
             </div>
           </div>
@@ -938,71 +930,67 @@ type Testimonial = {
 export class HomePage {
   readonly benefits = signal([
     {
-      title: 'Registros sem fricção',
-      desc: 'Você anota do seu jeito. O MIRA mantém consistência — sem te “punir” por falhar um dia.',
+      title: 'MARKETING.BENEFITS.ITEMS.FRICTION.TITLE',
+      desc:  'MARKETING.BENEFITS.ITEMS.FRICTION.DESC',
       path: 'M20 7l-9 10-4-4',
     },
     {
-      title: 'Insights com contexto',
-      desc: 'Dicas que conversam com você: menos culpa, mais clareza e próxima ação simples.',
+      title: 'MARKETING.BENEFITS.ITEMS.CONTEXT.TITLE',
+      desc:  'MARKETING.BENEFITS.ITEMS.CONTEXT.DESC',
       path: 'M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M7 17l-1.4 1.4m12.8 0L17 17M7 7l-1.4-1.4',
     },
     {
-      title: 'Painel limpo e premium',
-      desc: 'Gráficos e cartões com hierarquia visual. Você bate o olho e entende.',
+      title: 'MARKETING.BENEFITS.ITEMS.PANEL.TITLE',
+      desc:  'MARKETING.BENEFITS.ITEMS.PANEL.DESC',
       path: 'M4 19V5m0 14h16M8 16v-6m4 6v-9m4 9v-4m4 4V8',
     },
     {
-      title: 'Lembretes que ajudam',
-      desc: 'Sem barulho. Só o que importa — no horário certo.',
+      title: 'MARKETING.BENEFITS.ITEMS.REMINDERS.TITLE',
+      desc:  'MARKETING.BENEFITS.ITEMS.REMINDERS.DESC',
       path: 'M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7',
     },
     {
-      title: 'Organização automática',
-      desc: 'Categorias, resumos e padrões — pra você decidir com mais calma.',
+      title: 'MARKETING.BENEFITS.ITEMS.AUTO.TITLE',
+      desc:  'MARKETING.BENEFITS.ITEMS.AUTO.DESC',
       path: 'M8 7h8M8 12h8M8 17h8M6 5h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2',
     },
     {
-      title: 'Acessibilidade de verdade',
-      desc: 'Foco visível, teclado e responsividade bem resolvida.',
+      title: 'MARKETING.BENEFITS.ITEMS.A11Y.TITLE',
+      desc:  'MARKETING.BENEFITS.ITEMS.A11Y.DESC',
       path: 'M12 5a2 2 0 110 4 2 2 0 010-4Zm-5 6h10M10 11v8m4-8v8',
     },
   ]);
 
   readonly testimonials = signal<Testimonial[]>([
     {
-      name: 'Marina',
-      role: 'Autônoma',
-      city: 'Curitiba • PR',
-      quote:
-        'Parece que alguém finalmente traduziu finanças pra uma linguagem humana. Eu abro e entendo.',
+      name:  'MARKETING.TESTIMONIALS.ITEMS.T1.NAME',
+      role:  'MARKETING.TESTIMONIALS.ITEMS.T1.ROLE',
+      city:  'MARKETING.TESTIMONIALS.ITEMS.T1.CITY',
+      quote: 'MARKETING.TESTIMONIALS.ITEMS.T1.QUOTE',
       rating: 5,
       verified: true,
     },
     {
-      name: 'Carlos',
-      role: 'CLT',
-      city: 'São Paulo • SP',
-      quote:
-        'O painel é direto. Sem “poluição”. Dá uma calma real ver o mês assim.',
+      name:  'MARKETING.TESTIMONIALS.ITEMS.T2.NAME',
+      role:  'MARKETING.TESTIMONIALS.ITEMS.T2.ROLE',
+      city:  'MARKETING.TESTIMONIALS.ITEMS.T2.CITY',
+      quote: 'MARKETING.TESTIMONIALS.ITEMS.T2.QUOTE',
       rating: 5,
       verified: true,
     },
     {
-      name: 'Patrícia',
-      role: 'Empreendedora',
-      city: 'Belo Horizonte • MG',
-      quote:
-        'As microinterações fazem diferença. Parece produto premium — e me dá vontade de usar.',
+      name:  'MARKETING.TESTIMONIALS.ITEMS.T3.NAME',
+      role:  'MARKETING.TESTIMONIALS.ITEMS.T3.ROLE',
+      city:  'MARKETING.TESTIMONIALS.ITEMS.T3.CITY',
+      quote: 'MARKETING.TESTIMONIALS.ITEMS.T3.QUOTE',
       rating: 5,
       verified: true,
     },
     {
-      name: 'Renato',
-      role: 'Freela',
-      city: 'Recife • PE',
-      quote:
-        'Eu sempre abandono app de finanças. Esse aqui… eu sinto que consigo manter.',
+      name:  'MARKETING.TESTIMONIALS.ITEMS.T4.NAME',
+      role:  'MARKETING.TESTIMONIALS.ITEMS.T4.ROLE',
+      city:  'MARKETING.TESTIMONIALS.ITEMS.T4.CITY',
+      quote: 'MARKETING.TESTIMONIALS.ITEMS.T4.QUOTE',
       rating: 5,
       verified: true,
     },
@@ -1014,9 +1002,9 @@ export class HomePage {
     STORIES (CSS progress + Timer)
   ------------------------------ */
   readonly stories = signal([
-    { src: '/assets/marketing/stories/story-01.webp', alt: 'Story Mira 01' },
-    { src: '/assets/marketing/stories/story-02.webp', alt: 'Story Mira 02' },
-    { src: '/assets/marketing/stories/story-03.webp', alt: 'Story Mira 03' },
+    { src: '/assets/marketing/stories/story-01.webp', alt: 'MARKETING.STORIES.ALT1' },
+    { src: '/assets/marketing/stories/story-02.webp', alt: 'MARKETING.STORIES.ALT2' },
+    { src: '/assets/marketing/stories/story-03.webp', alt: 'MARKETING.STORIES.ALT3' },
   ]);
 
   readonly storyIndex = signal(0);

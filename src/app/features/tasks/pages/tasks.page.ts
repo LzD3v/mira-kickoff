@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   TemplateRef,
+  DestroyRef,
   inject,
   signal,
   computed,
@@ -18,6 +19,7 @@ import { ToastService } from '@core/services/toast.service';
 import { UiInputComponent } from '@ui/input/ui-input.component';
 import { UiTextareaComponent } from '@ui/textarea/ui-textarea.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type ViewState = 'loading' | 'empty' | 'error' | 'ready';
 type TaskStatus = 'open' | 'done';
@@ -49,24 +51,30 @@ type Task = {
     UiSkeletonComponent,
     UiInputComponent,
     UiTextareaComponent,
+    TranslateModule,
   ],
   template: `
     <div class="top">
       <div>
-        <div class="title">Tarefas & Lembretes</div>
-        <div class="muted sub">Kick-off: CRUD mock + prioridades + categorias + agenda + concluir por seleção.</div>
+        <div class="title">{{ 'TASKS.TITLE' | translate }}</div>
+        <div class="muted sub">{{ 'TASKS.SUB' | translate }}</div>
       </div>
 
       <div class="actions">
-        <mira-ui-button variant="ghost" (click)="simulate('loading')">Simular loading</mira-ui-button>
-        <mira-ui-button variant="ghost" (click)="simulate('error')">Simular erro</mira-ui-button>
+        <mira-ui-button variant="ghost" (click)="simulate('loading')">
+          {{ 'TASKS.ACTIONS.SIM_LOADING' | translate }}
+        </mira-ui-button>
+
+        <mira-ui-button variant="ghost" (click)="simulate('error')">
+          {{ 'TASKS.ACTIONS.SIM_ERROR' | translate }}
+        </mira-ui-button>
 
         <mira-ui-button
           variant="secondary"
           (click)="completeSelected()"
           [disabled]="selectedOpenCount() === 0 || state() !== 'ready'"
         >
-          Concluir selecionadas ({{ selectedOpenCount() }})
+          {{ 'TASKS.ACTIONS.COMPLETE_SELECTED' | translate:{ n: selectedOpenCount() } }}
         </mira-ui-button>
 
         <mira-ui-button
@@ -74,10 +82,12 @@ type Task = {
           (click)="openBulkDelete()"
           [disabled]="selectedCount() === 0 || state() !== 'ready'"
         >
-          Apagar selecionadas
+          {{ 'TASKS.ACTIONS.DELETE_SELECTED' | translate }}
         </mira-ui-button>
 
-        <mira-ui-button variant="primary" (click)="openCreate()">Criar tarefa</mira-ui-button>
+        <mira-ui-button variant="primary" (click)="openCreate()">
+          {{ 'TASKS.ACTIONS.CREATE' | translate }}
+        </mira-ui-button>
       </div>
     </div>
 
@@ -86,7 +96,6 @@ type Task = {
         <!-- LOADING -->
         <div *ngSwitchCase="'loading'" class="list">
           <div class="rowSkel" *ngFor="let i of [1,2,3,4,5]">
-            <!-- ✅ atributos como string (component espera string) -->
             <mira-ui-skeleton width="24" height="24" radius="999"></mira-ui-skeleton>
             <mira-ui-skeleton class="skFill" height="14" radius="12"></mira-ui-skeleton>
             <mira-ui-skeleton class="skFill" height="14" radius="12"></mira-ui-skeleton>
@@ -97,43 +106,43 @@ type Task = {
         <!-- ERROR -->
         <mira-ui-error-state
           *ngSwitchCase="'error'"
-          title="Não foi possível carregar"
-          description="No Kick-off, isso é apenas simulado. Depois, será um erro real vindo do backend."
-          actionLabel="Tentar novamente"
+          [title]="'TASKS.STATES.ERROR.TITLE' | translate"
+          [description]="'TASKS.STATES.ERROR.DESC' | translate"
+          [actionLabel]="'TASKS.STATES.ERROR.ACTION' | translate"
           [action]="retry"
         />
 
         <!-- EMPTY -->
         <mira-ui-empty-state
           *ngSwitchCase="'empty'"
-          title="Sem tarefas por enquanto"
-          description="Crie sua primeira tarefa. (No produto final, isso vem do endpoint.)"
-          actionLabel="Criar tarefa"
+          [title]="'TASKS.STATES.EMPTY.TITLE' | translate"
+          [description]="'TASKS.STATES.EMPTY.DESC' | translate"
+          [actionLabel]="'TASKS.STATES.EMPTY.ACTION' | translate"
           [action]="openCreate"
         />
 
         <!-- READY -->
         <div *ngSwitchCase="'ready'" class="ready">
           <div class="toolbar">
-            <div class="filters" role="tablist" aria-label="Filtro">
+            <div class="filters" role="tablist" [attr.aria-label]="'TASKS.TOOLBAR.FILTER_ARIA' | translate">
               <button class="chip focus-ring" type="button" (click)="filter.set('all')" [class.is-active]="filter() === 'all'">
-                Todas <span class="muted">({{ totalCount() }})</span>
+                {{ 'TASKS.FILTER.ALL' | translate }} <span class="muted">({{ totalCount() }})</span>
               </button>
               <button class="chip focus-ring" type="button" (click)="filter.set('open')" [class.is-active]="filter() === 'open'">
-                Abertas <span class="muted">({{ openCount() }})</span>
+                {{ 'TASKS.FILTER.OPEN' | translate }} <span class="muted">({{ openCount() }})</span>
               </button>
               <button class="chip focus-ring" type="button" (click)="filter.set('done')" [class.is-active]="filter() === 'done'">
-                Concluídas <span class="muted">({{ doneCount() }})</span>
+                {{ 'TASKS.FILTER.DONE' | translate }} <span class="muted">({{ doneCount() }})</span>
               </button>
             </div>
 
             <div class="bulk">
               <button class="linkBtn focus-ring" type="button" (click)="selectAllVisible()" [disabled]="visibleTasks().length === 0">
-                Selecionar visíveis
+                {{ 'TASKS.BULK.SELECT_VISIBLE' | translate }}
               </button>
               <span class="muted sep">•</span>
               <button class="linkBtn focus-ring" type="button" (click)="clearSelection()" [disabled]="selectedCount() === 0">
-                Limpar seleção ({{ selectedCount() }})
+                {{ 'TASKS.BULK.CLEAR' | translate:{ n: selectedCount() } }}
               </button>
             </div>
           </div>
@@ -141,25 +150,24 @@ type Task = {
           <div class="tools">
             <div class="search">
               <label class="searchField">
-                <span class="searchField__label">Buscar</span>
+                <span class="searchField__label">{{ 'TASKS.TOOLS.SEARCH' | translate }}</span>
                 <input
                   class="searchField__input focus-ring"
                   type="text"
                   [value]="query()"
                   (input)="onQuery(($any($event.target).value || '').toString())"
-                  placeholder="Pesquisar por título, notas ou categoria…"
+                  [placeholder]="'TASKS.TOOLS.SEARCH_PH' | translate"
                   autocomplete="off"
                 />
               </label>
             </div>
 
             <label class="field field--sort">
-              <span class="field__label">Ordenar</span>
-              <!-- ✅ sem cast TS no template -->
+              <span class="field__label">{{ 'TASKS.TOOLS.SORT' | translate }}</span>
               <select class="select focus-ring" [value]="sort()" (change)="onSortChange($any($event.target).value)">
-                <option value="smart">Inteligente (prioridade + prazo)</option>
-                <option value="due">Prazo (mais próximo)</option>
-                <option value="newest">Mais recentes</option>
+                <option value="smart">{{ 'TASKS.SORT.SMART' | translate }}</option>
+                <option value="due">{{ 'TASKS.SORT.DUE' | translate }}</option>
+                <option value="newest">{{ 'TASKS.SORT.NEWEST' | translate }}</option>
               </select>
             </label>
           </div>
@@ -175,33 +183,58 @@ type Task = {
                       (change)="toggleSelected(t.id, $any($event.target).checked)"
                     />
                     <span class="dotPick__ui" aria-hidden="true"></span>
-                    <span class="sr-only">Selecionar</span>
+                    <span class="sr-only">{{ 'TASKS.LIST.SELECT' | translate }}</span>
                   </label>
 
-                  <div class="main">
+                  <button
+                    type="button"
+                    class="main mainBtn focus-ring"
+                    (click)="openDetail(t)"
+                    [attr.aria-label]="'TASKS.LIST.OPEN_DETAILS_ARIA' | translate"
+                  >
                     <div class="main__top">
                       <div class="item__title">{{ t.title }}</div>
                       <span class="cat muted">{{ categoryLabel(t.category) }}</span>
                     </div>
 
                     <div class="item__meta muted">
-                      Prazo: <b>{{ t.due }}</b>
+                      {{ 'TASKS.LIST.DUE' | translate }}: <b>{{ t.due }}</b>
                       <span class="dot">•</span>
-                      {{ t.status === 'open' ? 'Aberta (selecione e conclua)' : 'Concluída' }}
+                      {{ t.status === 'open' ? ('TASKS.STATUS.OPEN_HINT' | translate) : ('TASKS.STATUS.DONE' | translate) }}
                       <span class="dot">•</span>
-                      <span class="muted">Notas: {{ t.notes ? (t.notes | slice:0:52) + (t.notes.length > 52 ? '…' : '') : '—' }}</span>
+                      <span class="muted">
+                        {{ 'TASKS.LIST.NOTES' | translate }}:
+                        {{
+                          t.notes
+                            ? (t.notes | slice:0:52) + (t.notes.length > 52 ? '…' : '')
+                            : '—'
+                        }}
+                      </span>
                     </div>
-                  </div>
+                  </button>
 
                   <div class="item__actions">
                     <span class="badge" [attr.data-pri]="t.priority">{{ priorityLabel(t.priority) }}</span>
 
-                    <button class="iconBtn focus-ring" type="button" (click)="openEdit(t)" aria-label="Editar">✎</button>
-                    <button class="iconBtn focus-ring" type="button" (click)="openDelete(t.id)" aria-label="Apagar">🗑</button>
+                    <button
+                      class="iconBtn focus-ring"
+                      type="button"
+                      (click)="$event.stopPropagation(); openEdit(t)"
+                      [attr.aria-label]="'TASKS.LIST.EDIT' | translate"
+                    >✎</button>
+
+                    <button
+                      class="iconBtn focus-ring"
+                      type="button"
+                      (click)="$event.stopPropagation(); openDelete(t.id)"
+                      [attr.aria-label]="'TASKS.LIST.DELETE' | translate"
+                    >🗑</button>
                   </div>
                 </div>
 
-                <div class="muted hint" *ngIf="visibleTasks().length === 0">Nenhuma tarefa nesse filtro/busca.</div>
+                <div class="muted hint" *ngIf="visibleTasks().length === 0">
+                  {{ 'TASKS.LIST.NONE' | translate }}
+                </div>
               </div>
             </div>
 
@@ -209,13 +242,15 @@ type Task = {
               <div class="agenda">
                 <div class="agenda__head">
                   <div>
-                    <div class="agenda__title">Agenda (7 dias)</div>
-                    <div class="muted agenda__sub">Visão rápida do que está chegando.</div>
+                    <div class="agenda__title">{{ 'TASKS.AGENDA.TITLE' | translate }}</div>
+                    <div class="muted agenda__sub">{{ 'TASKS.AGENDA.SUB' | translate }}</div>
                   </div>
-                  <button class="ghostBtn focus-ring" type="button" (click)="agendaDay.set(0)">Hoje</button>
+                  <button class="ghostBtn focus-ring" type="button" (click)="agendaDay.set(0)">
+                    {{ 'TASKS.AGENDA.TODAY' | translate }}
+                  </button>
                 </div>
 
-                <div class="days" role="tablist" aria-label="Dias">
+                <div class="days" role="tablist" [attr.aria-label]="'TASKS.AGENDA.DAYS_ARIA' | translate">
                   <button
                     class="day focus-ring"
                     *ngFor="let d of agendaDays(); let i = index"
@@ -237,14 +272,18 @@ type Task = {
                       <div class="aItem__t">{{ t.title }}</div>
                       <span class="badge mini" [attr.data-pri]="t.priority">{{ priorityLabel(t.priority) }}</span>
                     </div>
-                    <div class="muted aItem__m">Prazo: {{ t.due }} • {{ categoryLabel(t.category) }}</div>
+                    <div class="muted aItem__m">
+                      {{ 'TASKS.LIST.DUE' | translate }}: {{ t.due }} • {{ categoryLabel(t.category) }}
+                    </div>
                   </div>
 
-                  <div class="muted aEmpty" *ngIf="agendaTasks().length === 0">Sem itens nesse dia.</div>
+                  <div class="muted aEmpty" *ngIf="agendaTasks().length === 0">
+                    {{ 'TASKS.AGENDA.EMPTY' | translate }}
+                  </div>
                 </div>
 
                 <div class="muted agenda__note">
-                  TODO (API): puxar prazos reais, horários, recorrência e notificações.
+                  {{ 'TASKS.AGENDA.NOTE' | translate }}
                 </div>
               </div>
             </div>
@@ -256,51 +295,66 @@ type Task = {
     <!-- MODAL: editor (create/edit) -->
     <ng-template #editorTpl>
       <form class="form" [formGroup]="form">
-        <mira-ui-input label="Título" placeholder="Ex.: Pagar cartão" formControlName="title" />
+        <mira-ui-input
+          [label]="'TASKS.EDITOR.TITLE_LABEL' | translate"
+          placeholder="Ex.: Pagar cartão"
+          formControlName="title"
+        />
 
         <div class="two">
-          <mira-ui-input label="Prazo" placeholder="Ex.: 25/04" formControlName="due" />
+          <mira-ui-input
+            [label]="'TASKS.EDITOR.DUE_LABEL' | translate"
+            placeholder="Ex.: 25/04"
+            formControlName="due"
+          />
 
           <label class="field">
-            <span class="field__label">Prioridade</span>
+            <span class="field__label">{{ 'TASKS.EDITOR.PRIORITY' | translate }}</span>
             <select class="select focus-ring" formControlName="priority">
-              <option value="low">Baixa</option>
-              <option value="normal">Normal</option>
-              <option value="urgent">Urgente</option>
+              <option value="low">{{ 'TASKS.PRIORITY.LOW' | translate }}</option>
+              <option value="normal">{{ 'TASKS.PRIORITY.NORMAL' | translate }}</option>
+              <option value="urgent">{{ 'TASKS.PRIORITY.URGENT' | translate }}</option>
             </select>
           </label>
         </div>
 
         <div class="two">
           <label class="field">
-            <span class="field__label">Categoria</span>
+            <span class="field__label">{{ 'TASKS.EDITOR.CATEGORY' | translate }}</span>
             <select class="select focus-ring" formControlName="category">
-              <option value="finance">Financeiro</option>
-              <option value="personal">Pessoal</option>
-              <option value="work">Trabalho</option>
+              <option value="finance">{{ 'TASKS.CATEGORY.FINANCE' | translate }}</option>
+              <option value="personal">{{ 'TASKS.CATEGORY.PERSONAL' | translate }}</option>
+              <option value="work">{{ 'TASKS.CATEGORY.WORK' | translate }}</option>
             </select>
           </label>
 
           <div class="muted note">
-            Dica: use “Urgente” só quando realmente for prioridade do dia (te ajuda a não virar ansiedade).
+            {{ 'TASKS.EDITOR.TIP' | translate }}
           </div>
         </div>
 
         <mira-ui-textarea
-          label="Notas"
-          placeholder="Detalhes, lembretes, links, contexto…"
+          [label]="'TASKS.EDITOR.NOTES_LABEL' | translate"
+          [placeholder]="'TASKS.EDITOR.NOTES_PH' | translate"
           formControlName="notes"
           [rows]="4"
         />
 
         <div class="muted note">
-          TODO (pós Kick-off): integrar CRUD real via API, ordenação no backend, recorrência e notificações.
+          {{ 'TASKS.EDITOR.TODO' | translate }}
         </div>
 
         <div class="form__actions">
-          <mira-ui-button variant="secondary" type="button" (click)="modal.close()">Cancelar</mira-ui-button>
+          <mira-ui-button variant="secondary" type="button" (click)="modal.close()">
+            {{ 'COMMON.CANCEL' | translate }}
+          </mira-ui-button>
+
           <mira-ui-button variant="primary" type="button" (click)="save()">
-            {{ editorMode() === 'create' ? 'Salvar (mock)' : 'Atualizar (mock)' }}
+            {{
+              editorMode() === 'create'
+                ? ('TASKS.EDITOR.SAVE_MOCK' | translate)
+                : ('TASKS.EDITOR.UPDATE_MOCK' | translate)
+            }}
           </mira-ui-button>
         </div>
       </form>
@@ -309,12 +363,16 @@ type Task = {
     <!-- MODAL: delete single -->
     <ng-template #deleteTpl>
       <div class="confirm">
-        <div class="confirm__title">Apagar tarefa?</div>
-        <div class="muted confirm__desc">Isso remove a tarefa do mock local. (No produto final, será delete no backend.)</div>
+        <div class="confirm__title">{{ 'TASKS.DELETE.ONE_TITLE' | translate }}</div>
+        <div class="muted confirm__desc">{{ 'TASKS.DELETE.ONE_DESC' | translate }}</div>
 
         <div class="confirm__actions">
-          <mira-ui-button variant="secondary" type="button" (click)="modal.close()">Cancelar</mira-ui-button>
-          <mira-ui-button variant="primary" type="button" (click)="confirmDelete()">Apagar</mira-ui-button>
+          <mira-ui-button variant="secondary" type="button" (click)="modal.close()">
+            {{ 'COMMON.CANCEL' | translate }}
+          </mira-ui-button>
+          <mira-ui-button variant="primary" type="button" (click)="confirmDelete()">
+            {{ 'TASKS.DELETE.DELETE' | translate }}
+          </mira-ui-button>
         </div>
       </div>
     </ng-template>
@@ -322,12 +380,54 @@ type Task = {
     <!-- MODAL: delete bulk -->
     <ng-template #bulkDeleteTpl>
       <div class="confirm">
-        <div class="confirm__title">Apagar selecionadas?</div>
-        <div class="muted confirm__desc">Você selecionou <b>{{ selectedCount() }}</b> tarefa(s). Isso remove do mock local.</div>
+        <div class="confirm__title">{{ 'TASKS.DELETE.BULK_TITLE' | translate }}</div>
+        <div class="muted confirm__desc" [innerHTML]="'TASKS.DELETE.BULK_DESC_HTML' | translate:{ n: selectedCount() }"></div>
 
         <div class="confirm__actions">
-          <mira-ui-button variant="secondary" type="button" (click)="modal.close()">Cancelar</mira-ui-button>
-          <mira-ui-button variant="primary" type="button" (click)="confirmBulkDelete()">Apagar</mira-ui-button>
+          <mira-ui-button variant="secondary" type="button" (click)="modal.close()">
+            {{ 'COMMON.CANCEL' | translate }}
+          </mira-ui-button>
+          <mira-ui-button variant="primary" type="button" (click)="confirmBulkDelete()">
+            {{ 'TASKS.DELETE.DELETE' | translate }}
+          </mira-ui-button>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- MODAL: details -->
+    <ng-template #detailTpl>
+      <div class="detail" *ngIf="detailTask() as t">
+        <div class="detail__top">
+          <div>
+            <div class="detail__title">{{ t.title }}</div>
+            <div class="muted detail__sub">
+              {{ categoryLabel(t.category) }} • {{ priorityLabel(t.priority) }} •
+              {{ t.status === 'open' ? ('TASKS.STATUS.OPEN' | translate) : ('TASKS.STATUS.DONE' | translate) }}
+            </div>
+          </div>
+          <span class="badge" [attr.data-pri]="t.priority">{{ priorityLabel(t.priority) }}</span>
+        </div>
+
+        <div class="detail__meta">
+          <div class="kv">
+            <div class="muted kv__k">{{ 'TASKS.DETAIL.DUE' | translate }}</div>
+            <div class="kv__v">{{ t.due }}</div>
+          </div>
+          <div class="kv">
+            <div class="muted kv__k">{{ 'TASKS.DETAIL.STATUS' | translate }}</div>
+            <div class="kv__v">
+              {{ t.status === 'open' ? ('TASKS.STATUS.OPEN' | translate) : ('TASKS.STATUS.DONE' | translate) }}
+            </div>
+          </div>
+          <div class="kv">
+            <div class="muted kv__k">{{ 'TASKS.DETAIL.CATEGORY' | translate }}</div>
+            <div class="kv__v">{{ categoryLabel(t.category) }}</div>
+          </div>
+        </div>
+
+        <div class="detail__notes">
+          <div class="detail__k">{{ 'TASKS.DETAIL.NOTES' | translate }}</div>
+          <div class="muted detail__t">{{ t.notes || '—' }}</div>
         </div>
       </div>
     </ng-template>
@@ -357,7 +457,6 @@ type Task = {
         align-items:center;
       }
 
-      /* ✅ card “menos apertado” + mais premium */
       mira-ui-card.panel{
         padding: 18px;
         border-radius: 24px;
@@ -369,7 +468,6 @@ type Task = {
 
       .ready{ display:grid; gap:14px; }
 
-      /* ✅ toolbar vira um “bloco” com respiro */
       .toolbar{
         display:flex;
         align-items:center;
@@ -408,7 +506,6 @@ type Task = {
         box-shadow: 0 14px 34px rgba(133,94,217,0.18);
       }
 
-      /* ✅ botões “Selecionar / Limpar” agora parecem botões */
       .bulk{
         display:inline-flex;
         align-items:center;
@@ -431,7 +528,6 @@ type Task = {
       .linkBtn:disabled{ opacity: .45; cursor:not-allowed; transform:none; }
       .sep{ font-size:12px; opacity:.8; }
 
-      /* ✅ tools com mais respiro e “Ordenar” mais largo */
       .tools{
         display:grid;
         grid-template-columns: 1fr minmax(280px, 360px);
@@ -494,11 +590,11 @@ type Task = {
 
       .split{
         display:grid;
-        grid-template-columns: 1fr 420px;
+        grid-template-columns: minmax(0, 70%) minmax(0, 30%);
         gap:14px;
         align-items:start;
       }
-      @media (max-width: 1020px){
+      @media (max-width: 980px){
         .split{ grid-template-columns: 1fr; }
       }
 
@@ -582,7 +678,7 @@ type Task = {
         font-size: 12.5px;
         line-height: 1.4;
       }
-      .dot{ margin: 0 7px; opacity: .7; }
+      .dot{ margin: 0 7px; opacity:.7; }
 
       .item__actions{
         display:inline-flex;
@@ -661,7 +757,6 @@ type Task = {
         font-weight: 800;
       }
 
-      /* ✅ select mais legível + sem “branco estourado” */
       .select{
         width: 100%;
         border-radius: 16px;
@@ -671,7 +766,6 @@ type Task = {
         color: var(--text, rgba(255,255,255,0.92));
         outline: none;
         min-height: 46px;
-
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -680,7 +774,6 @@ type Task = {
       .select:hover{ background: rgba(255,255,255,0.06); }
       .select:focus{ border-color: rgba(133,94,217,0.45); }
 
-      /* tenta escurecer o dropdown nativo quando suportado */
       .select option{
         background: rgba(12,14,20,1);
         color: rgba(255,255,255,0.92);
@@ -700,7 +793,6 @@ type Task = {
       .confirm__desc{ font-size: 12px; line-height: 1.4; }
       .confirm__actions{ display:flex; justify-content:flex-end; gap:10px; margin-top: 6px; }
 
-      /* ✅ agenda mais “solta” + dias maiores */
       .agenda{
         border: 1px solid rgba(255,255,255,0.10);
         background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
@@ -850,6 +942,146 @@ type Task = {
         white-space:nowrap !important;
         border:0 !important;
       }
+
+      @media (max-width: 560px){
+        .item{
+          grid-template-columns: 36px minmax(0, 1fr) 96px;
+          gap: 10px;
+          padding: 12px;
+        }
+
+        .main__top{
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 4px;
+        }
+
+        .item__title{
+          white-space: normal;
+          overflow: visible;
+          text-overflow: clip;
+          line-height: 1.25;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
+        .cat{
+          font-size: 11.5px;
+          opacity: .85;
+        }
+
+        .item__meta{
+          font-size: 12.5px;
+          line-height: 1.35;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+
+        .item__actions{
+          width: 96px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          justify-items: center;
+          align-content: start;
+          gap: 8px;
+        }
+
+        .item__actions .badge{
+          grid-column: 1 / -1;
+          justify-self: end;
+          padding: 6px 10px;
+          font-size: 11.5px;
+        }
+
+        .iconBtn{
+          width: 36px;
+          height: 36px;
+          border-radius: 12px;
+        }
+
+        .dotPick{
+          width: 36px;
+          height: 36px;
+        }
+      }
+
+      .mainBtn{
+        background: transparent;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .detail{
+        display: grid;
+        gap: 12px;
+        animation: sheetUp 200ms ease both;
+        max-width: 720px;
+      }
+
+      .detail__top{
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap: 10px;
+      }
+
+      .detail__title{
+        font-weight: 950;
+        letter-spacing: -0.2px;
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      .detail__sub{
+        margin-top: 4px;
+        font-size: 12.5px;
+      }
+
+      .detail__meta{
+        display:grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.03);
+        border-radius: 16px;
+        padding: 10px;
+      }
+
+      .kv{ display:grid; gap: 4px; }
+      .kv__k{ font-size: 12px; font-weight: 800; }
+      .kv__v{ font-size: 13px; font-weight: 900; }
+
+      .detail__notes{
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.03);
+        border-radius: 16px;
+        padding: 12px;
+      }
+
+      .detail__k{ font-weight: 950; font-size: 12px; }
+      .detail__t{ margin-top: 6px; font-size: 13px; line-height: 1.5; white-space: pre-wrap; }
+
+      @media (max-width: 560px){
+        .detail__meta{ grid-template-columns: 1fr; }
+      }
+
+      @keyframes sheetUp{
+        from{ opacity: 0; transform: translateY(10px); }
+        to{ opacity: 1; transform: translateY(0); }
+      }
+
+      @media (prefers-reduced-motion: reduce){
+        .detail{ animation: none !important; }
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -858,10 +1090,17 @@ export class TasksPage {
   readonly modal = inject(ModalService);
   readonly toast = inject(ToastService);
   private readonly fb = inject(FormBuilder);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  readonly locale = signal<string>('pt-BR');
 
   readonly editorTpl = viewChild<TemplateRef<unknown>>('editorTpl');
   readonly deleteTpl = viewChild<TemplateRef<unknown>>('deleteTpl');
   readonly bulkDeleteTpl = viewChild<TemplateRef<unknown>>('bulkDeleteTpl');
+  readonly detailTpl = viewChild<TemplateRef<unknown>>('detailTpl');
+
+  readonly detailTask = signal<Task | null>(null);
 
   readonly state = signal<ViewState>('loading');
 
@@ -892,6 +1131,9 @@ export class TasksPage {
   readonly doneCount = computed(() => this.tasks().filter((t) => t.status === 'done').length);
 
   readonly visibleTasks = computed(() => {
+    // força recompute quando muda idioma
+    this.locale();
+
     const f = this.filter();
     const q = (this.query() ?? '').trim().toLowerCase();
     const s = this.sort();
@@ -902,7 +1144,8 @@ export class TasksPage {
 
     if (q) {
       filtered = filtered.filter((t) => {
-        const blob = `${t.title} ${t.notes} ${this.categoryLabel(t.category)} ${this.priorityLabel(t.priority)}`.toLowerCase();
+        const blob =
+          `${t.title} ${t.notes} ${this.categoryLabel(t.category)} ${this.priorityLabel(t.priority)}`.toLowerCase();
         return blob.includes(q);
       });
     }
@@ -934,11 +1177,13 @@ export class TasksPage {
   });
 
   readonly agendaDays = computed(() => {
+    // força recompute quando muda idioma
+    this.locale();
+
     const base = new Date();
     base.setHours(0, 0, 0, 0);
 
     const days: { d: Date; k: string; n: string; c: string }[] = [];
-    const week = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
     for (let i = 0; i < 7; i++) {
       const d = new Date(base);
@@ -953,7 +1198,7 @@ export class TasksPage {
 
       days.push({
         d,
-        k: week[d.getDay()],
+        k: this.weekdayShort(d),
         n: String(d.getDate()).padStart(2, '0'),
         c: count ? `${count}` : '—',
       });
@@ -989,6 +1234,14 @@ export class TasksPage {
   });
 
   constructor() {
+    const setLocale = () => {
+      const l = (this.translate.currentLang || this.translate.defaultLang || 'pt-BR') as string;
+      this.locale.set(l);
+    };
+    setLocale();
+    const sub = this.translate.onLangChange.subscribe(() => setLocale());
+    this.destroyRef.onDestroy(() => sub.unsubscribe());
+
     const seed: Task[] = [
       {
         id: this.id(),
@@ -1026,6 +1279,13 @@ export class TasksPage {
       this.tasks.set(seed);
       this.state.set(seed.length ? 'ready' : 'empty');
     }, 600);
+  }
+
+  openDetail(t: Task) {
+    const tpl = this.detailTpl();
+    if (!tpl) return;
+    this.detailTask.set(t);
+    this.modal.open(this.translate.instant('TASKS.MODAL.DETAIL_TITLE'), tpl);
   }
 
   onQuery(v: string) {
@@ -1084,7 +1344,7 @@ export class TasksPage {
       category: 'finance',
       notes: '',
     });
-    this.modal.open('Criar tarefa (mock)', tpl);
+    this.modal.open(this.translate.instant('TASKS.MODAL.CREATE_TITLE'), tpl);
   };
 
   openEdit(t: Task) {
@@ -1099,7 +1359,7 @@ export class TasksPage {
       category: t.category,
       notes: t.notes ?? '',
     });
-    this.modal.open('Editar tarefa (mock)', tpl);
+    this.modal.open(this.translate.instant('TASKS.MODAL.EDIT_TITLE'), tpl);
   }
 
   save() {
@@ -1107,8 +1367,8 @@ export class TasksPage {
       this.form.markAllAsTouched();
       this.toast.push({
         type: 'warning',
-        title: 'Revise os campos',
-        message: 'Preencha título, prazo, prioridade e categoria.',
+        title: this.translate.instant('TASKS.TOAST.REVIEW_TITLE'),
+        message: this.translate.instant('TASKS.TOAST.REVIEW_MSG'),
       });
       return;
     }
@@ -1146,7 +1406,11 @@ export class TasksPage {
         notes: '',
       });
 
-      this.toast.push({ type: 'success', title: 'Criado (mock)', message: 'Tarefa adicionada localmente.' });
+      this.toast.push({
+        type: 'success',
+        title: this.translate.instant('TASKS.TOAST.CREATED_TITLE'),
+        message: this.translate.instant('TASKS.TOAST.CREATED_MSG'),
+      });
       return;
     }
 
@@ -1158,7 +1422,11 @@ export class TasksPage {
     );
 
     this.modal.close();
-    this.toast.push({ type: 'success', title: 'Atualizado (mock)', message: 'Alterações salvas localmente.' });
+    this.toast.push({
+      type: 'success',
+      title: this.translate.instant('TASKS.TOAST.UPDATED_TITLE'),
+      message: this.translate.instant('TASKS.TOAST.UPDATED_MSG'),
+    });
   }
 
   completeSelected() {
@@ -1167,7 +1435,11 @@ export class TasksPage {
 
     const openToComplete = this.tasks().filter((t) => sel.has(t.id) && t.status === 'open').length;
     if (openToComplete === 0) {
-      this.toast.push({ type: 'warning', title: 'Nada pra concluir', message: 'Selecione tarefas abertas.' });
+      this.toast.push({
+        type: 'warning',
+        title: this.translate.instant('TASKS.TOAST.NOTHING_TITLE'),
+        message: this.translate.instant('TASKS.TOAST.NOTHING_MSG'),
+      });
       return;
     }
 
@@ -1179,8 +1451,8 @@ export class TasksPage {
 
     this.toast.push({
       type: 'success',
-      title: 'Concluídas (mock)',
-      message: `${openToComplete} tarefa(s) marcada(s) como concluída(s).`,
+      title: this.translate.instant('TASKS.TOAST.COMPLETED_TITLE'),
+      message: this.translate.instant('TASKS.TOAST.COMPLETED_MSG', { n: openToComplete }),
     });
   }
 
@@ -1188,7 +1460,7 @@ export class TasksPage {
     const tpl = this.deleteTpl();
     if (!tpl) return;
     this.pendingDeleteId.set(id);
-    this.modal.open('Apagar tarefa', tpl);
+    this.modal.open(this.translate.instant('TASKS.MODAL.DELETE_TITLE'), tpl);
   }
 
   confirmDelete() {
@@ -1206,13 +1478,17 @@ export class TasksPage {
     this.modal.close();
 
     this.state.set(this.tasks().length ? 'ready' : 'empty');
-    this.toast.push({ type: 'success', title: 'Removido (mock)', message: 'Tarefa apagada localmente.' });
+    this.toast.push({
+      type: 'success',
+      title: this.translate.instant('TASKS.TOAST.REMOVED_TITLE'),
+      message: this.translate.instant('TASKS.TOAST.REMOVED_MSG'),
+    });
   }
 
   openBulkDelete() {
     const tpl = this.bulkDeleteTpl();
     if (!tpl) return;
-    this.modal.open('Apagar selecionadas', tpl);
+    this.modal.open(this.translate.instant('TASKS.MODAL.BULK_DELETE_TITLE'), tpl);
   }
 
   confirmBulkDelete() {
@@ -1226,21 +1502,46 @@ export class TasksPage {
     this.modal.close();
     this.state.set(this.tasks().length ? 'ready' : 'empty');
 
-    this.toast.push({ type: 'success', title: 'Removidas (mock)', message: `${n} tarefa(s) apagada(s).` });
+    this.toast.push({
+      type: 'success',
+      title: this.translate.instant('TASKS.TOAST.BULK_REMOVED_TITLE'),
+      message: this.translate.instant('TASKS.TOAST.BULK_REMOVED_MSG', { n }),
+    });
   }
 
   trackById = (_: number, t: Task) => t.id;
 
+  private priorityKey(p: Priority) {
+    if (p === 'urgent') return 'TASKS.PRIORITY.URGENT';
+    if (p === 'low') return 'TASKS.PRIORITY.LOW';
+    return 'TASKS.PRIORITY.NORMAL';
+  }
+
+  private categoryKey(c: Category) {
+    if (c === 'work') return 'TASKS.CATEGORY.WORK';
+    if (c === 'personal') return 'TASKS.CATEGORY.PERSONAL';
+    return 'TASKS.CATEGORY.FINANCE';
+  }
+
   priorityLabel(p: Priority) {
-    if (p === 'urgent') return 'Urgente';
-    if (p === 'low') return 'Baixa';
-    return 'Normal';
+    // locale() aqui garante que recalcula quando muda idioma
+    this.locale();
+    return this.translate.instant(this.priorityKey(p));
   }
 
   categoryLabel(c: Category) {
-    if (c === 'work') return 'Trabalho';
-    if (c === 'personal') return 'Pessoal';
-    return 'Financeiro';
+    this.locale();
+    return this.translate.instant(this.categoryKey(c));
+  }
+
+  private weekdayShort(d: Date) {
+    try {
+      const raw = new Intl.DateTimeFormat(this.locale(), { weekday: 'short' }).format(d);
+      const cleaned = raw.replace('.', '').trim();
+      return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+    } catch {
+      return '—';
+    }
   }
 
   private id() {
