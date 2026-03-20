@@ -35,7 +35,7 @@ type Testimonial = {
     TranslateModule,
   ],
   animations: [
-    // ✅ depoimento “passando pro lado”
+    // ✅ depoimento "passando pro lado"
     trigger('slideSwap', [
       transition('* => *', [
         style({ opacity: 0, transform: 'translateX(26px)' }),
@@ -100,18 +100,19 @@ type Testimonial = {
             </div>
           </div>
 
-          <div class=”hero__cta”>
-            <!-- ✅ agora abre o “Conheça nosso plano” -->
+          <div class="hero__cta">
+            <!-- ✅ agora abre o "Conheça nosso plano" -->
             <!-- Aqui foi modificado o CTA primário para scroll até #pricing como solicitado -->
-            <a
-              class=”cta-primary focus-ring”
-              href=”#pricing”
-              [attr.aria-label]=”'MARKETING.HERO.CTA.ARIA_PRIMARY' | translate”
+            <button
+              class="cta-primary focus-ring"
+              type="button"
+              (click)="scrollToPricing()"
+              [attr.aria-label]="'MARKETING.HERO.CTA.ARIA_PRIMARY' | translate"
             >
-              <span class=”cta-primary__shine” aria-hidden=”true”></span>
-              <span class=”cta-primary__text”>{{ 'MARKETING.HERO.CTA.PRIMARY' | translate }}</span>
-              <span class=”cta-primary__arrow” aria-hidden=”true”>→</span>
-            </a>
+              <span class="cta-primary__shine" aria-hidden="true"></span>
+              <span class="cta-primary__text">{{ 'MARKETING.HERO.CTA.PRIMARY' | translate }}</span>
+              <span class="cta-primary__arrow" aria-hidden="true">→</span>
+            </button>
 
             <a class="cta-secondary focus-ring" href="#como-funciona">{{ 'MARKETING.HERO.CTA.SECONDARY' | translate }}</a>
           </div>
@@ -399,7 +400,7 @@ type Testimonial = {
           <div class="stars" aria-hidden="true">★★★★★</div>
 
           <div class="swap" [@slideSwap]="active()">
-            <div class="quote">“{{ testimonials()[active()].quote | translate }}”</div>
+            <div class="quote">"{{ testimonials()[active()].quote | translate }}"</div>
 
             <div class="who">
               <div class="who__name">
@@ -554,7 +555,7 @@ type Testimonial = {
             <div class="muted">{{ 'MARKETING.CTA_FINAL.SUB' | translate }}</div>
           </div>
 
-          <!-- ✅ agora abre o “Conheça nosso plano” -->
+          <!-- ✅ agora abre o "Conheça nosso plano" -->
           <button class="cta-primary focus-ring" type="button" (click)="openPlan()">
             <span class="cta-primary__shine" aria-hidden="true"></span>
             <span class="cta-primary__text">{{ 'MARKETING.CTA_FINAL.BUTTON' | translate }}</span>
@@ -889,7 +890,7 @@ type Testimonial = {
       .proofCard .pc__t { padding: 6px 16px 16px; font-size: 12px; }
 
       /* TESTI */
-      .testi__inner { padding: 18px; overflow: hidden; } /* ✅ ajuda no “slide” */
+      .testi__inner { padding: 18px; overflow: hidden; } /* ✅ ajuda no "slide" */
       .stars { color: rgba(255,255,255,0.82); letter-spacing: 1px; font-size: 12px; }
       .quote { margin-top: 10px; font-size: 16px; font-weight: 800; letter-spacing: -0.2px; }
       .who { margin-top: 12px; }
@@ -1424,6 +1425,11 @@ export class HomePage {
   ------------------------------ */
   readonly planOpen = signal(false);
   readonly offerPrice = 'R$ 25/mês';
+
+  // Aqui foi adicionado o método de scroll para pricing como solicitado
+  scrollToPricing() {
+    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   openPlan() {
     this.planOpen.set(true);
