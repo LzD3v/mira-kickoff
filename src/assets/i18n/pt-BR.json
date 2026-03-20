@@ -33,9 +33,18 @@
         "C": " automaticamente."
       },
       "TRUST": {
-        "T1": { "K": "Comece rápido", "V": "em poucos minutos" },
-        "T2": { "K": "Mobile-first", "V": "360–1920" },
-        "T3": { "K": "Acessível", "V": "Foco e teclado" }
+        "T1": {
+          "K": "Comece rápido",
+          "V": "em poucos minutos"
+        },
+        "T2": {
+          "K": "Mobile-first",
+          "V": "360–1920"
+        },
+        "T3": {
+          "K": "Acessível",
+          "V": "Foco e teclado"
+        }
       },
       "CTA": {
         "PRIMARY": "Experimentar grátis",
@@ -52,14 +61,22 @@
     "MOCK": {
       "TITLE": "MIRA • Demo",
       "LIVE": "ao vivo",
-      "PANEL": { "K": "Visão do mês" },
+      "PANEL": {
+        "K": "Visão do mês"
+      },
       "CHAT": {
-        "ME1": { "TEXT": "gastei 52 no mercado", "META": "agora" },
+        "ME1": {
+          "TEXT": "gastei 52 no mercado",
+          "META": "agora"
+        },
         "BOT1": {
           "TEXT_HTML": "Anotado ✅ <b>Mercado</b> • R$ 52<br />Quer que eu separe em “alimentação”?",
           "META": "MIRA"
         },
-        "ME2": { "TEXT": "sim, e me lembra do aluguel dia 10", "META": "agora" },
+        "ME2": {
+          "TEXT": "sim, e me lembra do aluguel dia 10",
+          "META": "agora"
+        },
         "BOT2": {
           "TEXT_HTML": "Fechado 😌<br />Lembrete criado • <b>10</b> • 9:00",
           "META": "MIRA"
@@ -80,9 +97,18 @@
       "TITLE": "Como a MIRA te dá controle — sem virar mais uma obrigação.",
       "SUB": "Você conversa, a MIRA organiza. Você decide. Simples assim.",
       "STEPS": {
-        "S1": { "T": "Registre em segundos", "D": "Texto, áudio, do seu jeito. O importante é você não desistir." },
-        "S2": { "T": "Organização automática", "D": "Categorias, lembretes e resumos — tudo leve e fácil de acompanhar." },
-        "S3": { "T": "Você enxerga o mês", "D": "Painel claro, gráficos bonitos e dicas que parecem feitas pra você." }
+        "S1": {
+          "T": "Registre em segundos",
+          "D": "Texto, áudio, do seu jeito. O importante é você não desistir."
+        },
+        "S2": {
+          "T": "Organização automática",
+          "D": "Categorias, lembretes e resumos — tudo leve e fácil de acompanhar."
+        },
+        "S3": {
+          "T": "Você enxerga o mês",
+          "D": "Painel claro, gráficos bonitos e dicas que parecem feitas pra você."
+        }
       }
     },
 
@@ -262,6 +288,50 @@
       "FINE": "Cobrança mensal • Cancele quando quiser",
       "CONTINUE": "Continuar",
       "BACK": "Voltar"
+    },
+    "PLAN_MODAL": {
+      "FREE": {
+        "EYEBROW": "Plano Free",
+        "TITLE": "Comece sem pagar e organize o básico do seu mês.",
+        "DESC": "Perfeito para conhecer a MIRA, registrar sua rotina financeira e ter uma visão inicial sem complicação.",
+        "PRICE": "R$ 0",
+        "FINE": "Grátis para começar. Sem cobrança.",
+        "CTA": "Seguir para o Cadastro",
+        "ITEMS": {
+          "I1": "Visão geral do mês",
+          "I2": "Insights essenciais",
+          "I3": "Registro manual",
+          "I4": "Base simples para começar com clareza"
+        }
+      },
+      "PRO": {
+        "EYEBROW": "Plano Pro",
+        "TITLE": "Tudo que você precisa para cuidar do mês com clareza.",
+        "DESC": "Ideal para quem quer mais contexto, mais inteligência e menos esforço manual no dia a dia.",
+        "PRICE": "R$ 14,90/mês",
+        "FINE": "Cobrança mensal • Cancele quando quiser",
+        "CTA": "Continuar",
+        "ITEMS": {
+          "I1": "IA completa para entender seus padrões",
+          "I2": "Cruzamento de dados do seu dia a dia",
+          "I3": "Alertas inteligentes no momento certo",
+          "I4": "Painel premium com visão mais profunda"
+        }
+      },
+      "ELITE": {
+        "EYEBROW": "Plano Elite",
+        "TITLE": "Automação e visão avançada para vida e negócio.",
+        "DESC": "Para quem quer decisões mais estratégicas, automações mais fortes e leitura cruzada entre áreas da vida.",
+        "PRICE": "R$ 29,90/mês",
+        "FINE": "Cobrança mensal • Mais recursos e automações",
+        "CTA": "Continuar",
+        "ITEMS": {
+          "I1": "Tudo do Pro",
+          "I2": "Vida + negócio em uma visão unificada",
+          "I3": "Automações avançadas",
+          "I4": "Decisões cruzadas com mais contexto"
+        }
+      }
     }
   },
 
@@ -297,216 +367,245 @@
     }
   },
   "AUTH": {
-  "LOGIN": {
-    "KICKER": "Acesso",
-    "TITLE": "Entrar no MIRA",
-    "DESC_HTML": "Mock login (Kick-off): use <b>demo@mira.app</b> e senha <b>mira123</b>.",
-    "EMAIL_LABEL": "E-mail",
-    "EMAIL_PLACEHOLDER": "voce@exemplo.com",
-    "PASS_LABEL": "Senha",
-    "PASS_PLACEHOLDER": "••••••••",
-    "TIP": "Dica: este fluxo será trocado por endpoint real quando enviado.",
-    "BUTTON": "Entrar"
-  },
-  "ERRORS": {
-    "EMAIL_REQUIRED": "Informe seu e-mail.",
-    "EMAIL_INVALID": "E-mail inválido.",
-    "PASS_REQUIRED": "Informe sua senha.",
-    "PASS_SHORT": "Senha muito curta.",
-    "REVIEW_TITLE": "Revise os campos",
-    "REVIEW_MSG": "Confira e tente novamente.",
-    "FAIL_TITLE": "Falha no login",
-    "FAIL_MSG": "Tente novamente."
-  },
-  "TOASTS": {
-    "WELCOME_TITLE": "Bem-vindo!",
-    "WELCOME_MSG": "Login mock efetuado."
-  }
-},
-"DASHBOARD": {
-  "TOP": {
-    "MONTH_ARIA": "Selecionar mês",
-    "PREV_MONTH": "Mês anterior",
-    "NEXT_MONTH": "Próximo mês",
-    "MONTH": "Mês",
-    "PRESETS_ARIA": "Atalhos de período",
-    "PRESETS": { "WEEK": "Semana", "MONTH": "Mês", "TODAY": "Hoje" },
-    "DATES_ARIA": "Selecionar datas",
-    "DATE_START_SR": "Data inicial",
-    "DATE_END_SR": "Data final"
-  },
-  "DEV": { "LOADING": "Loading", "ERROR": "Erro", "NORMAL": "Normal" },
-  "ERROR": {
-    "SUMMARY_TITLE": "Resumo",
-    "SIM_FAIL": "Falha simulada (Kick-off)",
-    "STATE_TITLE": "Não foi possível carregar",
-    "STATE_DESC": "No Kick-off isso é simulado. Depois, o erro vem da API.",
-    "STATE_ACTION": "Tentar novamente"
-  },
-  "CARDS": {
-    "PERIOD_RESULT": { "TITLE": "Resultado do Período" },
-    "INCOME": { "TITLE": "Entradas" },
-    "EXPENSE": { "TITLE": "Saídas" }
-  },
-  "LABELS": {
-    "REALIZED": "Realizado",
-    "PROJECTED": "Previsto",
-    "PROJECTED_RECEIVE": "Previsto (A Receber)",
-    "PROJECTED_PAY": "Previsto (A Pagar)"
-  },
-  "BALANCE": {
-    "TITLE": "Evolução do Saldo no Período",
-    "SUB": "Comparando realizado vs projetado",
-    "MODE_ARIA": "Modo do gráfico",
-    "MODE": { "REALIZED": "Realizado", "PROJECTED": "Projetado" },
-    "CHART_ARIA": "Gráfico de saldo (mock)",
-    "LEGEND": { "REALIZED": "Saldo Realizado", "PROJECTED": "Saldo Projetado" }
-  },
-  "EXPENSES": {
-    "TITLE": "Despesas",
-    "SUB": "Pagas vs A pagar • Detalhes por categoria",
-    "TAB_ARIA": "Despesas pagas ou a pagar",
-    "TAB": { "PAID": "Pagas", "DUE": "A pagar" },
-    "PIE_ARIA": "Repetir animação do gráfico de despesas",
-    "TOTAL": "Total",
-    "TOTAL_PAID": "pago",
-    "TOTAL_DUE": "a pagar",
-    "CLICK_REANIMATE": "Clique para reanimar",
-    "CATS_TITLE": "Detalhes por Categoria",
-    "REPLAY_BTN": "Repetir animação"
-  },
-  "CATS": {
-    "HOME": "Casa",
-    "OTHERS": "Outros",
-    "UTILITIES": "Utilidades",
-    "TRANSPORT": "Transporte"
-  }
-},
-"TASKS": {
-  "TITLE": "Tarefas & Lembretes",
-  "SUB": "Kick-off: CRUD mock + prioridades + categorias + agenda + concluir por seleção.",
-  "ACTIONS": {
-    "SIM_LOADING": "Simular loading",
-    "SIM_ERROR": "Simular erro",
-    "COMPLETE_SELECTED": "Concluir selecionadas ({{n}})",
-    "DELETE_SELECTED": "Apagar selecionadas",
-    "CREATE": "Criar tarefa"
-  },
-  "STATES": {
-    "ERROR": {
-      "TITLE": "Não foi possível carregar",
-      "DESC": "No Kick-off, isso é apenas simulado. Depois, será um erro real vindo do backend.",
-      "ACTION": "Tentar novamente"
+    "LOGIN": {
+      "KICKER": "Acesso",
+      "TITLE": "Entrar no MIRA",
+      "DESC_HTML": "Mock login (Kick-off): use <b>demo@mira.app</b> e senha <b>mira123</b>.",
+      "EMAIL_LABEL": "E-mail",
+      "EMAIL_PLACEHOLDER": "voce@exemplo.com",
+      "PASS_LABEL": "Senha",
+      "PASS_PLACEHOLDER": "••••••••",
+      "TIP": "Dica: este fluxo será trocado por endpoint real quando enviado.",
+      "BUTTON": "Entrar"
     },
-    "EMPTY": {
-      "TITLE": "Sem tarefas por enquanto",
-      "DESC": "Crie sua primeira tarefa. (No produto final, isso vem do endpoint.)",
-      "ACTION": "Criar tarefa"
+    "ERRORS": {
+      "EMAIL_REQUIRED": "Informe seu e-mail.",
+      "EMAIL_INVALID": "E-mail inválido.",
+      "PASS_REQUIRED": "Informe sua senha.",
+      "PASS_SHORT": "Senha muito curta.",
+      "REVIEW_TITLE": "Revise os campos",
+      "REVIEW_MSG": "Confira e tente novamente.",
+      "FAIL_TITLE": "Falha no login",
+      "FAIL_MSG": "Tente novamente."
+    },
+    "TOASTS": {
+      "WELCOME_TITLE": "Bem-vindo!",
+      "WELCOME_MSG": "Login mock efetuado."
     }
   },
-  "TOOLBAR": { "FILTER_ARIA": "Filtro" },
-  "FILTER": { "ALL": "Todas", "OPEN": "Abertas", "DONE": "Concluídas" },
-  "BULK": {
-    "SELECT_VISIBLE": "Selecionar visíveis",
-    "CLEAR": "Limpar seleção ({{n}})"
+  "DASHBOARD": {
+    "TOP": {
+      "MONTH_ARIA": "Selecionar mês",
+      "PREV_MONTH": "Mês anterior",
+      "NEXT_MONTH": "Próximo mês",
+      "MONTH": "Mês",
+      "PRESETS_ARIA": "Atalhos de período",
+      "PRESETS": {
+        "WEEK": "Semana",
+        "MONTH": "Mês",
+        "TODAY": "Hoje"
+      },
+      "DATES_ARIA": "Selecionar datas",
+      "DATE_START_SR": "Data inicial",
+      "DATE_END_SR": "Data final"
+    },
+    "DEV": {
+      "LOADING": "Loading",
+      "ERROR": "Erro",
+      "NORMAL": "Normal"
+    },
+    "ERROR": {
+      "SUMMARY_TITLE": "Resumo",
+      "SIM_FAIL": "Falha simulada (Kick-off)",
+      "STATE_TITLE": "Não foi possível carregar",
+      "STATE_DESC": "No Kick-off isso é simulado. Depois, o erro vem da API.",
+      "STATE_ACTION": "Tentar novamente"
+    },
+    "CARDS": {
+      "PERIOD_RESULT": {
+        "TITLE": "Resultado do Período"
+      },
+      "INCOME": {
+        "TITLE": "Entradas"
+      },
+      "EXPENSE": {
+        "TITLE": "Saídas"
+      }
+    },
+    "LABELS": {
+      "REALIZED": "Realizado",
+      "PROJECTED": "Previsto",
+      "PROJECTED_RECEIVE": "Previsto (A Receber)",
+      "PROJECTED_PAY": "Previsto (A Pagar)"
+    },
+    "BALANCE": {
+      "TITLE": "Evolução do Saldo no Período",
+      "SUB": "Comparando realizado vs projetado",
+      "MODE_ARIA": "Modo do gráfico",
+      "MODE": {
+        "REALIZED": "Realizado",
+        "PROJECTED": "Projetado"
+      },
+      "CHART_ARIA": "Gráfico de saldo (mock)",
+      "LEGEND": {
+        "REALIZED": "Saldo Realizado",
+        "PROJECTED": "Saldo Projetado"
+      }
+    },
+    "EXPENSES": {
+      "TITLE": "Despesas",
+      "SUB": "Pagas vs A pagar • Detalhes por categoria",
+      "TAB_ARIA": "Despesas pagas ou a pagar",
+      "TAB": {
+        "PAID": "Pagas",
+        "DUE": "A pagar"
+      },
+      "PIE_ARIA": "Repetir animação do gráfico de despesas",
+      "TOTAL": "Total",
+      "TOTAL_PAID": "pago",
+      "TOTAL_DUE": "a pagar",
+      "CLICK_REANIMATE": "Clique para reanimar",
+      "CATS_TITLE": "Detalhes por Categoria",
+      "REPLAY_BTN": "Repetir animação"
+    },
+    "CATS": {
+      "HOME": "Casa",
+      "OTHERS": "Outros",
+      "UTILITIES": "Utilidades",
+      "TRANSPORT": "Transporte"
+    }
   },
-  "TOOLS": {
-    "SEARCH": "Buscar",
-    "SEARCH_PH": "Pesquisar por título, notas ou categoria…",
-    "SORT": "Ordenar"
+  "TASKS": {
+    "TITLE": "Tarefas & Lembretes",
+    "SUB": "Kick-off: CRUD mock + prioridades + categorias + agenda + concluir por seleção.",
+    "ACTIONS": {
+      "SIM_LOADING": "Simular loading",
+      "SIM_ERROR": "Simular erro",
+      "COMPLETE_SELECTED": "Concluir selecionadas ({{n}})",
+      "DELETE_SELECTED": "Apagar selecionadas",
+      "CREATE": "Criar tarefa"
+    },
+    "STATES": {
+      "ERROR": {
+        "TITLE": "Não foi possível carregar",
+        "DESC": "No Kick-off, isso é apenas simulado. Depois, será um erro real vindo do backend.",
+        "ACTION": "Tentar novamente"
+      },
+      "EMPTY": {
+        "TITLE": "Sem tarefas por enquanto",
+        "DESC": "Crie sua primeira tarefa. (No produto final, isso vem do endpoint.)",
+        "ACTION": "Criar tarefa"
+      }
+    },
+    "TOOLBAR": {
+      "FILTER_ARIA": "Filtro"
+    },
+    "FILTER": {
+      "ALL": "Todas",
+      "OPEN": "Abertas",
+      "DONE": "Concluídas"
+    },
+    "BULK": {
+      "SELECT_VISIBLE": "Selecionar visíveis",
+      "CLEAR": "Limpar seleção ({{n}})"
+    },
+    "TOOLS": {
+      "SEARCH": "Buscar",
+      "SEARCH_PH": "Pesquisar por título, notas ou categoria…",
+      "SORT": "Ordenar"
+    },
+    "SORT": {
+      "SMART": "Inteligente (prioridade + prazo)",
+      "DUE": "Prazo (mais próximo)",
+      "NEWEST": "Mais recentes"
+    },
+    "LIST": {
+      "SELECT": "Selecionar",
+      "OPEN_DETAILS_ARIA": "Abrir detalhes da tarefa",
+      "DUE": "Prazo",
+      "NOTES": "Notas",
+      "EDIT": "Editar",
+      "DELETE": "Apagar",
+      "NONE": "Nenhuma tarefa nesse filtro/busca."
+    },
+    "STATUS": {
+      "OPEN": "Aberta",
+      "DONE": "Concluída",
+      "OPEN_HINT": "Aberta (selecione e conclua)"
+    },
+    "AGENDA": {
+      "TITLE": "Agenda (7 dias)",
+      "SUB": "Visão rápida do que está chegando.",
+      "TODAY": "Hoje",
+      "DAYS_ARIA": "Dias",
+      "EMPTY": "Sem itens nesse dia.",
+      "NOTE": "TODO (API): puxar prazos reais, horários, recorrência e notificações."
+    },
+    "EDITOR": {
+      "TITLE_LABEL": "Título",
+      "DUE_LABEL": "Prazo",
+      "PRIORITY": "Prioridade",
+      "CATEGORY": "Categoria",
+      "TIP": "Dica: use “Urgente” só quando realmente for prioridade do dia (te ajuda a não virar ansiedade).",
+      "NOTES_LABEL": "Notas",
+      "NOTES_PH": "Detalhes, lembretes, links, contexto…",
+      "TODO": "TODO (pós Kick-off): integrar CRUD real via API, ordenação no backend, recorrência e notificações.",
+      "SAVE_MOCK": "Salvar (mock)",
+      "UPDATE_MOCK": "Atualizar (mock)"
+    },
+    "DELETE": {
+      "ONE_TITLE": "Apagar tarefa?",
+      "ONE_DESC": "Isso remove a tarefa do mock local. (No produto final, será delete no backend.)",
+      "BULK_TITLE": "Apagar selecionadas?",
+      "BULK_DESC_HTML": "Você selecionou <b>{{n}}</b> tarefa(s). Isso remove do mock local.",
+      "DELETE": "Apagar"
+    },
+    "DETAIL": {
+      "DUE": "Prazo",
+      "STATUS": "Status",
+      "CATEGORY": "Categoria",
+      "NOTES": "Notas"
+    },
+    "MODAL": {
+      "CREATE_TITLE": "Criar tarefa (mock)",
+      "EDIT_TITLE": "Editar tarefa (mock)",
+      "DELETE_TITLE": "Apagar tarefa",
+      "BULK_DELETE_TITLE": "Apagar selecionadas",
+      "DETAIL_TITLE": "Detalhes da tarefa"
+    },
+    "PRIORITY": {
+      "LOW": "Baixa",
+      "NORMAL": "Normal",
+      "URGENT": "Urgente"
+    },
+    "CATEGORY": {
+      "FINANCE": "Financeiro",
+      "PERSONAL": "Pessoal",
+      "WORK": "Trabalho"
+    },
+    "TOAST": {
+      "REVIEW_TITLE": "Revise os campos",
+      "REVIEW_MSG": "Preencha título, prazo, prioridade e categoria.",
+      "CREATED_TITLE": "Criado (mock)",
+      "CREATED_MSG": "Tarefa adicionada localmente.",
+      "UPDATED_TITLE": "Atualizado (mock)",
+      "UPDATED_MSG": "Alterações salvas localmente.",
+      "NOTHING_TITLE": "Nada pra concluir",
+      "NOTHING_MSG": "Selecione tarefas abertas.",
+      "COMPLETED_TITLE": "Concluídas (mock)",
+      "COMPLETED_MSG": "{{n}} tarefa(s) marcada(s) como concluída(s).",
+      "REMOVED_TITLE": "Removido (mock)",
+      "REMOVED_MSG": "Tarefa apagada localmente.",
+      "BULK_REMOVED_TITLE": "Removidas (mock)",
+      "BULK_REMOVED_MSG": "{{n}} tarefa(s) apagada(s)."
+    }
   },
-  "SORT": {
-    "SMART": "Inteligente (prioridade + prazo)",
-    "DUE": "Prazo (mais próximo)",
-    "NEWEST": "Mais recentes"
+  "COMMON": {
+    "CLOSE": "Fechar",
+    "CANCEL": "Cancelar",
+    "CLOSE_MODAL": "Fechar modal",
+    "MODAL": "Modal"
   },
-  "LIST": {
-    "SELECT": "Selecionar",
-    "OPEN_DETAILS_ARIA": "Abrir detalhes da tarefa",
-    "DUE": "Prazo",
-    "NOTES": "Notas",
-    "EDIT": "Editar",
-    "DELETE": "Apagar",
-    "NONE": "Nenhuma tarefa nesse filtro/busca."
-  },
-  "STATUS": {
-    "OPEN": "Aberta",
-    "DONE": "Concluída",
-    "OPEN_HINT": "Aberta (selecione e conclua)"
-  },
-  "AGENDA": {
-    "TITLE": "Agenda (7 dias)",
-    "SUB": "Visão rápida do que está chegando.",
-    "TODAY": "Hoje",
-    "DAYS_ARIA": "Dias",
-    "EMPTY": "Sem itens nesse dia.",
-    "NOTE": "TODO (API): puxar prazos reais, horários, recorrência e notificações."
-  },
-  "EDITOR": {
-    "TITLE_LABEL": "Título",
-    "DUE_LABEL": "Prazo",
-    "PRIORITY": "Prioridade",
-    "CATEGORY": "Categoria",
-    "TIP": "Dica: use “Urgente” só quando realmente for prioridade do dia (te ajuda a não virar ansiedade).",
-    "NOTES_LABEL": "Notas",
-    "NOTES_PH": "Detalhes, lembretes, links, contexto…",
-    "TODO": "TODO (pós Kick-off): integrar CRUD real via API, ordenação no backend, recorrência e notificações.",
-    "SAVE_MOCK": "Salvar (mock)",
-    "UPDATE_MOCK": "Atualizar (mock)"
-  },
-  "DELETE": {
-    "ONE_TITLE": "Apagar tarefa?",
-    "ONE_DESC": "Isso remove a tarefa do mock local. (No produto final, será delete no backend.)",
-    "BULK_TITLE": "Apagar selecionadas?",
-    "BULK_DESC_HTML": "Você selecionou <b>{{n}}</b> tarefa(s). Isso remove do mock local.",
-    "DELETE": "Apagar"
-  },
-  "DETAIL": {
-    "DUE": "Prazo",
-    "STATUS": "Status",
-    "CATEGORY": "Categoria",
-    "NOTES": "Notas"
-  },
-  "MODAL": {
-    "CREATE_TITLE": "Criar tarefa (mock)",
-    "EDIT_TITLE": "Editar tarefa (mock)",
-    "DELETE_TITLE": "Apagar tarefa",
-    "BULK_DELETE_TITLE": "Apagar selecionadas",
-    "DETAIL_TITLE": "Detalhes da tarefa"
-  },
-  "PRIORITY": {
-    "LOW": "Baixa",
-    "NORMAL": "Normal",
-    "URGENT": "Urgente"
-  },
-  "CATEGORY": {
-    "FINANCE": "Financeiro",
-    "PERSONAL": "Pessoal",
-    "WORK": "Trabalho"
-  },
-  "TOAST": {
-    "REVIEW_TITLE": "Revise os campos",
-    "REVIEW_MSG": "Preencha título, prazo, prioridade e categoria.",
-    "CREATED_TITLE": "Criado (mock)",
-    "CREATED_MSG": "Tarefa adicionada localmente.",
-    "UPDATED_TITLE": "Atualizado (mock)",
-    "UPDATED_MSG": "Alterações salvas localmente.",
-    "NOTHING_TITLE": "Nada pra concluir",
-    "NOTHING_MSG": "Selecione tarefas abertas.",
-    "COMPLETED_TITLE": "Concluídas (mock)",
-    "COMPLETED_MSG": "{{n}} tarefa(s) marcada(s) como concluída(s).",
-    "REMOVED_TITLE": "Removido (mock)",
-    "REMOVED_MSG": "Tarefa apagada localmente.",
-    "BULK_REMOVED_TITLE": "Removidas (mock)",
-    "BULK_REMOVED_MSG": "{{n}} tarefa(s) apagada(s)."
-  }
-},
-"COMMON": {
-  "CLOSE": "Fechar",
-  "CANCEL": "Cancelar",
-  "CLOSE_MODAL": "Fechar modal",
-  "MODAL": "Modal"
-},
   "CHAT": {
     "BRAND_ARIA": "MIRA",
     "HELLO": "Olá, {{name}}",
@@ -690,7 +789,9 @@
   "SETTINGS": {
     "TITLE": "Perfil & Config",
     "SUB": "Kick-off • preferências locais (sem backend)",
-    "ACTIONS": { "SAVE": "Salvar" },
+    "ACTIONS": {
+      "SAVE": "Salvar"
+    },
 
     "PROFILE": {
       "NAME_LABEL": "Nome (mock)",
@@ -722,9 +823,21 @@
       "GROUP_INSIGHTS": "Insights",
       "GROUP_APPEARANCE": "Aparência",
 
-      "NOTIFS": { "NAME": "Notificações", "DESC": "Lembretes de tarefas e check-ins semanais (mock).", "ARIA": "Ativar notificações" },
-      "WEEKLY": { "NAME": "Resumo semanal", "DESC": "Um overview simples de gastos/entradas (mock).", "ARIA": "Ativar resumo semanal" },
-      "WEEKLY_EMAIL": { "NAME": "Enviar resumo por e-mail", "DESC": "Receber um e-mail com os pontos-chave (mock).", "ARIA": "Ativar resumo por e-mail" },
+      "NOTIFS": {
+        "NAME": "Notificações",
+        "DESC": "Lembretes de tarefas e check-ins semanais (mock).",
+        "ARIA": "Ativar notificações"
+      },
+      "WEEKLY": {
+        "NAME": "Resumo semanal",
+        "DESC": "Um overview simples de gastos/entradas (mock).",
+        "ARIA": "Ativar resumo semanal"
+      },
+      "WEEKLY_EMAIL": {
+        "NAME": "Enviar resumo por e-mail",
+        "DESC": "Receber um e-mail com os pontos-chave (mock).",
+        "ARIA": "Ativar resumo por e-mail"
+      },
 
       "WEEK_START": {
         "NAME": "Semana começa em",
@@ -741,8 +854,16 @@
         "D90": "90 dias"
       },
 
-      "AUTO_CAT": { "NAME": "Auto-categorização", "DESC": "Ajuda a agrupar gastos automaticamente (mock).", "ARIA": "Ativar auto-categorização" },
-      "ROUNDING": { "NAME": "Arredondar economia sugerida", "DESC": "Deixa recomendações mais “práticas” (ex.: R$ 47 → R$ 50).", "ARIA": "Arredondar economia sugerida" },
+      "AUTO_CAT": {
+        "NAME": "Auto-categorização",
+        "DESC": "Ajuda a agrupar gastos automaticamente (mock).",
+        "ARIA": "Ativar auto-categorização"
+      },
+      "ROUNDING": {
+        "NAME": "Arredondar economia sugerida",
+        "DESC": "Deixa recomendações mais “práticas” (ex.: R$ 47 → R$ 50).",
+        "ARIA": "Arredondar economia sugerida"
+      },
 
       "THEME": {
         "NAME": "Tema",
@@ -770,8 +891,16 @@
     "DATA": {
       "TITLE": "Dados",
       "SUB": "Ferramentas locais (mock). Depois vira export real / LGPD.",
-      "EXPORT": { "TITLE": "Exportar preferências", "DESC": "Gera um JSON simples com seu setup (mock).", "BTN": "Exportar" },
-      "CLEAR": { "TITLE": "Limpar dados locais", "DESC": "Remove preferências e perfil salvos nesse navegador.", "BTN": "Limpar" }
+      "EXPORT": {
+        "TITLE": "Exportar preferências",
+        "DESC": "Gera um JSON simples com seu setup (mock).",
+        "BTN": "Exportar"
+      },
+      "CLEAR": {
+        "TITLE": "Limpar dados locais",
+        "DESC": "Remove preferências e perfil salvos nesse navegador.",
+        "BTN": "Limpar"
+      }
     },
 
     "TOAST": {
