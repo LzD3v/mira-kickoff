@@ -23,6 +23,19 @@ type Testimonial = {
   verified: boolean;
 };
 
+type PlanKey = 'free' | 'pro' | 'elite';
+
+type PlanModalData = {
+  eyebrow: string;
+  title: string;
+  desc: string;
+  price: string;
+  fine: string;
+  cta: string;
+  ctaLink: string;
+  items: string[];
+};
+
 @Component({
   standalone: true,
   imports: [
@@ -456,7 +469,7 @@ type Testimonial = {
               <li>{{ 'MARKETING.PRICING.FREE.I3' | translate }}</li>
             </ul>
 
-            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
+            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan('free')">
               {{ 'MARKETING.PRICING.CTA_FREE' | translate }}
             </button>
           </div>
@@ -484,7 +497,7 @@ type Testimonial = {
               <li>{{ 'MARKETING.PRICING.PRO.I4' | translate }}</li>
             </ul>
 
-            <button class="cta-primary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
+            <button class="cta-primary focus-ring pricing-card__btn" type="button" (click)="openPlan('pro')">
               <span class="cta-primary__shine" aria-hidden="true"></span>
               <span class="cta-primary__text">{{ 'MARKETING.PRICING.CTA_PRO' | translate }}</span>
               <span class="cta-primary__arrow" aria-hidden="true">→</span>
@@ -510,7 +523,7 @@ type Testimonial = {
               <li>{{ 'MARKETING.PRICING.ELITE.I4' | translate }}</li>
             </ul>
 
-            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
+            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan('elite')">
               {{ 'MARKETING.PRICING.CTA_ELITE' | translate }}
             </button>
           </div>
@@ -524,21 +537,7 @@ type Testimonial = {
           <strong class="founding-banner__t">{{ 'MARKETING.PRICING.FOUNDING_TITLE' | translate }}</strong>
           <p class="founding-banner__d muted">{{ 'MARKETING.PRICING.FOUNDING_DESC' | translate }}</p>
         </div>
-        <button class="cta-primary focus-ring" type="button" (click)="openPlan()">
-          <span class="cta-primary__shine" aria-hidden="true"></span>
-          <span class="cta-primary__text">{{ 'MARKETING.PRICING.FOUNDING_CTA' | translate }}</span>
-          <span class="cta-primary__arrow" aria-hidden="true">→</span>
-        </button>
-      </div>
-
-      <!-- Founding Users banner -->
-      <div class="founding-banner">
-        <span class="founding-banner__ic" aria-hidden="true">🎁</span>
-        <div class="founding-banner__copy">
-          <strong class="founding-banner__t">{{ 'MARKETING.PRICING.FOUNDING_TITLE' | translate }}</strong>
-          <p class="founding-banner__d muted">{{ 'MARKETING.PRICING.FOUNDING_DESC' | translate }}</p>
-        </div>
-        <button class="cta-primary focus-ring" type="button" (click)="openPlan()">
+        <button class="cta-primary focus-ring" type="button" (click)="openPlan('pro')">
           <span class="cta-primary__shine" aria-hidden="true"></span>
           <span class="cta-primary__text">{{ 'MARKETING.PRICING.FOUNDING_CTA' | translate }}</span>
           <span class="cta-primary__arrow" aria-hidden="true">→</span>
@@ -587,7 +586,7 @@ type Testimonial = {
           </div>
 
           <!-- ✅ agora abre o "Conheça nosso plano" -->
-          <button class="cta-primary focus-ring" type="button" (click)="openPlan()">
+          <button class="cta-primary focus-ring" type="button" (click)="openPlan('pro')">
             <span class="cta-primary__shine" aria-hidden="true"></span>
             <span class="cta-primary__text">{{ 'MARKETING.CTA_FINAL.BUTTON' | translate }}</span>
             <span class="cta-primary__arrow" aria-hidden="true">→</span>
@@ -603,39 +602,44 @@ type Testimonial = {
       (click)="closePlan()"
       role="dialog"
       aria-modal="true"
-      [attr.aria-label]="'MARKETING.PLAN.TITLE' | translate"
+      [attr.aria-label]="selectedPlan().title"
     >
       <mira-ui-card class="planModal__card" (click)="$event.stopPropagation()">
-        <button class="planModal__close focus-ring" type="button" (click)="closePlan()" [attr.aria-label]="'COMMON.CLOSE' | translate">
+        <button
+          class="planModal__close focus-ring"
+          type="button"
+          (click)="closePlan()"
+          aria-label="Fechar"
+        >
           ×
         </button>
 
         <div class="planModal__inner">
           <div class="planModal__head">
-            <div class="planModal__k">{{ 'MARKETING.PLAN.TITLE' | translate }}</div>
-            <div class="planModal__h">{{ 'MARKETING.PLAN.H' | translate }}</div>
-            <div class="planModal__p muted">{{ 'MARKETING.PLAN.P' | translate }}</div>
+            <div class="planModal__k">{{ selectedPlan().eyebrow }}</div>
+            <div class="planModal__h">{{ selectedPlan().title }}</div>
+            <div class="planModal__p muted">{{ selectedPlan().desc }}</div>
           </div>
 
           <div class="planModal__grid">
             <div class="planModal__list">
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I1' | translate }}</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I2' | translate }}</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I3' | translate }}</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I4' | translate }}</span></div>
-              <div class="planModal__li"><span class="li__ic" aria-hidden="true">✓</span><span class="li__t">{{ 'MARKETING.PLAN.ITEMS.I5' | translate }}</span></div>
+              <div class="planModal__li" *ngFor="let item of selectedPlan().items">
+                <span class="li__ic" aria-hidden="true">✓</span>
+                <span class="li__t">{{ item }}</span>
+              </div>
             </div>
 
             <div class="planModal__side">
-              <div class="planModal__price">{{ offerPrice }}</div>
-              <div class="planModal__fine muted">{{ 'MARKETING.PLAN.FINE' | translate }}</div>
+              <div class="planModal__price">{{ selectedPlan().price }}</div>
+              <div class="planModal__fine muted">{{ selectedPlan().fine }}</div>
 
-              <a class="planModal__cta focus-ring" routerLink="/login">
-                <span>{{ 'MARKETING.PLAN.CONTINUE' | translate }}</span><span aria-hidden="true">→</span>
+              <a class="planModal__cta focus-ring" [routerLink]="selectedPlan().ctaLink">
+                <span>{{ selectedPlan().cta }}</span>
+                <span aria-hidden="true">→</span>
               </a>
 
               <button class="planModal__ghost focus-ring" type="button" (click)="closePlan()">
-                {{ 'MARKETING.PLAN.BACK' | translate }}
+                Voltar
               </button>
             </div>
           </div>
@@ -952,20 +956,23 @@ type Testimonial = {
         inset: 0;
         z-index: 120;
         background: rgba(0,0,0,0.58);
-        backdrop-filter: blur(14px);
+        backdrop-filter: blur(12px);
         display: grid;
         place-items: center;
-        padding: 18px;
+        padding: 20px;
       }
+
       .planModal__card{
-        width: min(920px, 94vw);
-        border-radius: 28px;
-        border: 1px solid rgba(255,255,255,0.16);
-        background: rgba(255,255,255,0.06);
-        box-shadow: var(--shadow);
+        width: min(760px, 100%);
+        max-height: min(88vh, 760px);
+        border-radius: 26px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(20,20,28,0.82);
+        box-shadow: 0 28px 80px rgba(0,0,0,0.35);
         position: relative;
-        overflow: hidden;
+        overflow: auto;
       }
+
       .planModal__close{
         position: absolute;
         top: 12px;
@@ -973,30 +980,62 @@ type Testimonial = {
         width: 40px;
         height: 40px;
         border-radius: 14px;
-        border: 1px solid rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.14);
         background: rgba(255,255,255,0.06);
         color: var(--text);
         font-size: 22px;
         cursor: pointer;
+        z-index: 2;
       }
-      .planModal__inner{ padding: 22px; display: grid; gap: 16px; }
-      .planModal__k{ color: var(--muted); font-size: 12px; }
-      .planModal__h{ font-weight: 950; letter-spacing: -0.4px; font-size: 22px; margin-top: 4px; }
-      .planModal__p{ max-width: 70ch; }
+
+      .planModal__inner{
+        padding: 24px;
+        display: grid;
+        gap: 20px;
+      }
+
+      .planModal__head{
+        max-width: 58ch;
+        padding-right: 52px;
+      }
+
+      .planModal__k{
+        color: var(--brand-2);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .planModal__h{
+        font-weight: 950;
+        letter-spacing: -0.4px;
+        font-size: clamp(24px, 3vw, 34px);
+        line-height: 1.08;
+        margin-top: 8px;
+      }
+
+      .planModal__p{
+        margin-top: 8px;
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
       .planModal__grid{
         display: grid;
         grid-template-columns: 1.15fr 0.85fr;
-        gap: 16px;
+        gap: 18px;
         align-items: start;
       }
-      .planModal__list{ display: grid; gap: 10px; }
+
+      .planModal__list{ display: grid; gap: 12px; }
       .planModal__li{ display: flex; gap: 12px; align-items: flex-start; }
 
       .li__ic{
         flex: 0 0 auto;
-        width: 20px;
-        height: 20px;
-        margin-top: 2px;
+        width: 22px;
+        height: 22px;
+        margin-top: 1px;
         border-radius: 999px;
         display: grid;
         place-items: center;
@@ -1007,39 +1046,45 @@ type Testimonial = {
         font-size: 12px;
         line-height: 1;
       }
-      .li__t{ font-size: 13px; color: var(--muted); line-height: 1.35; }
+      .li__t{ font-size: 14px; color: var(--muted); line-height: 1.45; }
 
       .planModal__side{
-        border: 1px solid rgba(255,255,255,0.12);
-        background: rgba(0,0,0,0.14);
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.04);
         border-radius: 22px;
-        padding: 16px;
+        padding: 18px;
         display: grid;
-        gap: 10px;
+        gap: 12px;
       }
+
       .planModal__price{
-        font-size: 34px;
+        font-size: clamp(28px, 4vw, 40px);
         font-weight: 950;
-        letter-spacing: -0.6px;
+        letter-spacing: -0.7px;
         line-height: 1;
       }
-      .planModal__fine{ font-size: 12px; }
+      .planModal__fine{ font-size: 12px; line-height: 1.4; }
 
       .planModal__cta{
         margin-top: 6px;
         display: inline-flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 14px;
+        gap: 12px;
+        padding: 13px 16px;
         border-radius: 999px;
         border: 1px solid rgba(133,94,217,0.45);
         background: rgba(255,255,255,0.06);
         transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
       }
-      .planModal__cta:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.10); border-color: rgba(132,210,244,0.55); }
+      .planModal__cta:hover{
+        transform: translateY(-1px);
+        background: rgba(255,255,255,0.10);
+        border-color: rgba(132,210,244,0.55);
+      }
 
       .planModal__ghost{
-        padding: 10px 12px;
+        padding: 11px 14px;
         border-radius: 999px;
         border: 1px solid rgba(255,255,255,0.12);
         background: transparent;
@@ -1049,8 +1094,14 @@ type Testimonial = {
       .planModal__ghost:hover{ background: rgba(255,255,255,0.06); color: var(--text); }
 
       @media (max-width: 820px){
+        .planModal__card{
+          width: min(680px, 100%);
+          max-height: 88vh;
+        }
+
         .planModal__grid{ grid-template-columns: 1fr; }
-        .planModal__h{ font-size: 20px; }
+        .planModal__inner{ padding: 20px; }
+        .planModal__head{ padding-right: 44px; }
       }
 
       /* RESPONSIVO */
@@ -1297,6 +1348,7 @@ type Testimonial = {
         gap: 12px;
         font-size: 15px;
         line-height: 1.4;
+        min-height: 152px;
       }
 
       .pricing-card__list li {
@@ -1403,9 +1455,6 @@ type Testimonial = {
           align-items: flex-start;
         }
       }
-        .pricing-card__list {
-          min-height: 152px;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -1499,6 +1548,59 @@ export class HomePage {
   private _remaining = this._storyMs;
   private _preloaded = false;
 
+  readonly planOpen = signal(false);
+  readonly selectedPlanKey = signal<PlanKey>('pro');
+
+  readonly planContent: Record<PlanKey, PlanModalData> = {
+    free: {
+      eyebrow: 'Plano Free',
+      title: 'Comece sem pagar e organize o básico do seu mês.',
+      desc: 'Perfeito para conhecer a MIRA, registrar sua rotina financeira e ter uma visão inicial sem complicação.',
+      price: 'R$ 0',
+      fine: 'Grátis para começar. Sem cobrança.',
+      cta: 'Seguir para o Cadastro',
+      ctaLink: '/register',
+      items: [
+        'Visão geral do mês',
+        'Insights essenciais',
+        'Registro manual',
+        'Base simples para começar com clareza',
+      ],
+    },
+    pro: {
+      eyebrow: 'Plano Pro',
+      title: 'Tudo que você precisa para cuidar do mês com clareza.',
+      desc: 'Ideal para quem quer mais contexto, mais inteligência e menos esforço manual no dia a dia.',
+      price: 'R$ 14,90/mês',
+      fine: 'Cobrança mensal • Cancele quando quiser',
+      cta: 'Continuar',
+      ctaLink: '/login',
+      items: [
+        'IA completa para entender seus padrões',
+        'Cruzamento de dados do seu dia a dia',
+        'Alertas inteligentes no momento certo',
+        'Painel premium com visão mais profunda',
+      ],
+    },
+    elite: {
+      eyebrow: 'Plano Elite',
+      title: 'Automação e visão avançada para vida e negócio.',
+      desc: 'Para quem quer decisões mais estratégicas, automações mais fortes e leitura cruzada entre áreas da vida.',
+      price: 'R$ 29,90/mês',
+      fine: 'Cobrança mensal • Mais recursos e automações',
+      cta: 'Continuar',
+      ctaLink: '/login',
+      items: [
+        'Tudo do Pro',
+        'Vida + negócio em uma visão unificada',
+        'Automações avançadas',
+        'Decisões cruzadas com mais contexto',
+      ],
+    },
+  };
+
+  readonly selectedPlan = signal<PlanModalData>(this.planContent.pro);
+
   private preloadAllStories() {
     if (this._preloaded) return;
     this._preloaded = true;
@@ -1584,15 +1686,15 @@ export class HomePage {
   /* -----------------------------
     MODAL DO PLANO (1 plano)
   ------------------------------ */
-  readonly planOpen = signal(false);
-  readonly offerPrice = 'R$ 25/mês';
 
   // Aqui foi adicionado o método de scroll para pricing como solicitado
   scrollToPricing() {
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  openPlan() {
+  openPlan(plan: PlanKey = 'pro') {
+    this.selectedPlanKey.set(plan);
+    this.selectedPlan.set(this.planContent[plan]);
     this.planOpen.set(true);
     document.body.style.overflow = 'hidden';
   }
