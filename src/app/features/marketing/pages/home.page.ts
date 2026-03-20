@@ -88,11 +88,13 @@ type PlanModalData = {
 
           <h1 class="h1">
             {{ 'MARKETING.HERO.TITLE.A' | translate }}
-            <span class="grad">{{ 'MARKETING.HERO.TITLE.B' | translate }}</span>{{ 'MARKETING.HERO.TITLE.C' | translate }}
+            <span class="grad">{{ 'MARKETING.HERO.TITLE.B' | translate }}</span
+            >{{ 'MARKETING.HERO.TITLE.C' | translate }}
           </h1>
 
           <p class="sub muted">
-            {{ 'MARKETING.HERO.SUB.A' | translate }}<b>{{ 'MARKETING.HERO.SUB.B' | translate }}</b>{{ 'MARKETING.HERO.SUB.C' | translate }}
+            {{ 'MARKETING.HERO.SUB.A' | translate }}<b>{{ 'MARKETING.HERO.SUB.B' | translate }}</b
+            >{{ 'MARKETING.HERO.SUB.C' | translate }}
           </p>
 
           <div class="trust">
@@ -122,22 +124,31 @@ type PlanModalData = {
               <span class="cta-primary__arrow" aria-hidden="true">→</span>
             </button>
 
-            <a class="cta-secondary focus-ring" href="#como-funciona">{{ 'MARKETING.HERO.CTA.SECONDARY' | translate }}</a>
+            <a class="cta-secondary focus-ring" href="#como-funciona">{{
+              'MARKETING.HERO.CTA.SECONDARY' | translate
+            }}</a>
           </div>
 
           <div class="bullets">
-            <div class="b"><span class="b__ic" aria-hidden="true">✓</span> {{ 'MARKETING.HERO.BULLETS.B1' | translate }}</div>
-            <div class="b"><span class="b__ic" aria-hidden="true">↗</span> {{ 'MARKETING.HERO.BULLETS.B2' | translate }}</div>
-            <div class="b"><span class="b__ic" aria-hidden="true">◆</span> {{ 'MARKETING.HERO.BULLETS.B3' | translate }}</div>
+            <div class="b">
+              <span class="b__ic" aria-hidden="true">✓</span>
+              {{ 'MARKETING.HERO.BULLETS.B1' | translate }}
+            </div>
+            <div class="b">
+              <span class="b__ic" aria-hidden="true">↗</span>
+              {{ 'MARKETING.HERO.BULLETS.B2' | translate }}
+            </div>
+            <div class="b">
+              <span class="b__ic" aria-hidden="true">◆</span>
+              {{ 'MARKETING.HERO.BULLETS.B3' | translate }}
+            </div>
           </div>
         </div>
 
         <div class="hero__visual" aria-hidden="true" @fadeUpDelay>
           <div class="mock">
             <div class="mock__top">
-              <div class="dots">
-                <span></span><span></span><span></span>
-              </div>
+              <div class="dots"><span></span><span></span><span></span></div>
               <div class="mock__title">{{ 'MARKETING.MOCK.TITLE' | translate }}</div>
               <div class="mock__chip">{{ 'MARKETING.MOCK.LIVE' | translate }}</div>
             </div>
@@ -150,7 +161,10 @@ type PlanModalData = {
                 </div>
 
                 <div class="msg bot">
-                  <div class="msg__bubble" [innerHTML]="'MARKETING.MOCK.CHAT.BOT1.TEXT_HTML' | translate"></div>
+                  <div
+                    class="msg__bubble"
+                    [innerHTML]="'MARKETING.MOCK.CHAT.BOT1.TEXT_HTML' | translate"
+                  ></div>
                   <div class="msg__meta">{{ 'MARKETING.MOCK.CHAT.BOT1.META' | translate }}</div>
                 </div>
 
@@ -160,7 +174,10 @@ type PlanModalData = {
                 </div>
 
                 <div class="msg bot">
-                  <div class="msg__bubble" [innerHTML]="'MARKETING.MOCK.CHAT.BOT2.TEXT_HTML' | translate"></div>
+                  <div
+                    class="msg__bubble"
+                    [innerHTML]="'MARKETING.MOCK.CHAT.BOT2.TEXT_HTML' | translate"
+                  ></div>
                   <div class="msg__meta">{{ 'MARKETING.MOCK.CHAT.BOT2.META' | translate }}</div>
                 </div>
               </div>
@@ -210,7 +227,10 @@ type PlanModalData = {
             [attr.aria-label]="'MARKETING.STORIES.TITLE' | translate"
           >
             <div class="storyTop" aria-hidden="true">
-              <div class="bars" [style.gridTemplateColumns]="'repeat(' + stories().length + ', 1fr)'">
+              <div
+                class="bars"
+                [style.gridTemplateColumns]="'repeat(' + stories().length + ', 1fr)'"
+              >
                 <div
                   class="bar"
                   *ngFor="let s of stories(); let i = index"
@@ -375,9 +395,15 @@ type PlanModalData = {
           <p class="muted">{{ 'MARKETING.PROOF.SUB' | translate }}</p>
 
           <div class="proof__bullets">
-            <div class="pb"><span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B1' | translate }}</div>
-            <div class="pb"><span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B2' | translate }}</div>
-            <div class="pb"><span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B3' | translate }}</div>
+            <div class="pb">
+              <span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B1' | translate }}
+            </div>
+            <div class="pb">
+              <span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B2' | translate }}
+            </div>
+            <div class="pb">
+              <span class="pb__dot"></span> {{ 'MARKETING.PROOF.BULLETS.B3' | translate }}
+            </div>
           </div>
         </div>
 
@@ -421,19 +447,24 @@ type PlanModalData = {
               </div>
 
               <div class="who__role muted">
-                {{ testimonials()[active()].role | translate }} • {{ testimonials()[active()].city | translate }}
+                {{ testimonials()[active()].role | translate }} •
+                {{ testimonials()[active()].city | translate }}
               </div>
             </div>
           </div>
 
-          <div class="dots" role="tablist" [attr.aria-label]="'MARKETING.TESTIMONIALS.TITLE' | translate">
+          <div
+            class="dots"
+            role="tablist"
+            [attr.aria-label]="'MARKETING.TESTIMONIALS.TITLE' | translate"
+          >
             <button
               *ngFor="let t of testimonials(); let i = index"
               class="dot-btn focus-ring"
               type="button"
               [class.is-active]="i === active()"
               (click)="active.set(i)"
-              [attr.aria-label]="('MARKETING.TESTIMONIALS.ARIA' | translate:{ n: i + 1 })"
+              [attr.aria-label]="'MARKETING.TESTIMONIALS.ARIA' | translate: { n: i + 1 }"
             ></button>
           </div>
         </div>
@@ -454,8 +485,12 @@ type PlanModalData = {
           <div class="pricing-card__inner">
             <div class="pricing-card__top">
               <div class="pricing-card__name">{{ 'MARKETING.PRICING.FREE.NAME' | translate }}</div>
-              <div class="pricing-card__price">{{ 'MARKETING.PRICING.FREE.PRICE' | translate }}</div>
-              <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.FREE.DESC' | translate }}</div>
+              <div class="pricing-card__price">
+                {{ 'MARKETING.PRICING.FREE.PRICE' | translate }}
+              </div>
+              <div class="pricing-card__desc muted">
+                {{ 'MARKETING.PRICING.FREE.DESC' | translate }}
+              </div>
             </div>
 
             <ul class="pricing-card__list">
@@ -464,7 +499,11 @@ type PlanModalData = {
               <li>{{ 'MARKETING.PRICING.FREE.I3' | translate }}</li>
             </ul>
 
-            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan('free')">
+            <button
+              class="cta-secondary focus-ring pricing-card__btn"
+              type="button"
+              (click)="openPlan('free')"
+            >
               {{ 'MARKETING.PRICING.CTA_FREE' | translate }}
             </button>
           </div>
@@ -480,9 +519,14 @@ type PlanModalData = {
             <div class="pricing-card__top">
               <div class="pricing-card__name">{{ 'MARKETING.PRICING.PRO.NAME' | translate }}</div>
               <div class="pricing-card__price">
-                {{ 'MARKETING.PRICING.PRO.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.PRO.PERIOD' | translate }}</span>
+                {{ 'MARKETING.PRICING.PRO.PRICE' | translate
+                }}<span class="pricing-card__period">{{
+                  'MARKETING.PRICING.PRO.PERIOD' | translate
+                }}</span>
               </div>
-              <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.PRO.DESC' | translate }}</div>
+              <div class="pricing-card__desc muted">
+                {{ 'MARKETING.PRICING.PRO.DESC' | translate }}
+              </div>
             </div>
 
             <ul class="pricing-card__list">
@@ -492,7 +536,11 @@ type PlanModalData = {
               <li>{{ 'MARKETING.PRICING.PRO.I4' | translate }}</li>
             </ul>
 
-            <button class="cta-primary focus-ring pricing-card__btn" type="button" (click)="openPlan('pro')">
+            <button
+              class="cta-primary focus-ring pricing-card__btn"
+              type="button"
+              (click)="openPlan('pro')"
+            >
               <span class="cta-primary__shine" aria-hidden="true"></span>
               <span class="cta-primary__text">{{ 'MARKETING.PRICING.CTA_PRO' | translate }}</span>
               <span class="cta-primary__arrow" aria-hidden="true">→</span>
@@ -506,9 +554,14 @@ type PlanModalData = {
             <div class="pricing-card__top">
               <div class="pricing-card__name">{{ 'MARKETING.PRICING.ELITE.NAME' | translate }}</div>
               <div class="pricing-card__price">
-                {{ 'MARKETING.PRICING.ELITE.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.ELITE.PERIOD' | translate }}</span>
+                {{ 'MARKETING.PRICING.ELITE.PRICE' | translate
+                }}<span class="pricing-card__period">{{
+                  'MARKETING.PRICING.ELITE.PERIOD' | translate
+                }}</span>
               </div>
-              <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.ELITE.DESC' | translate }}</div>
+              <div class="pricing-card__desc muted">
+                {{ 'MARKETING.PRICING.ELITE.DESC' | translate }}
+              </div>
             </div>
 
             <ul class="pricing-card__list">
@@ -518,7 +571,11 @@ type PlanModalData = {
               <li>{{ 'MARKETING.PRICING.ELITE.I4' | translate }}</li>
             </ul>
 
-            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan('elite')">
+            <button
+              class="cta-secondary focus-ring pricing-card__btn"
+              type="button"
+              (click)="openPlan('elite')"
+            >
               {{ 'MARKETING.PRICING.CTA_ELITE' | translate }}
             </button>
           </div>
@@ -528,8 +585,12 @@ type PlanModalData = {
       <div class="founding-banner">
         <span class="founding-banner__ic" aria-hidden="true">🎁</span>
         <div class="founding-banner__copy">
-          <strong class="founding-banner__t">{{ 'MARKETING.PRICING.FOUNDING_TITLE' | translate }}</strong>
-          <p class="founding-banner__d muted">{{ 'MARKETING.PRICING.FOUNDING_DESC' | translate }}</p>
+          <strong class="founding-banner__t">{{
+            'MARKETING.PRICING.FOUNDING_TITLE' | translate
+          }}</strong>
+          <p class="founding-banner__d muted">
+            {{ 'MARKETING.PRICING.FOUNDING_DESC' | translate }}
+          </p>
         </div>
         <button class="cta-primary focus-ring" type="button" (click)="openPlan('pro')">
           <span class="cta-primary__shine" aria-hidden="true"></span>
@@ -644,18 +705,39 @@ type PlanModalData = {
   `,
   styles: [
     `
-      .section { padding: 54px 0; }
-      .section__head { margin-bottom: 16px; }
-      .h2 { font-size: 28px; margin: 0; letter-spacing: -0.4px; }
-      .container { scroll-margin-top: 86px; }
+      .section {
+        padding: 54px 0;
+      }
+      .section__head {
+        margin-bottom: 16px;
+      }
+      .h2 {
+        font-size: 28px;
+        margin: 0;
+        letter-spacing: -0.4px;
+      }
+      .container {
+        scroll-margin-top: 86px;
+      }
 
-      .hero { padding: 72px 0 34px; position: relative; overflow: hidden; }
-      .hero__inner { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
+      .hero {
+        padding: 72px 0 34px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero__inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        align-items: center;
+      }
 
       .pill {
-        display: inline-flex; align-items: center; gap: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
         border: 1px solid var(--border);
-        background: rgba(255,255,255,0.05);
+        background: rgba(255, 255, 255, 0.05);
         color: var(--muted);
         border-radius: 999px;
         padding: 8px 12px;
@@ -663,9 +745,11 @@ type PlanModalData = {
         font-size: 13px;
       }
       .pill .dot {
-        width: 10px; height: 10px; border-radius: 999px;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
         background: linear-gradient(90deg, var(--brand-2), var(--brand));
-        box-shadow: 0 10px 30px rgba(133,94,217,0.30);
+        box-shadow: 0 10px 30px rgba(133, 94, 217, 0.3);
       }
 
       .h1 {
@@ -681,7 +765,10 @@ type PlanModalData = {
         background-clip: text;
         color: transparent;
       }
-      .sub { font-size: 16px; max-width: 60ch; }
+      .sub {
+        font-size: 16px;
+        max-width: 60ch;
+      }
 
       .trust {
         margin-top: 14px;
@@ -692,16 +779,28 @@ type PlanModalData = {
       }
       .trust__item {
         border: 1px solid var(--border);
-        background: rgba(255,255,255,0.04);
+        background: rgba(255, 255, 255, 0.04);
         border-radius: 18px;
         padding: 12px;
         display: grid;
         gap: 2px;
       }
-      .trust__k { font-size: 12px; color: var(--muted); }
-      .trust__v { font-weight: 900; letter-spacing: -0.2px; }
+      .trust__k {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .trust__v {
+        font-weight: 900;
+        letter-spacing: -0.2px;
+      }
 
-      .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
+      .hero__cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-top: 32px;
+      }
 
       .cta-primary {
         position: relative;
@@ -711,44 +810,66 @@ type PlanModalData = {
         padding: 12px 16px;
         border-radius: 999px;
         border: 1px solid rgba(133, 94, 217, 0.45);
-        background: linear-gradient(90deg, rgba(132,210,244,0.18), rgba(133,94,217,0.18));
+        background: linear-gradient(90deg, rgba(132, 210, 244, 0.18), rgba(133, 94, 217, 0.18));
         color: var(--text);
-        box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
         overflow: hidden;
         transform: translateZ(0);
-        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
         will-change: transform;
         cursor: pointer;
       }
       .cta-primary:hover {
         transform: translateY(-1px);
-        border-color: rgba(132,210,244,0.55);
-        box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+        border-color: rgba(132, 210, 244, 0.55);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
       }
       .cta-primary__shine {
         position: absolute;
         inset: -40% -30%;
-        background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.22), transparent 42%);
+        background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.22), transparent 42%);
         transform: rotate(18deg);
         opacity: 0.9;
         pointer-events: none;
         animation: shine 3.2s ease-in-out infinite;
       }
       @keyframes shine {
-        0%, 100% { transform: translateX(-6%) rotate(18deg); opacity: 0.75; }
-        50% { transform: translateX(6%) rotate(18deg); opacity: 1; }
+        0%,
+        100% {
+          transform: translateX(-6%) rotate(18deg);
+          opacity: 0.75;
+        }
+        50% {
+          transform: translateX(6%) rotate(18deg);
+          opacity: 1;
+        }
       }
-      .cta-primary__text { font-weight: 900; letter-spacing: -0.1px; }
-      .cta-primary__arrow { opacity: 0.9; }
+      .cta-primary__text {
+        font-weight: 900;
+        letter-spacing: -0.1px;
+      }
+      .cta-primary__arrow {
+        opacity: 0.9;
+      }
 
       .cta-secondary {
         padding: 12px 14px;
         border-radius: 999px;
         border: 1px solid transparent;
         color: var(--muted);
-        transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease;
       }
-      .cta-secondary:hover { border-color: var(--border); background: rgba(255,255,255,0.04); color: var(--text); }
+      .cta-secondary:hover {
+        border-color: var(--border);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+      }
 
       .bullets {
         margin-top: 14px;
@@ -756,94 +877,183 @@ type PlanModalData = {
         gap: 10px;
         max-width: 56ch;
       }
-      .b { display: flex; align-items: flex-start; gap: 12px; color: var(--muted); line-height: 1.3; }
+      .b {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        color: var(--muted);
+        line-height: 1.3;
+      }
       .b__ic {
         flex: 0 0 auto;
-        width: 22px; height: 22px; margin-top: 2px;
+        width: 22px;
+        height: 22px;
+        margin-top: 2px;
         border-radius: 999px;
-        display: grid; place-items: center;
+        display: grid;
+        place-items: center;
         border: 1px solid rgba(132, 210, 244, 0.35);
         background: rgba(132, 210, 244, 0.12);
         color: rgba(255, 255, 255, 0.92);
-        box-shadow: 0 10px 30px rgba(132, 210, 244, 0.10);
+        box-shadow: 0 10px 30px rgba(132, 210, 244, 0.1);
       }
 
       .hero__visual .mock {
         border-radius: 28px;
         border: 1px solid var(--border);
-        background: rgba(255,255,255,0.05);
+        background: rgba(255, 255, 255, 0.05);
         box-shadow: var(--shadow);
         overflow: hidden;
         position: relative;
       }
-      .mock__top { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .mock__title { font-size: 12px; color: var(--muted); }
-      .mock__chip { margin-left: auto; font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: var(--muted); }
-      .dots { display: inline-flex; gap: 6px; margin-right: 6px; }
-      .dots span { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.18); }
-      .mock__body { padding: 14px; display: grid; gap: 14px; }
+      .mock__top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .mock__title {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .mock__chip {
+        margin-left: auto;
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+      }
+      .dots {
+        display: inline-flex;
+        gap: 6px;
+        margin-right: 6px;
+      }
+      .dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.18);
+      }
+      .mock__body {
+        padding: 14px;
+        display: grid;
+        gap: 14px;
+      }
 
-      .chat { display: grid; gap: 10px; }
-      .msg { display: grid; gap: 4px; }
+      .chat {
+        display: grid;
+        gap: 10px;
+      }
+      .msg {
+        display: grid;
+        gap: 4px;
+      }
       .msg__bubble {
         width: fit-content;
         max-width: 92%;
         padding: 10px 12px;
         border-radius: 16px;
-        border: 1px solid rgba(255,255,255,0.10);
-        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
         line-height: 1.35;
         font-size: 13px;
       }
-      .msg__meta { font-size: 11px; color: var(--muted); }
-      .msg.me { justify-items: end; }
-      .msg.me .msg__bubble { background: linear-gradient(180deg, rgba(133,94,217,0.18), rgba(255,255,255,0.03)); border-color: rgba(133,94,217,0.28); }
-      .msg.bot .msg__bubble { background: linear-gradient(180deg, rgba(132,210,244,0.12), rgba(255,255,255,0.03)); border-color: rgba(132,210,244,0.22); }
+      .msg__meta {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .msg.me {
+        justify-items: end;
+      }
+      .msg.me .msg__bubble {
+        background: linear-gradient(180deg, rgba(133, 94, 217, 0.18), rgba(255, 255, 255, 0.03));
+        border-color: rgba(133, 94, 217, 0.28);
+      }
+      .msg.bot .msg__bubble {
+        background: linear-gradient(180deg, rgba(132, 210, 244, 0.12), rgba(255, 255, 255, 0.03));
+        border-color: rgba(132, 210, 244, 0.22);
+      }
 
-      .mini-panel { border-radius: 22px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); padding: 12px; }
-      .mini-panel__head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-      .mini-panel__n { font-weight: 950; letter-spacing: -0.3px; font-size: 20px; }
-      .mini-bars { margin-top: 10px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; align-items: end; height: 58px; }
+      .mini-panel {
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 12px;
+      }
+      .mini-panel__head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .mini-panel__n {
+        font-weight: 950;
+        letter-spacing: -0.3px;
+        font-size: 20px;
+      }
+      .mini-bars {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        align-items: end;
+        height: 58px;
+      }
       .mini-bars span {
         height: calc(var(--h) * 1%);
         border-radius: 12px;
-        border: 1px solid rgba(133,94,217,0.25);
-        background: linear-gradient(180deg, rgba(133,94,217,0.25), rgba(132,210,244,0.14));
+        border: 1px solid rgba(133, 94, 217, 0.25);
+        background: linear-gradient(180deg, rgba(133, 94, 217, 0.25), rgba(132, 210, 244, 0.14));
       }
       .mock__glow {
         position: absolute;
         inset: -20%;
         background:
-          radial-gradient(600px 380px at 30% 20%, rgba(133,94,217,0.20), transparent 60%),
-          radial-gradient(520px 340px at 70% 40%, rgba(132,210,244,0.14), transparent 60%);
+          radial-gradient(600px 380px at 30% 20%, rgba(133, 94, 217, 0.2), transparent 60%),
+          radial-gradient(520px 340px at 70% 40%, rgba(132, 210, 244, 0.14), transparent 60%);
         pointer-events: none;
         filter: blur(8px);
         opacity: 0.8;
       }
 
-      .hero__fade { position: absolute; left: 0; right: 0; bottom: -2px; height: 120px; background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.10)); pointer-events: none; }
+      .hero__fade {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 120px;
+        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+        pointer-events: none;
+      }
 
-      .storiesOne { margin-top: 12px; }
-      :host{
+      .storiesOne {
+        margin-top: 12px;
+      }
+      :host {
         --story-w: min(420px, 92vw);
         --story-h: calc(var(--story-w) * 16 / 9);
         --story-ms: 4200ms;
       }
-      @media (min-width: 980px){
-        :host{ --story-w: 380px; }
+      @media (min-width: 980px) {
+        :host {
+          --story-w: 380px;
+        }
       }
-      .storyStage{
+      .storyStage {
         display: grid;
         place-items: center;
         width: fit-content;
         margin-inline: auto;
       }
-      .storyCard{
+      .storyCard {
         width: var(--story-w);
         height: var(--story-h);
         border-radius: 28px;
-        border: 1px solid rgba(255,255,255,0.16);
-        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.04);
         overflow: hidden;
         position: relative;
         box-shadow: var(--shadow);
@@ -852,7 +1062,7 @@ type PlanModalData = {
         transform: translateZ(0);
         backface-visibility: hidden;
       }
-      .storyTop{
+      .storyTop {
         position: absolute;
         left: 14px;
         right: 14px;
@@ -860,72 +1070,230 @@ type PlanModalData = {
         z-index: 3;
         pointer-events: none;
       }
-      .bars{ display: grid; gap: 8px; }
-      .bar{
+      .bars {
+        display: grid;
+        gap: 8px;
+      }
+      .bar {
         height: 3px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.18);
+        background: rgba(255, 255, 255, 0.18);
         overflow: hidden;
       }
-      .barFill{
+      .barFill {
         display: block;
         height: 100%;
         width: 100%;
         transform-origin: left center;
         transform: scaleX(0);
-        background: rgba(255,255,255,0.78);
+        background: rgba(255, 255, 255, 0.78);
         will-change: transform;
       }
-      .bar.is-done .barFill{ transform: scaleX(1); }
-      .bar.is-active .barFill{ animation: storyFill var(--story-ms) linear forwards; }
-      .storyCard.is-paused .bar.is-active .barFill{ animation-play-state: paused; }
-      @keyframes storyFill{ from{ transform: scaleX(0); } to{ transform: scaleX(1); } }
+      .bar.is-done .barFill {
+        transform: scaleX(1);
+      }
+      .bar.is-active .barFill {
+        animation: storyFill var(--story-ms) linear forwards;
+      }
+      .storyCard.is-paused .bar.is-active .barFill {
+        animation-play-state: paused;
+      }
+      @keyframes storyFill {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
 
-      .storyImg{ width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
-      .storyFade{
-        position: absolute; inset: auto 0 0 0;
+      .storyImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+        pointer-events: none;
+      }
+      .storyFade {
+        position: absolute;
+        inset: auto 0 0 0;
         height: 44%;
         z-index: 2;
         pointer-events: none;
-        background: linear-gradient(to top, rgba(0,0,0,0.36), transparent);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.36), transparent);
       }
-      .storiesHint{ margin-top: 10px; font-size: 12px; text-align: center; }
+      .storiesHint {
+        margin-top: 10px;
+        font-size: 12px;
+        text-align: center;
+      }
 
-      .steps { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
-      .step__inner { padding: 16px; display: grid; gap: 8px; }
-      .step__n { width: fit-content; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: var(--muted); font-size: 12px; }
-      .step__t { font-weight: 950; letter-spacing: -0.2px; }
-      .step__d { font-size: 13px; }
+      .steps {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .step__inner {
+        padding: 16px;
+        display: grid;
+        gap: 8px;
+      }
+      .step__n {
+        width: fit-content;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .step__t {
+        font-weight: 950;
+        letter-spacing: -0.2px;
+      }
+      .step__d {
+        font-size: 13px;
+      }
 
-      .benefits { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
-      .benefit__inner { padding: 16px; display: grid; gap: 10px; }
-      .benefit__ic { width: 44px; height: 44px; border-radius: 16px; display: grid; place-items: center; border: 1px solid rgba(133,94,217,0.22); background: rgba(133,94,217,0.14); color: var(--text); }
-      .benefit__ic svg { width: 22px; height: 22px; }
-      .benefit__t { font-weight: 950; letter-spacing: -0.2px; }
-      .benefit__d { font-size: 13px; max-width: 64ch; overflow-wrap: anywhere; }
+      .benefits {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .benefit__inner {
+        padding: 16px;
+        display: grid;
+        gap: 10px;
+      }
+      .benefit__ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(133, 94, 217, 0.22);
+        background: rgba(133, 94, 217, 0.14);
+        color: var(--text);
+      }
+      .benefit__ic svg {
+        width: 22px;
+        height: 22px;
+      }
+      .benefit__t {
+        font-weight: 950;
+        letter-spacing: -0.2px;
+      }
+      .benefit__d {
+        font-size: 13px;
+        max-width: 64ch;
+        overflow-wrap: anywhere;
+      }
 
-      .proof { display: grid; grid-template-columns: 1fr; gap: 12px; align-items: start; }
-      .proof__bullets { margin-top: 12px; display: grid; gap: 10px; }
-      .pb { display: flex; align-items: center; gap: 10px; color: var(--muted); }
-      .pb__dot { width: 10px; height: 10px; border-radius: 999px; background: linear-gradient(90deg, var(--brand-2), var(--brand)); }
-      .proof__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-      .proofCard .pc__n { padding: 16px 16px 0; font-weight: 950; font-size: 28px; letter-spacing: -0.4px; line-height: 1; }
-      .proofCard .pc__t { padding: 6px 16px 16px; font-size: 12px; }
+      .proof {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+      .proof__bullets {
+        margin-top: 12px;
+        display: grid;
+        gap: 10px;
+      }
+      .pb {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+      }
+      .pb__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--brand-2), var(--brand));
+      }
+      .proof__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .proofCard .pc__n {
+        padding: 16px 16px 0;
+        font-weight: 950;
+        font-size: 28px;
+        letter-spacing: -0.4px;
+        line-height: 1;
+      }
+      .proofCard .pc__t {
+        padding: 6px 16px 16px;
+        font-size: 12px;
+      }
 
-      .testi__inner { padding: 18px; overflow: hidden; }
-      .stars { color: rgba(255,255,255,0.82); letter-spacing: 1px; font-size: 12px; }
-      .quote { margin-top: 10px; font-size: 16px; font-weight: 800; letter-spacing: -0.2px; }
-      .who { margin-top: 12px; }
-      .who__name { font-weight: 950; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-      .who__role { font-size: 12px; margin-top: 2px; }
-      .badge { font-size: 12px; border: 1px solid rgba(132,210,244,0.35); background: rgba(132,210,244,0.10); color: var(--text); padding: 4px 10px; border-radius: 999px; }
-      .dots { margin-top: 14px; display: flex; gap: 8px; align-items: center; }
-      .dot-btn { width: 10px; height: 10px; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,0.10); cursor: pointer; }
-      .dot-btn.is-active { background: linear-gradient(90deg, var(--brand-2), var(--brand)); border-color: rgba(133,94,217,0.5); }
+      .testi__inner {
+        padding: 18px;
+        overflow: hidden;
+      }
+      .stars {
+        color: rgba(255, 255, 255, 0.82);
+        letter-spacing: 1px;
+        font-size: 12px;
+      }
+      .quote {
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: -0.2px;
+      }
+      .who {
+        margin-top: 12px;
+      }
+      .who__name {
+        font-weight: 950;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .who__role {
+        font-size: 12px;
+        margin-top: 2px;
+      }
+      .badge {
+        font-size: 12px;
+        border: 1px solid rgba(132, 210, 244, 0.35);
+        background: rgba(132, 210, 244, 0.1);
+        color: var(--text);
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+      .dots {
+        margin-top: 14px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .dot-btn {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+      }
+      .dot-btn.is-active {
+        background: linear-gradient(90deg, var(--brand-2), var(--brand));
+        border-color: rgba(133, 94, 217, 0.5);
+      }
 
-      .cta { padding-bottom: 72px; }
-      .ctaCard { display:block; }
-      .ctaCard__inner{
+      .cta {
+        padding-bottom: 72px;
+      }
+      .ctaCard {
+        display: block;
+      }
+      .ctaCard__inner {
         padding: 20px;
         display: flex;
         flex-wrap: wrap;
@@ -933,71 +1301,93 @@ type PlanModalData = {
         justify-content: space-between;
         gap: 16px;
       }
-      .cta__title { font-weight: 950; font-size: 18px; letter-spacing: -0.2px; }
-      .cta__copy{ display:grid; gap: 6px; min-width: min(520px, 100%); }
+      .cta__title {
+        font-weight: 950;
+        font-size: 18px;
+        letter-spacing: -0.2px;
+      }
+      .cta__copy {
+        display: grid;
+        gap: 6px;
+        min-width: min(520px, 100%);
+      }
 
-      .planModal{
+      .planModal {
         position: fixed;
         inset: 0;
         z-index: 120;
-        background: rgba(0,0,0,0.58);
+        background: rgba(0, 0, 0, 0.58);
         backdrop-filter: blur(12px);
         display: grid;
         place-items: center;
         padding: 20px;
       }
 
-      .planModal__card{
-        width: min(920px, 100%);
-        border-radius: 26px;
-        border: 1px solid rgba(255,255,255,0.14);
-        background: rgba(20,20,28,0.82);
-        box-shadow: 0 28px 80px rgba(0,0,0,0.35);
+      .planModal__card {
+        width: min(980px, 100%);
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: min(88vh, 820px);
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(20, 20, 28, 0.86);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
         position: relative;
-        overflow: hidden;
-        overflow-y: auto;
-        max-height: 90vh;
+        overflow: auto;
       }
 
-      .planModal__close{
+      .planModal__close {
         position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 40px;
-        height: 40px;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,0.14);
-        background: rgba(255,255,255,0.06);
+        top: 14px;
+        right: 14px;
+        width: 46px;
+        height: 46px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.08);
         color: var(--text);
-        font-size: 22px;
-        cursor: pointer;
-        z-index: 2;
-      }
-
-      .planModal__inner{
-        padding: 26px;
-      }
-
-      .planModal__grid{
+        font-size: 24px;
+        line-height: 1;
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
-        gap: 28px;
+        place-items: center;
+        cursor: pointer;
+        z-index: 4;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease,
+          transform 180ms ease;
+      }
+
+      .planModal__close:hover {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.22);
+        transform: scale(1.02);
+      }
+
+      .planModal__inner {
+        padding: 32px;
+      }
+
+      .planModal__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 40px;
         align-items: start;
       }
 
-      .planModal__main{
+      .planModal__main {
         display: grid;
-        gap: 20px;
+        gap: 18px;
         align-content: start;
         min-width: 0;
       }
 
-      .planModal__head{
-        max-width: 540px;
-        padding-right: 12px;
+      .planModal__head {
+        max-width: 560px;
+        padding-right: 56px;
       }
 
-      .planModal__k{
+      .planModal__k {
         color: var(--brand-2);
         font-size: 12px;
         font-weight: 800;
@@ -1005,36 +1395,36 @@ type PlanModalData = {
         text-transform: uppercase;
       }
 
-      .planModal__h{
+      .planModal__h {
         font-weight: 950;
         letter-spacing: -0.8px;
-        font-size: clamp(30px, 3.2vw, 48px);
-        line-height: 1.05;
+        font-size: clamp(28px, 3vw, 44px);
+        line-height: 1.06;
         margin-top: 10px;
-        max-width: 12ch;
+        max-width: 11ch;
       }
 
-      .planModal__p{
-        margin-top: 10px;
+      .planModal__p {
+        margin-top: 8px;
         font-size: 15px;
         line-height: 1.55;
-        max-width: 42ch;
+        max-width: 44ch;
       }
 
-      .planModal__list{
+      .planModal__list {
         display: grid;
         gap: 14px;
         align-content: start;
-        max-width: 520px;
+        max-width: 540px;
       }
 
-      .planModal__li{
+      .planModal__li {
         display: flex;
         gap: 12px;
         align-items: flex-start;
       }
 
-      .li__ic{
+      .li__ic {
         flex: 0 0 auto;
         width: 22px;
         height: 22px;
@@ -1050,37 +1440,41 @@ type PlanModalData = {
         line-height: 1;
       }
 
-      .li__t{
+      .li__t {
         font-size: 14px;
         color: var(--muted);
         line-height: 1.45;
       }
 
-      .planModal__side{
+      .planModal__side {
         align-self: start;
-        margin-top: 0;
-        border: 1px solid rgba(255,255,255,0.10);
-        background: rgba(255,255,255,0.04);
-        border-radius: 22px;
-        padding: 20px;
+        justify-self: end;
+        width: 100%;
+        max-width: 300px;
+        margin-right: 29px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 24px;
+        padding: 20px;  
         display: grid;
         gap: 12px;
       }
 
-      .planModal__price{
-        font-size: clamp(28px, 3.5vw, 48px);
+      .planModal__price {
+        font-size: clamp(26px, 2.8vw, 38px);
         font-weight: 950;
         letter-spacing: -1px;
-        line-height: 0.95;
-        word-break: break-word;
+        line-height: 0.98;
+        word-break: normal;
+        overflow-wrap: anywhere;
       }
 
-      .planModal__fine{
+      .planModal__fine {
         font-size: 12px;
         line-height: 1.45;
       }
 
-      .planModal__cta{
+      .planModal__cta {
         margin-top: 8px;
         display: inline-flex;
         justify-content: space-between;
@@ -1088,77 +1482,347 @@ type PlanModalData = {
         gap: 12px;
         padding: 14px 16px;
         border-radius: 999px;
-        border: 1px solid rgba(133,94,217,0.45);
-        background: rgba(255,255,255,0.06);
-        transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+        border: 1px solid rgba(133, 94, 217, 0.45);
+        background: rgba(255, 255, 255, 0.06);
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          border-color 180ms ease;
       }
 
-      .planModal__cta:hover{
+      .planModal__cta:hover {
         transform: translateY(-1px);
-        background: rgba(255,255,255,0.10);
-        border-color: rgba(132,210,244,0.55);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(132, 210, 244, 0.55);
       }
 
-      .planModal__ghost{
+      .planModal__ghost {
         padding: 12px 14px;
         border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.12);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         background: transparent;
         color: var(--muted);
         cursor: pointer;
       }
 
-      .planModal__ghost:hover{
-        background: rgba(255,255,255,0.06);
+      .planModal__ghost:hover {
+        background: rgba(255, 255, 255, 0.06);
         color: var(--text);
       }
 
-      @media (max-width: 900px){
-        .planModal__card{
+      @media (max-width: 900px) {
+        .planModal__card {
+          width: min(760px, 100%);
+          max-height: 90vh;
+        }
+
+        .planModal__inner {
+          padding: 24px;
+        }
+
+        .planModal__grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .planModal__head {
+          max-width: 100%;
+          padding-right: 56px;
+        }
+
+        .planModal__h {
+          max-width: 100%;
+          font-size: clamp(26px, 6vw, 40px);
+        }
+
+        .planModal__p,
+        .planModal__list {
+          max-width: 100%;
+        }
+
+        .planModal__side {
+          max-width: 100%;
+        }
+
+        .li__ic {
+          flex: 0 0 auto;
+          width: 22px;
+          height: 22px;
+          margin-top: 1px;
+          border-radius: 999px;
+          display: grid;
+          place-items: center;
+          border: 1px solid rgba(133, 94, 217, 0.35);
+          background: rgba(133, 94, 217, 0.14);
+          color: rgba(255, 255, 255, 0.92);
+          font-weight: 900;
+          font-size: 12px;
+          line-height: 1;
+        }
+
+        .li__t {
+          font-size: 14px;
+          color: var(--muted);
+          line-height: 1.45;
+        }
+
+        .planModal__side {
+          align-self: start;
+          width: 100%;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.04);
+          border-radius: 24px;
+          padding: 20px;
+          display: grid;
+          gap: 12px;
+        }
+      }
+
+      .planModal__price {
+        font-size: clamp(26px, 2.8vw, 38px);
+        font-weight: 950;
+        letter-spacing: -1px;
+        line-height: 0.98;
+        word-break: normal;
+        overflow-wrap: anywhere;
+      }
+
+      .planModal__fine {
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .planModal__cta {
+        margin-top: 8px;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(133, 94, 217, 0.45);
+        background: rgba(255, 255, 255, 0.06);
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .planModal__cta:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(132, 210, 244, 0.55);
+      }
+
+      .planModal__ghost {
+        padding: 12px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .planModal__ghost:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+      }
+
+      @media (max-width: 900px) {
+        .planModal__card {
+          width: min(760px, 100%);
+          max-height: 90vh;
+        }
+
+        .planModal__inner {
+          padding: 24px;
+        }
+
+        .planModal__grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .planModal__head {
+          max-width: 100%;
+          padding-right: 56px;
+        }
+
+        .planModal__h {
+          max-width: 100%;
+          font-size: clamp(26px, 6vw, 40px);
+        }
+
+        .planModal__p,
+        .planModal__list {
+          max-width: 100%;
+        }
+
+        .planModal__side {
+          max-width: 100%;
+        }
+      }
+
+      .planModal__li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .li__ic {
+        flex: 0 0 auto;
+        width: 22px;
+        height: 22px;
+        margin-top: 1px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(133, 94, 217, 0.35);
+        background: rgba(133, 94, 217, 0.14);
+        color: rgba(255, 255, 255, 0.92);
+        font-weight: 900;
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      .li__t {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .planModal__side {
+        align-self: start;
+        margin-top: 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 22px;
+        padding: 20px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .planModal__price {
+        font-size: clamp(28px, 3.5vw, 48px);
+        font-weight: 950;
+        letter-spacing: -1px;
+        line-height: 0.95;
+        word-break: break-word;
+      }
+
+      .planModal__fine {
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .planModal__cta {
+        margin-top: 8px;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(133, 94, 217, 0.45);
+        background: rgba(255, 255, 255, 0.06);
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .planModal__cta:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(132, 210, 244, 0.55);
+      }
+
+      .planModal__ghost {
+        padding: 12px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .planModal__ghost:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+      }
+
+      @media (max-width: 900px) {
+        .planModal__card {
           width: min(760px, 100%);
         }
 
-        .planModal__grid{
+        .planModal__grid {
           grid-template-columns: 1fr;
           gap: 22px;
         }
 
-        .planModal__side{
+        .planModal__side {
           margin-top: 0;
         }
 
-        .planModal__head{
+        .planModal__head {
           max-width: 100%;
           padding-right: 44px;
         }
 
-        .planModal__h{
+        .planModal__h {
           max-width: 100%;
           font-size: clamp(28px, 6vw, 42px);
         }
 
         .planModal__p,
-        .planModal__list{
+        .planModal__list {
           max-width: 100%;
         }
       }
 
       @media (min-width: 980px) {
-        .hero__inner { grid-template-columns: 1.08fr 0.92fr; }
-        .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .proof { grid-template-columns: 1.1fr 0.9fr; }
+        .hero__inner {
+          grid-template-columns: 1.08fr 0.92fr;
+        }
+        .steps {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .benefits {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .proof {
+          grid-template-columns: 1.1fr 0.9fr;
+        }
       }
       @media (max-width: 520px) {
-        .trust { grid-template-columns: 1fr; }
-        .proof__grid { grid-template-columns: 1fr; }
+        .trust {
+          grid-template-columns: 1fr;
+        }
+        .proof__grid {
+          grid-template-columns: 1fr;
+        }
       }
 
-      .faq { margin-top: 14px; display: grid; gap: 10px; }
-      .qa { border: 1px solid var(--border); border-radius: 18px; padding: 12px 14px; background: rgba(255,255,255,0.04); }
-      summary { cursor: pointer; font-weight: 900; }
+      .faq {
+        margin-top: 14px;
+        display: grid;
+        gap: 10px;
+      }
+      .qa {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 900;
+      }
 
-      .qa { overflow: hidden; }
+      .qa {
+        overflow: hidden;
+      }
       .qa summary {
         list-style: none;
         display: flex;
@@ -1166,35 +1830,53 @@ type PlanModalData = {
         justify-content: space-between;
         gap: 12px;
       }
-      .qa summary::-webkit-details-marker { display: none; }
-
-      .qa summary::after{
-        content: "▾";
-        opacity: .7;
-        transform: rotate(0deg);
-        transition: transform 220ms ease, opacity 220ms ease;
+      .qa summary::-webkit-details-marker {
+        display: none;
       }
 
-      .qa__content{
+      .qa summary::after {
+        content: '▾';
+        opacity: 0.7;
+        transform: rotate(0deg);
+        transition:
+          transform 220ms ease,
+          opacity 220ms ease;
+      }
+
+      .qa__content {
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows 260ms cubic-bezier(.2,.9,.2,1);
+        transition: grid-template-rows 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
       }
-      .qa__content > *{
+      .qa__content > * {
         overflow: hidden;
         margin: 0;
         padding-top: 10px;
         opacity: 0;
         transform: translateY(-4px);
-        transition: opacity 200ms ease, transform 200ms ease;
+        transition:
+          opacity 200ms ease,
+          transform 200ms ease;
       }
 
-      .qa[open] .qa__content{ grid-template-rows: 1fr; }
-      .qa[open] summary::after{ transform: rotate(180deg); opacity: 1; }
-      .qa[open] .qa__content > *{ opacity: 1; transform: translateY(0); }
+      .qa[open] .qa__content {
+        grid-template-rows: 1fr;
+      }
+      .qa[open] summary::after {
+        transform: rotate(180deg);
+        opacity: 1;
+      }
+      .qa[open] .qa__content > * {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-      @media (prefers-reduced-motion: reduce){
-        .qa__content, .qa__content > *, .qa summary::after { transition: none !important; }
+      @media (prefers-reduced-motion: reduce) {
+        .qa__content,
+        .qa__content > *,
+        .qa summary::after {
+          transition: none !important;
+        }
       }
 
       .kicker {
@@ -1222,35 +1904,48 @@ type PlanModalData = {
         padding: 20px 14px;
         border: 1px solid var(--border);
         border-radius: 20px;
-        background: rgba(255,255,255,0.04);
+        background: rgba(255, 255, 255, 0.04);
         text-align: center;
         cursor: pointer;
-        transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+        transition:
+          border-color 180ms ease,
+          background 180ms ease,
+          transform 180ms ease;
       }
       .onboarding-opt:hover {
-        border-color: rgba(133,94,217,0.45);
-        background: rgba(133,94,217,0.08);
+        border-color: rgba(133, 94, 217, 0.45);
+        background: rgba(133, 94, 217, 0.08);
         transform: translateY(-2px);
       }
-      .onboarding-opt__ic { font-size: 28px; line-height: 1; }
-      .onboarding-opt__t { font-weight: 700; font-size: 14px; }
+      .onboarding-opt__ic {
+        font-size: 28px;
+        line-height: 1;
+      }
+      .onboarding-opt__t {
+        font-weight: 700;
+        font-size: 14px;
+      }
       .onboarding-promise {
         margin-top: 20px;
         display: flex;
         align-items: center;
         gap: 10px;
         padding: 14px 18px;
-        border: 1px solid rgba(132,210,244,0.25);
+        border: 1px solid rgba(132, 210, 244, 0.25);
         border-radius: 14px;
-        background: rgba(132,210,244,0.06);
+        background: rgba(132, 210, 244, 0.06);
         font-size: 14px;
         font-weight: 600;
         color: var(--brand-2);
         max-width: 480px;
       }
-      .onboarding-promise__ic { font-size: 18px; }
+      .onboarding-promise__ic {
+        font-size: 18px;
+      }
       @media (max-width: 640px) {
-        .onboarding-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .onboarding-opts {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
 
       .crossinsights {
@@ -1283,8 +1978,8 @@ type PlanModalData = {
         font-size: 24px;
         line-height: 1;
         border-radius: 14px;
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .ci-card__t {
@@ -1386,7 +2081,7 @@ type PlanModalData = {
       }
 
       .pricing-card__list li::before {
-        content: "✓";
+        content: '✓';
         position: absolute;
         left: 0;
         top: 0;
@@ -1411,8 +2106,8 @@ type PlanModalData = {
         text-transform: uppercase;
         padding: 6px 10px;
         border-radius: 999px;
-        border: 1px solid rgba(132,210,244,0.28);
-        background: rgba(132,210,244,0.10);
+        border: 1px solid rgba(132, 210, 244, 0.28);
+        background: rgba(132, 210, 244, 0.1);
         color: var(--brand-2);
       }
 
@@ -1424,9 +2119,9 @@ type PlanModalData = {
       }
 
       .pricing-card--pro {
-        border-color: rgba(133,94,217,0.45) !important;
-        background: rgba(133,94,217,0.06) !important;
-        box-shadow: 0 18px 44px rgba(133,94,217,0.12);
+        border-color: rgba(133, 94, 217, 0.45) !important;
+        background: rgba(133, 94, 217, 0.06) !important;
+        box-shadow: 0 18px 44px rgba(133, 94, 217, 0.12);
       }
 
       .founding-banner {
@@ -1435,9 +2130,9 @@ type PlanModalData = {
         align-items: center;
         gap: 16px;
         padding: 20px 24px;
-        border: 1px solid rgba(132,210,244,0.30);
+        border: 1px solid rgba(132, 210, 244, 0.3);
         border-radius: 20px;
-        background: rgba(132,210,244,0.06);
+        background: rgba(132, 210, 244, 0.06);
         flex-wrap: wrap;
       }
 
