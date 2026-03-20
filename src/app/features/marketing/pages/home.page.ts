@@ -955,6 +955,8 @@ type PlanModalData = {
         box-shadow: 0 28px 80px rgba(0,0,0,0.35);
         position: relative;
         overflow: hidden;
+        overflow-y: auto;
+        max-height: 90vh;
       }
 
       .planModal__close{
@@ -978,7 +980,7 @@ type PlanModalData = {
 
       .planModal__grid{
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
         gap: 28px;
         align-items: start;
       }
@@ -1056,7 +1058,7 @@ type PlanModalData = {
 
       .planModal__side{
         align-self: start;
-        margin-top: 64px;
+        margin-top: 0;
         border: 1px solid rgba(255,255,255,0.10);
         background: rgba(255,255,255,0.04);
         border-radius: 22px;
@@ -1066,10 +1068,11 @@ type PlanModalData = {
       }
 
       .planModal__price{
-        font-size: clamp(34px, 4vw, 56px);
+        font-size: clamp(28px, 3.5vw, 48px);
         font-weight: 950;
         letter-spacing: -1px;
         line-height: 0.95;
+        word-break: break-word;
       }
 
       .planModal__fine{
