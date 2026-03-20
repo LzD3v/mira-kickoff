@@ -12,7 +12,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { UiButtonComponent } from '@ui/button/ui-button.component';
 import { UiCardComponent } from '@ui/card/ui-card.component';
 import { RevealOnScrollDirective } from '@core/directives/reveal-on-scroll.directive';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type Testimonial = {
   name: string;
@@ -48,7 +48,6 @@ type PlanModalData = {
     TranslateModule,
   ],
   animations: [
-    // ✅ depoimento "passando pro lado"
     trigger('slideSwap', [
       transition('* => *', [
         style({ opacity: 0, transform: 'translateX(26px)' }),
@@ -87,13 +86,11 @@ type PlanModalData = {
             <span>{{ 'MARKETING.HERO.PILL' | translate }}</span>
           </div>
 
-          <!-- Aqui foi modificado o headline para alta conversão como solicitado -->
           <h1 class="h1">
             {{ 'MARKETING.HERO.TITLE.A' | translate }}
             <span class="grad">{{ 'MARKETING.HERO.TITLE.B' | translate }}</span>{{ 'MARKETING.HERO.TITLE.C' | translate }}
           </h1>
 
-          <!-- Aqui foi modificado o subtítulo para alta conversão como solicitado -->
           <p class="sub muted">
             {{ 'MARKETING.HERO.SUB.A' | translate }}<b>{{ 'MARKETING.HERO.SUB.B' | translate }}</b>{{ 'MARKETING.HERO.SUB.C' | translate }}
           </p>
@@ -114,8 +111,6 @@ type PlanModalData = {
           </div>
 
           <div class="hero__cta">
-            <!-- ✅ agora abre o "Conheça nosso plano" -->
-            <!-- Aqui foi modificado o CTA primário para scroll até #pricing como solicitado -->
             <button
               class="cta-primary focus-ring"
               type="button"
@@ -193,7 +188,7 @@ type PlanModalData = {
       <div class="hero__fade" aria-hidden="true"></div>
     </section>
 
-    <!-- ✅ STORIES -->
+    <!-- STORIES -->
     <section id="stories" class="section container" miraRevealOnScroll>
       <div class="section__head">
         <h2 class="h2">{{ 'MARKETING.STORIES.TITLE' | translate }}</h2>
@@ -243,7 +238,7 @@ type PlanModalData = {
       </div>
     </section>
 
-    <!-- Aqui foi adicionada a secção de onboarding teaser como solicitado -->
+    <!-- ONBOARDING -->
     <section id="onboarding" class="section container" miraRevealOnScroll>
       <div class="section__head">
         <span class="kicker">{{ 'MARKETING.ONBOARDING.KICKER' | translate }}</span>
@@ -338,7 +333,7 @@ type PlanModalData = {
       </div>
     </section>
 
-    <!-- Aqui foi adicionada a secção de insights cruzados de vida como solicitado -->
+    <!-- CROSS INSIGHTS -->
     <section id="crossinsights" class="section container" miraRevealOnScroll>
       <div class="section__head">
         <span class="kicker">{{ 'MARKETING.CROSSINSIGHTS.KICKER' | translate }}</span>
@@ -372,7 +367,7 @@ type PlanModalData = {
       <p class="crossinsights__note muted">{{ 'MARKETING.CROSSINSIGHTS.NOTE' | translate }}</p>
     </section>
 
-    <!-- PROVA / NÚMEROS -->
+    <!-- PROVA -->
     <section id="prova" class="section container" miraRevealOnScroll>
       <div class="proof">
         <div class="proof__copy">
@@ -445,7 +440,7 @@ type PlanModalData = {
       </mira-ui-card>
     </section>
 
-    <!-- Aqui foi adicionada a secção de preços como solicitado -->
+    <!-- PRICING -->
     <section id="pricing" class="section container" miraRevealOnScroll>
       <div class="section__head">
         <span class="kicker">{{ 'MARKETING.PRICING.KICKER' | translate }}</span>
@@ -475,7 +470,7 @@ type PlanModalData = {
           </div>
         </mira-ui-card>
 
-        <!-- Pro (destaque) -->
+        <!-- Pro -->
         <mira-ui-card class="pricing-card pricing-card--pro">
           <div class="pricing-card__badge pricing-card__badge--floating">
             {{ 'MARKETING.PRICING.PRO.BADGE' | translate }}
@@ -530,7 +525,6 @@ type PlanModalData = {
         </mira-ui-card>
       </div>
 
-      <!-- Founding Users banner -->
       <div class="founding-banner">
         <span class="founding-banner__ic" aria-hidden="true">🎁</span>
         <div class="founding-banner__copy">
@@ -585,7 +579,6 @@ type PlanModalData = {
             <div class="muted">{{ 'MARKETING.CTA_FINAL.SUB' | translate }}</div>
           </div>
 
-          <!-- ✅ agora abre o "Conheça nosso plano" -->
           <button class="cta-primary focus-ring" type="button" (click)="openPlan('pro')">
             <span class="cta-primary__shine" aria-hidden="true"></span>
             <span class="cta-primary__text">{{ 'MARKETING.CTA_FINAL.BUTTON' | translate }}</span>
@@ -595,7 +588,7 @@ type PlanModalData = {
       </mira-ui-card>
     </section>
 
-    <!-- ✅ MODAL: Conheça nosso plano -->
+    <!-- MODAL -->
     <div
       class="planModal"
       *ngIf="planOpen()"
@@ -609,23 +602,25 @@ type PlanModalData = {
           class="planModal__close focus-ring"
           type="button"
           (click)="closePlan()"
-          aria-label="Fechar"
+          [attr.aria-label]="'COMMON.CLOSE' | translate"
         >
           ×
         </button>
 
         <div class="planModal__inner">
-          <div class="planModal__head">
-            <div class="planModal__k">{{ selectedPlan().eyebrow }}</div>
-            <div class="planModal__h">{{ selectedPlan().title }}</div>
-            <div class="planModal__p muted">{{ selectedPlan().desc }}</div>
-          </div>
-
           <div class="planModal__grid">
-            <div class="planModal__list">
-              <div class="planModal__li" *ngFor="let item of selectedPlan().items">
-                <span class="li__ic" aria-hidden="true">✓</span>
-                <span class="li__t">{{ item }}</span>
+            <div class="planModal__main">
+              <div class="planModal__head">
+                <div class="planModal__k">{{ selectedPlan().eyebrow }}</div>
+                <div class="planModal__h">{{ selectedPlan().title }}</div>
+                <div class="planModal__p muted">{{ selectedPlan().desc }}</div>
+              </div>
+
+              <div class="planModal__list">
+                <div class="planModal__li" *ngFor="let item of selectedPlan().items">
+                  <span class="li__ic" aria-hidden="true">✓</span>
+                  <span class="li__t">{{ item }}</span>
+                </div>
               </div>
             </div>
 
@@ -639,7 +634,7 @@ type PlanModalData = {
               </a>
 
               <button class="planModal__ghost focus-ring" type="button" (click)="closePlan()">
-                Voltar
+                {{ 'MARKETING.PLAN.BACK' | translate }}
               </button>
             </div>
           </div>
@@ -654,7 +649,6 @@ type PlanModalData = {
       .h2 { font-size: 28px; margin: 0; letter-spacing: -0.4px; }
       .container { scroll-margin-top: 86px; }
 
-      /* HERO */
       .hero { padding: 72px 0 34px; position: relative; overflow: hidden; }
       .hero__inner { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
 
@@ -707,7 +701,6 @@ type PlanModalData = {
       .trust__k { font-size: 12px; color: var(--muted); }
       .trust__v { font-weight: 900; letter-spacing: -0.2px; }
 
-      /* Aqui foi aumentado o espaçamento do CTA como solicitado */
       .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
 
       .cta-primary {
@@ -775,7 +768,6 @@ type PlanModalData = {
         box-shadow: 0 10px 30px rgba(132, 210, 244, 0.10);
       }
 
-      /* VISUAL MOCK */
       .hero__visual .mock {
         border-radius: 28px;
         border: 1px solid var(--border);
@@ -831,7 +823,6 @@ type PlanModalData = {
 
       .hero__fade { position: absolute; left: 0; right: 0; bottom: -2px; height: 120px; background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.10)); pointer-events: none; }
 
-      /* STORIES — CSS progress */
       .storiesOne { margin-top: 12px; }
       :host{
         --story-w: min(420px, 92vw);
@@ -900,14 +891,12 @@ type PlanModalData = {
       }
       .storiesHint{ margin-top: 10px; font-size: 12px; text-align: center; }
 
-      /* STEPS */
       .steps { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
       .step__inner { padding: 16px; display: grid; gap: 8px; }
       .step__n { width: fit-content; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: var(--muted); font-size: 12px; }
       .step__t { font-weight: 950; letter-spacing: -0.2px; }
       .step__d { font-size: 13px; }
 
-      /* BENEFITS */
       .benefits { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
       .benefit__inner { padding: 16px; display: grid; gap: 10px; }
       .benefit__ic { width: 44px; height: 44px; border-radius: 16px; display: grid; place-items: center; border: 1px solid rgba(133,94,217,0.22); background: rgba(133,94,217,0.14); color: var(--text); }
@@ -915,7 +904,6 @@ type PlanModalData = {
       .benefit__t { font-weight: 950; letter-spacing: -0.2px; }
       .benefit__d { font-size: 13px; max-width: 64ch; overflow-wrap: anywhere; }
 
-      /* PROOF */
       .proof { display: grid; grid-template-columns: 1fr; gap: 12px; align-items: start; }
       .proof__bullets { margin-top: 12px; display: grid; gap: 10px; }
       .pb { display: flex; align-items: center; gap: 10px; color: var(--muted); }
@@ -924,8 +912,7 @@ type PlanModalData = {
       .proofCard .pc__n { padding: 16px 16px 0; font-weight: 950; font-size: 28px; letter-spacing: -0.4px; line-height: 1; }
       .proofCard .pc__t { padding: 6px 16px 16px; font-size: 12px; }
 
-      /* TESTI */
-      .testi__inner { padding: 18px; overflow: hidden; } /* ✅ ajuda no "slide" */
+      .testi__inner { padding: 18px; overflow: hidden; }
       .stars { color: rgba(255,255,255,0.82); letter-spacing: 1px; font-size: 12px; }
       .quote { margin-top: 10px; font-size: 16px; font-weight: 800; letter-spacing: -0.2px; }
       .who { margin-top: 12px; }
@@ -936,7 +923,6 @@ type PlanModalData = {
       .dot-btn { width: 10px; height: 10px; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,0.10); cursor: pointer; }
       .dot-btn.is-active { background: linear-gradient(90deg, var(--brand-2), var(--brand)); border-color: rgba(133,94,217,0.5); }
 
-      /* CTA FINAL */
       .cta { padding-bottom: 72px; }
       .ctaCard { display:block; }
       .ctaCard__inner{
@@ -950,7 +936,6 @@ type PlanModalData = {
       .cta__title { font-weight: 950; font-size: 18px; letter-spacing: -0.2px; }
       .cta__copy{ display:grid; gap: 6px; min-width: min(520px, 100%); }
 
-      /* ✅ Modal do plano */
       .planModal{
         position: fixed;
         inset: 0;
@@ -963,14 +948,13 @@ type PlanModalData = {
       }
 
       .planModal__card{
-        width: min(760px, 100%);
-        max-height: min(88vh, 760px);
+        width: min(920px, 100%);
         border-radius: 26px;
         border: 1px solid rgba(255,255,255,0.14);
         background: rgba(20,20,28,0.82);
         box-shadow: 0 28px 80px rgba(0,0,0,0.35);
         position: relative;
-        overflow: auto;
+        overflow: hidden;
       }
 
       .planModal__close{
@@ -989,14 +973,26 @@ type PlanModalData = {
       }
 
       .planModal__inner{
-        padding: 24px;
+        padding: 26px;
+      }
+
+      .planModal__grid{
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+        gap: 28px;
+        align-items: start;
+      }
+
+      .planModal__main{
         display: grid;
         gap: 20px;
+        align-content: start;
+        min-width: 0;
       }
 
       .planModal__head{
-        max-width: 58ch;
-        padding-right: 52px;
+        max-width: 540px;
+        padding-right: 12px;
       }
 
       .planModal__k{
@@ -1009,27 +1005,32 @@ type PlanModalData = {
 
       .planModal__h{
         font-weight: 950;
-        letter-spacing: -0.4px;
-        font-size: clamp(24px, 3vw, 34px);
-        line-height: 1.08;
-        margin-top: 8px;
+        letter-spacing: -0.8px;
+        font-size: clamp(30px, 3.2vw, 48px);
+        line-height: 1.05;
+        margin-top: 10px;
+        max-width: 12ch;
       }
 
       .planModal__p{
-        margin-top: 8px;
+        margin-top: 10px;
         font-size: 15px;
-        line-height: 1.5;
+        line-height: 1.55;
+        max-width: 42ch;
       }
 
-      .planModal__grid{
+      .planModal__list{
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 18px;
-        align-items: start;
+        gap: 14px;
+        align-content: start;
+        max-width: 520px;
       }
 
-      .planModal__list{ display: grid; gap: 12px; }
-      .planModal__li{ display: flex; gap: 12px; align-items: flex-start; }
+      .planModal__li{
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
 
       .li__ic{
         flex: 0 0 auto;
@@ -1046,37 +1047,49 @@ type PlanModalData = {
         font-size: 12px;
         line-height: 1;
       }
-      .li__t{ font-size: 14px; color: var(--muted); line-height: 1.45; }
+
+      .li__t{
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
 
       .planModal__side{
+        align-self: start;
+        margin-top: 64px;
         border: 1px solid rgba(255,255,255,0.10);
         background: rgba(255,255,255,0.04);
         border-radius: 22px;
-        padding: 18px;
+        padding: 20px;
         display: grid;
         gap: 12px;
       }
 
       .planModal__price{
-        font-size: clamp(28px, 4vw, 40px);
+        font-size: clamp(34px, 4vw, 56px);
         font-weight: 950;
-        letter-spacing: -0.7px;
-        line-height: 1;
+        letter-spacing: -1px;
+        line-height: 0.95;
       }
-      .planModal__fine{ font-size: 12px; line-height: 1.4; }
+
+      .planModal__fine{
+        font-size: 12px;
+        line-height: 1.45;
+      }
 
       .planModal__cta{
-        margin-top: 6px;
+        margin-top: 8px;
         display: inline-flex;
         justify-content: space-between;
         align-items: center;
         gap: 12px;
-        padding: 13px 16px;
+        padding: 14px 16px;
         border-radius: 999px;
         border: 1px solid rgba(133,94,217,0.45);
         background: rgba(255,255,255,0.06);
         transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
       }
+
       .planModal__cta:hover{
         transform: translateY(-1px);
         background: rgba(255,255,255,0.10);
@@ -1084,27 +1097,49 @@ type PlanModalData = {
       }
 
       .planModal__ghost{
-        padding: 11px 14px;
+        padding: 12px 14px;
         border-radius: 999px;
         border: 1px solid rgba(255,255,255,0.12);
         background: transparent;
         color: var(--muted);
         cursor: pointer;
       }
-      .planModal__ghost:hover{ background: rgba(255,255,255,0.06); color: var(--text); }
 
-      @media (max-width: 820px){
-        .planModal__card{
-          width: min(680px, 100%);
-          max-height: 88vh;
-        }
-
-        .planModal__grid{ grid-template-columns: 1fr; }
-        .planModal__inner{ padding: 20px; }
-        .planModal__head{ padding-right: 44px; }
+      .planModal__ghost:hover{
+        background: rgba(255,255,255,0.06);
+        color: var(--text);
       }
 
-      /* RESPONSIVO */
+      @media (max-width: 900px){
+        .planModal__card{
+          width: min(760px, 100%);
+        }
+
+        .planModal__grid{
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+
+        .planModal__side{
+          margin-top: 0;
+        }
+
+        .planModal__head{
+          max-width: 100%;
+          padding-right: 44px;
+        }
+
+        .planModal__h{
+          max-width: 100%;
+          font-size: clamp(28px, 6vw, 42px);
+        }
+
+        .planModal__p,
+        .planModal__list{
+          max-width: 100%;
+        }
+      }
+
       @media (min-width: 980px) {
         .hero__inner { grid-template-columns: 1.08fr 0.92fr; }
         .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1120,7 +1155,6 @@ type PlanModalData = {
       .qa { border: 1px solid var(--border); border-radius: 18px; padding: 12px 14px; background: rgba(255,255,255,0.04); }
       summary { cursor: pointer; font-weight: 900; }
 
-      /* ✅ FAQ — animação suave abrir/fechar (apenas isso) */
       .qa { overflow: hidden; }
       .qa summary {
         list-style: none;
@@ -1160,9 +1194,6 @@ type PlanModalData = {
         .qa__content, .qa__content > *, .qa summary::after { transition: none !important; }
       }
 
-      /* Aqui foram adicionados estilos para as secções de alta conversão como solicitado */
-
-      /* KICKER */
       .kicker {
         display: inline-block;
         font-size: 12px;
@@ -1174,7 +1205,6 @@ type PlanModalData = {
         opacity: 0.9;
       }
 
-      /* ONBOARDING TEASER */
       .onboarding-opts {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1220,8 +1250,6 @@ type PlanModalData = {
         .onboarding-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
 
-      /* CROSS-INSIGHTS */
-      /* Aqui foi ajustado o tamanho igual dos cards como solicitado */
       .crossinsights {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1280,8 +1308,6 @@ type PlanModalData = {
         }
       }
 
-      /* PRICING */
-      /* Aqui foi ajustado o tamanho igual dos cards de pricing como solicitado */
       .pricing-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1463,65 +1489,65 @@ export class HomePage {
   readonly benefits = signal([
     {
       title: 'MARKETING.BENEFITS.ITEMS.FRICTION.TITLE',
-      desc:  'MARKETING.BENEFITS.ITEMS.FRICTION.DESC',
+      desc: 'MARKETING.BENEFITS.ITEMS.FRICTION.DESC',
       path: 'M20 7l-9 10-4-4',
     },
     {
       title: 'MARKETING.BENEFITS.ITEMS.CONTEXT.TITLE',
-      desc:  'MARKETING.BENEFITS.ITEMS.CONTEXT.DESC',
+      desc: 'MARKETING.BENEFITS.ITEMS.CONTEXT.DESC',
       path: 'M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M7 17l-1.4 1.4m12.8 0L17 17M7 7l-1.4-1.4',
     },
     {
       title: 'MARKETING.BENEFITS.ITEMS.PANEL.TITLE',
-      desc:  'MARKETING.BENEFITS.ITEMS.PANEL.DESC',
+      desc: 'MARKETING.BENEFITS.ITEMS.PANEL.DESC',
       path: 'M4 19V5m0 14h16M8 16v-6m4 6v-9m4 9v-4m4 4V8',
     },
     {
       title: 'MARKETING.BENEFITS.ITEMS.REMINDERS.TITLE',
-      desc:  'MARKETING.BENEFITS.ITEMS.REMINDERS.DESC',
+      desc: 'MARKETING.BENEFITS.ITEMS.REMINDERS.DESC',
       path: 'M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7',
     },
     {
       title: 'MARKETING.BENEFITS.ITEMS.AUTO.TITLE',
-      desc:  'MARKETING.BENEFITS.ITEMS.AUTO.DESC',
+      desc: 'MARKETING.BENEFITS.ITEMS.AUTO.DESC',
       path: 'M8 7h8M8 12h8M8 17h8M6 5h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2',
     },
     {
       title: 'MARKETING.BENEFITS.ITEMS.A11Y.TITLE',
-      desc:  'MARKETING.BENEFITS.ITEMS.A11Y.DESC',
+      desc: 'MARKETING.BENEFITS.ITEMS.A11Y.DESC',
       path: 'M12 5a2 2 0 110 4 2 2 0 010-4Zm-5 6h10M10 11v8m4-8v8',
     },
   ]);
 
   readonly testimonials = signal<Testimonial[]>([
     {
-      name:  'MARKETING.TESTIMONIALS.ITEMS.T1.NAME',
-      role:  'MARKETING.TESTIMONIALS.ITEMS.T1.ROLE',
-      city:  'MARKETING.TESTIMONIALS.ITEMS.T1.CITY',
+      name: 'MARKETING.TESTIMONIALS.ITEMS.T1.NAME',
+      role: 'MARKETING.TESTIMONIALS.ITEMS.T1.ROLE',
+      city: 'MARKETING.TESTIMONIALS.ITEMS.T1.CITY',
       quote: 'MARKETING.TESTIMONIALS.ITEMS.T1.QUOTE',
       rating: 5,
       verified: true,
     },
     {
-      name:  'MARKETING.TESTIMONIALS.ITEMS.T2.NAME',
-      role:  'MARKETING.TESTIMONIALS.ITEMS.T2.ROLE',
-      city:  'MARKETING.TESTIMONIALS.ITEMS.T2.CITY',
+      name: 'MARKETING.TESTIMONIALS.ITEMS.T2.NAME',
+      role: 'MARKETING.TESTIMONIALS.ITEMS.T2.ROLE',
+      city: 'MARKETING.TESTIMONIALS.ITEMS.T2.CITY',
       quote: 'MARKETING.TESTIMONIALS.ITEMS.T2.QUOTE',
       rating: 5,
       verified: true,
     },
     {
-      name:  'MARKETING.TESTIMONIALS.ITEMS.T3.NAME',
-      role:  'MARKETING.TESTIMONIALS.ITEMS.T3.ROLE',
-      city:  'MARKETING.TESTIMONIALS.ITEMS.T3.CITY',
+      name: 'MARKETING.TESTIMONIALS.ITEMS.T3.NAME',
+      role: 'MARKETING.TESTIMONIALS.ITEMS.T3.ROLE',
+      city: 'MARKETING.TESTIMONIALS.ITEMS.T3.CITY',
       quote: 'MARKETING.TESTIMONIALS.ITEMS.T3.QUOTE',
       rating: 5,
       verified: true,
     },
     {
-      name:  'MARKETING.TESTIMONIALS.ITEMS.T4.NAME',
-      role:  'MARKETING.TESTIMONIALS.ITEMS.T4.ROLE',
-      city:  'MARKETING.TESTIMONIALS.ITEMS.T4.CITY',
+      name: 'MARKETING.TESTIMONIALS.ITEMS.T4.NAME',
+      role: 'MARKETING.TESTIMONIALS.ITEMS.T4.ROLE',
+      city: 'MARKETING.TESTIMONIALS.ITEMS.T4.CITY',
       quote: 'MARKETING.TESTIMONIALS.ITEMS.T4.QUOTE',
       rating: 5,
       verified: true,
@@ -1529,10 +1555,8 @@ export class HomePage {
   ]);
 
   private readonly destroyRef = inject(DestroyRef);
+  private readonly translate = inject(TranslateService);
 
-  /* -----------------------------
-    STORIES (CSS progress + Timer)
-  ------------------------------ */
   readonly stories = signal([
     { src: '/assets/marketing/stories/story-01.webp', alt: 'MARKETING.STORIES.ALT1' },
     { src: '/assets/marketing/stories/story-02.webp', alt: 'MARKETING.STORIES.ALT2' },
@@ -1550,56 +1574,88 @@ export class HomePage {
 
   readonly planOpen = signal(false);
   readonly selectedPlanKey = signal<PlanKey>('pro');
+  readonly selectedPlan = signal<PlanModalData>(this.buildPlanContent('pro'));
 
-  readonly planContent: Record<PlanKey, PlanModalData> = {
-    free: {
-      eyebrow: 'Plano Free',
-      title: 'Comece sem pagar e organize o básico do seu mês.',
-      desc: 'Perfeito para conhecer a MIRA, registrar sua rotina financeira e ter uma visão inicial sem complicação.',
-      price: 'R$ 0',
-      fine: 'Grátis para começar. Sem cobrança.',
-      cta: 'Seguir para o Cadastro',
-      ctaLink: '/register',
-      items: [
-        'Visão geral do mês',
-        'Insights essenciais',
-        'Registro manual',
-        'Base simples para começar com clareza',
-      ],
-    },
-    pro: {
-      eyebrow: 'Plano Pro',
-      title: 'Tudo que você precisa para cuidar do mês com clareza.',
-      desc: 'Ideal para quem quer mais contexto, mais inteligência e menos esforço manual no dia a dia.',
-      price: 'R$ 14,90/mês',
-      fine: 'Cobrança mensal • Cancele quando quiser',
-      cta: 'Continuar',
-      ctaLink: '/login',
-      items: [
-        'IA completa para entender seus padrões',
-        'Cruzamento de dados do seu dia a dia',
-        'Alertas inteligentes no momento certo',
-        'Painel premium com visão mais profunda',
-      ],
-    },
-    elite: {
-      eyebrow: 'Plano Elite',
-      title: 'Automação e visão avançada para vida e negócio.',
-      desc: 'Para quem quer decisões mais estratégicas, automações mais fortes e leitura cruzada entre áreas da vida.',
-      price: 'R$ 29,90/mês',
-      fine: 'Cobrança mensal • Mais recursos e automações',
-      cta: 'Continuar',
-      ctaLink: '/login',
-      items: [
-        'Tudo do Pro',
-        'Vida + negócio em uma visão unificada',
-        'Automações avançadas',
-        'Decisões cruzadas com mais contexto',
-      ],
-    },
-  };
+  readonly active = signal(0);
+  readonly proofA = signal('0');
+  readonly proofB = signal('0');
+  readonly proofC = signal('0');
 
-  readonly selectedPlan = signal<PlanModalData>(this.planContent.pro);
+  constructor() {
+    const testiTimer = window.setInterval(() => {
+      const next = (this.active() + 1) % this.testimonials().length;
+      this.active.set(next);
+    }, 9000);
+
+    afterNextRender(() => {
+      this.startStories();
+
+      const onVis = () => {
+        if (document.visibilityState === 'hidden') this.stopStories();
+        else this.startStories();
+      };
+      document.addEventListener('visibilitychange', onVis);
+
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === 'Escape' && this.planOpen()) this.closePlan();
+      };
+      window.addEventListener('keydown', onKey);
+
+      this.destroyRef.onDestroy(() => {
+        document.removeEventListener('visibilitychange', onVis);
+        window.removeEventListener('keydown', onKey);
+      });
+
+      const provaEl = document.getElementById('prova');
+      if (provaEl) {
+        const run = () => {
+          this.countTo(this.proofA, 2);
+          this.countTo(this.proofB, 3);
+          this.proofC.set('0');
+        };
+
+        const ioProva = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              run();
+              ioProva.disconnect();
+            }
+          },
+          { threshold: 0.25 },
+        );
+
+        ioProva.observe(provaEl);
+
+        this.destroyRef.onDestroy(() => {
+          ioProva.disconnect();
+        });
+      }
+    });
+
+    this.destroyRef.onDestroy(() => {
+      window.clearInterval(testiTimer);
+      this.stopStories();
+      document.body.style.overflow = '';
+    });
+  }
+
+  private buildPlanContent(plan: PlanKey): PlanModalData {
+    return {
+      eyebrow: this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.EYEBROW`),
+      title: this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.TITLE`),
+      desc: this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.DESC`),
+      price: this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.PRICE`),
+      fine: this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.FINE`),
+      cta: this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.CTA`),
+      ctaLink: plan === 'free' ? '/register' : '/login',
+      items: [
+        this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.ITEMS.I1`),
+        this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.ITEMS.I2`),
+        this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.ITEMS.I3`),
+        this.translate.instant(`MARKETING.PLAN_MODAL.${plan.toUpperCase()}.ITEMS.I4`),
+      ],
+    };
+  }
 
   private preloadAllStories() {
     if (this._preloaded) return;
@@ -1683,18 +1739,13 @@ export class HomePage {
     else this.nextStory();
   }
 
-  /* -----------------------------
-    MODAL DO PLANO (1 plano)
-  ------------------------------ */
-
-  // Aqui foi adicionado o método de scroll para pricing como solicitado
   scrollToPricing() {
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
   }
 
   openPlan(plan: PlanKey = 'pro') {
     this.selectedPlanKey.set(plan);
-    this.selectedPlan.set(this.planContent[plan]);
+    this.selectedPlan.set(this.buildPlanContent(plan));
     this.planOpen.set(true);
     document.body.style.overflow = 'hidden';
   }
@@ -1702,71 +1753,6 @@ export class HomePage {
   closePlan() {
     this.planOpen.set(false);
     document.body.style.overflow = '';
-  }
-
-  /* Depoimentos + Prova */
-  readonly active = signal(0);
-  readonly proofA = signal('0');
-  readonly proofB = signal('0');
-  readonly proofC = signal('0');
-
-  constructor() {
-    // ✅ 8–10s pra dar tempo de ler
-    const testiTimer = window.setInterval(() => {
-      const next = (this.active() + 1) % this.testimonials().length;
-      this.active.set(next);
-    }, 9000);
-
-    afterNextRender(() => {
-      this.startStories();
-
-      const onVis = () => {
-        if (document.visibilityState === 'hidden') this.stopStories();
-        else this.startStories();
-      };
-      document.addEventListener('visibilitychange', onVis);
-
-      const onKey = (e: KeyboardEvent) => {
-        if (e.key === 'Escape' && this.planOpen()) this.closePlan();
-      };
-      window.addEventListener('keydown', onKey);
-
-      this.destroyRef.onDestroy(() => {
-        document.removeEventListener('visibilitychange', onVis);
-        window.removeEventListener('keydown', onKey);
-      });
-
-      const provaEl = document.getElementById('prova');
-      if (provaEl) {
-        const run = () => {
-          this.countTo(this.proofA, 2);
-          this.countTo(this.proofB, 3);
-          this.proofC.set('0');
-        };
-
-        const ioProva = new IntersectionObserver(
-          (entries) => {
-            if (entries.some((e) => e.isIntersecting)) {
-              run();
-              ioProva.disconnect();
-            }
-          },
-          { threshold: 0.25 },
-        );
-
-        ioProva.observe(provaEl);
-
-        this.destroyRef.onDestroy(() => {
-          ioProva.disconnect();
-        });
-      }
-    });
-
-    this.destroyRef.onDestroy(() => {
-      window.clearInterval(testiTimer);
-      this.stopStories();
-      document.body.style.overflow = '';
-    });
   }
 
   private countTo(target: any, n: number) {
