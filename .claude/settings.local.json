@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-PT.json'', ''utf8''\\)\\); console.log\\(''pt-PT: valid''\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-BR.json'', ''utf8''\\)\\); console.log\\(''pt-BR: valid''\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/en.json'', ''utf8''\\)\\); console.log\\(''en: valid''\\)\")",
+      "Bash(node -e \"const s=require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-PT.json'',''utf8''\\); console.log\\(''len:'',s.length\\); console.log\\(''around 6490-6530:'', JSON.stringify\\(s.slice\\(6480,6540\\)\\)\\)\")",
+      "Bash(node -e \"try{JSON.parse\\(require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-PT.json'',''utf8''\\)\\);console.log\\(''valid''\\)}catch\\(e\\){console.log\\(''pos:'',e.message\\)}\")",
+      "Bash(node -e \"const s=require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-PT.json'',''utf8''\\); console.log\\(''around 6495-6510:'', JSON.stringify\\(s.slice\\(6495,6510\\)\\)\\); for\\(let i=6495;i<6510;i++\\){console.log\\(i, s.charCodeAt\\(i\\), s[i]\\);}\")",
+      "Bash(node -e \"const s=require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-PT.json'',''utf8''\\); let count=0; for\\(let i=0;i<s.length;i++\\){if\\(s.charCodeAt\\(i\\)===8220||s.charCodeAt\\(i\\)===8221\\){count++;if\\(count<=10\\)console.log\\(''pos:'',i,''char:'',s.charCodeAt\\(i\\),''context:'',JSON.stringify\\(s.slice\\(Math.max\\(0,i-20\\),i+20\\)\\)\\);}} console.log\\(''total curly quotes:'',count\\);\")",
+      "Bash(node -e \"const s=require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-PT.json'',''utf8''\\); console.log\\(JSON.stringify\\(s.slice\\(6480,6560\\)\\)\\);\")",
+      "Bash(node -e \"const s=require\\(''fs''\\).readFileSync\\(''C:/Users/L/Desktop/c\\\\u00f3digos/mira-kickoff/src/assets/i18n/pt-PT.json'',''utf8''\\); for\\(let i=6490;i<6530;i++\\){process.stdout.write\\(i+'':''+s.charCodeAt\\(i\\)+''\\(''+s[i]+''\\) ''\\);} console.log\\(\\);\")",
+      "Bash(node \"C:/Users/L/AppData/Local/Temp/fix-json-quotes.js\")"
+    ]
+  }
+}

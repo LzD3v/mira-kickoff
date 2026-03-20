@@ -102,17 +102,16 @@ type Testimonial = {
 
           <div class=”hero__cta”>
             <!-- ✅ agora abre o “Conheça nosso plano” -->
-            <!-- Aqui foi modificado o CTA primário para “Experimentar grátis” como solicitado -->
-            <button
-              class="cta-primary focus-ring"
-              type="button"
-              (click)="openPlan()"
-              [attr.aria-label]="'MARKETING.HERO.CTA.ARIA_PRIMARY' | translate"
+            <!-- Aqui foi modificado o CTA primário para scroll até #pricing como solicitado -->
+            <a
+              class=”cta-primary focus-ring”
+              href=”#pricing”
+              [attr.aria-label]=”'MARKETING.HERO.CTA.ARIA_PRIMARY' | translate”
             >
-              <span class="cta-primary__shine" aria-hidden="true"></span>
-              <span class="cta-primary__text">{{ 'MARKETING.HERO.CTA.PRIMARY' | translate }}</span>
-              <span class="cta-primary__arrow" aria-hidden="true">→</span>
-            </button>
+              <span class=”cta-primary__shine” aria-hidden=”true”></span>
+              <span class=”cta-primary__text”>{{ 'MARKETING.HERO.CTA.PRIMARY' | translate }}</span>
+              <span class=”cta-primary__arrow” aria-hidden=”true”>→</span>
+            </a>
 
             <a class="cta-secondary focus-ring" href="#como-funciona">{{ 'MARKETING.HERO.CTA.SECONDARY' | translate }}</a>
           </div>
@@ -672,7 +671,8 @@ type Testimonial = {
       .trust__k { font-size: 12px; color: var(--muted); }
       .trust__v { font-weight: 900; letter-spacing: -0.2px; }
 
-      .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+      /* Aqui foi aumentado o espaçamento do CTA como solicitado */
+      .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
 
       .cta-primary {
         position: relative;
@@ -1138,18 +1138,21 @@ type Testimonial = {
       }
 
       /* CROSS-INSIGHTS */
+      /* Aqui foi ajustado o tamanho igual dos cards como solicitado */
       .crossinsights {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 14px;
         margin-top: 20px;
+        align-items: stretch;
       }
-      .ci-card { }
+      .ci-card { height: 100%; display: flex; flex-direction: column; }
       .ci-card__inner {
         display: flex;
         flex-direction: column;
         gap: 10px;
         padding: 4px;
+        flex: 1;
       }
       .ci-card__ic { font-size: 26px; line-height: 1; }
       .ci-card__t {
@@ -1169,19 +1172,21 @@ type Testimonial = {
       }
 
       /* PRICING */
+      /* Aqui foi ajustado o tamanho igual dos cards de pricing como solicitado */
       .pricing-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 14px;
         margin-top: 20px;
-        align-items: start;
+        align-items: stretch;
       }
-      .pricing-card { }
+      .pricing-card { height: 100%; display: flex; flex-direction: column; }
       .pricing-card__inner {
         display: flex;
         flex-direction: column;
         gap: 10px;
         padding: 4px;
+        flex: 1;
       }
       .pricing-card__badge {
         display: inline-block;
@@ -1213,7 +1218,7 @@ type Testimonial = {
         font-size: 13px;
       }
       .pricing-card__list li::before { content: "✓  "; color: var(--brand-2); font-weight: 700; }
-      .pricing-card__btn { width: 100%; justify-content: center; margin-top: 6px; }
+      .pricing-card__btn { width: 100%; justify-content: center; margin-top: auto; padding-top: 14px; }
       .pricing-card--pro {
         border-color: rgba(133,94,217,0.45) !important;
         background: rgba(133,94,217,0.06) !important;
