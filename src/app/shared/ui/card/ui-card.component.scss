@@ -1,9 +1,13 @@
 :host {
   display: block; /* host sempre ocupa largura correta */
+  height: 100%; /* Aqui foi adicionado para permitir cards de igual altura em grids como solicitado */
 }
 
 .card {
   width: 100%;
+  height: 100%; /* Aqui foi adicionado para preencher a célula do grid */
+  display: flex;
+  flex-direction: column;
   padding: var(--card-pad, 0px); /* controlado pelo host */
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.04));
   border: 1px solid var(--border);
