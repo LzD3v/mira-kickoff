@@ -340,12 +340,14 @@ type Testimonial = {
             <p class="ci-card__t">{{ 'MARKETING.CROSSINSIGHTS.I1' | translate }}</p>
           </div>
         </mira-ui-card>
+
         <mira-ui-card class="ci-card">
           <div class="ci-card__inner">
             <span class="ci-card__ic" aria-hidden="true">📆</span>
             <p class="ci-card__t">{{ 'MARKETING.CROSSINSIGHTS.I2' | translate }}</p>
           </div>
         </mira-ui-card>
+
         <mira-ui-card class="ci-card">
           <div class="ci-card__inner">
             <span class="ci-card__ic" aria-hidden="true">📈</span>
@@ -1143,33 +1145,59 @@ type Testimonial = {
       .crossinsights {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 20px;
+        gap: 18px;
+        margin-top: 24px;
         align-items: stretch;
       }
-      .ci-card { height: 100%; display: flex; flex-direction: column; }
-      .ci-card__inner {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 4px;
-        flex: 1;
+
+      .ci-card {
+        display: block;
+        height: 100%;
+        min-height: 170px;
       }
-      .ci-card__ic { font-size: 26px; line-height: 1; }
+
+      .ci-card__inner {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 14px;
+        padding: 22px;
+      }
+
+      .ci-card__ic {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+        line-height: 1;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.10);
+      }
+
       .ci-card__t {
-        font-size: 15px;
-        font-weight: 700;
         margin: 0;
-        line-height: 1.35;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.45;
         letter-spacing: -0.2px;
       }
+
       .crossinsights__note {
-        margin-top: 16px;
+        margin-top: 18px;
         font-size: 13px;
         font-style: italic;
       }
+
       @media (max-width: 700px) {
-        .crossinsights { grid-template-columns: 1fr; }
+        .crossinsights {
+          grid-template-columns: 1fr;
+        }
+
+        .ci-card {
+          min-height: auto;
+        }
       }
 
       /* PRICING */
