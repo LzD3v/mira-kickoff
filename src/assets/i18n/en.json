@@ -23,14 +23,14 @@
     "HERO": {
       "PILL": "MIRA • Personal finance assistant",
       "TITLE": {
-        "A": "Clarity for your money.",
-        "B": "No spreadsheets",
-        "C": ", no guilt."
+        "A": "The AI that organizes ",
+        "B": "your entire life",
+        "C": " in minutes"
       },
       "SUB": {
-        "A": "You log it in seconds, MIRA organizes it for you and gives you back ",
-        "B": "control",
-        "C": " with a beautiful, simple, delightful experience."
+        "A": "Connect your accounts, schedule and routine — and receive ",
+        "B": "smart decisions",
+        "C": " automatically."
       },
       "TRUST": {
         "T1": { "K": "Start fast", "V": "in just a few minutes" },
@@ -38,9 +38,9 @@
         "T3": { "K": "Accessible", "V": "Focus & keyboard" }
       },
       "CTA": {
-        "PRIMARY": "Get MIRA now",
+        "PRIMARY": "Try for free",
         "SECONDARY": "See how it works",
-        "ARIA_PRIMARY": "View the MIRA plan"
+        "ARIA_PRIMARY": "Try MIRA for free"
       },
       "BULLETS": {
         "B1": "Log expenses and income effortlessly",
@@ -184,8 +184,68 @@
 
     "CTA_FINAL": {
       "TITLE": "Ready to feel “my money is under control”?",
-      "SUB": "Get MIRA and start light. We’ll organize the rest with you.",
-      "BUTTON": "Get MIRA now"
+      "SUB": "Start for free. No card. No commitment.",
+      "BUTTON": "Try for free"
+    },
+
+    "ONBOARDING": {
+      "KICKER": "Personalized for you",
+      "TITLE": "What do you want to improve?",
+      "SUB": "Pick your focus and in 2 minutes MIRA analyzes your life and gives you a personalized plan.",
+      "OPT1": "Money",
+      "OPT2": "Organization",
+      "OPT3": "Productivity",
+      "OPT4": "Everything",
+      "PROMISE": "In 2 minutes MIRA analyzes your life"
+    },
+    "CROSSINSIGHTS": {
+      "KICKER": "Exclusive feature",
+      "TITLE": "Cross-life insights",
+      "SUB": "MIRA connects your money, schedule and routine data — and returns patterns nobody else sees.",
+      "I1": "On days you sleep less, you spend 23% more",
+      "I2": "When your schedule is empty, you buy more online",
+      "I3": "Monday is your peak financial productivity day",
+      "NOTE": "Nobody is doing this well — and MIRA does."
+    },
+    "PRICING": {
+      "KICKER": "Simple, transparent pricing",
+      "TITLE": "Choose your plan",
+      "SUB": "Start free. Upgrade whenever you want.",
+      "FREE": {
+        "NAME": "Free",
+        "PRICE": "$0",
+        "DESC": "Limited but useful",
+        "I1": "Monthly overview",
+        "I2": "Essential insights",
+        "I3": "Manual logging"
+      },
+      "PRO": {
+        "NAME": "Pro",
+        "PRICE": "$14.90",
+        "PERIOD": "/mo",
+        "BADGE": "Most popular",
+        "DESC": "Full AI for your money",
+        "I1": "Full AI",
+        "I2": "Data cross-referencing",
+        "I3": "Smart alerts",
+        "I4": "Premium dashboard"
+      },
+      "ELITE": {
+        "NAME": "Elite",
+        "PRICE": "$29.90",
+        "PERIOD": "/mo",
+        "DESC": "Life + business, fully automated",
+        "I1": "Everything in Pro",
+        "I2": "Life + business",
+        "I3": "Advanced automations",
+        "I4": "Cross-life decisions"
+      },
+      "CTA_FREE": "Start free",
+      "CTA_PRO": "Try Pro",
+      "CTA_ELITE": "Try Elite",
+      "FOUNDING_TITLE": "Founding Users — fixed price for life",
+      "FOUNDING_DESC": "Lock in your lifetime price now. Only for early users. It goes up after.",
+      "FOUNDING_CTA": "Lock in founding price"
     },
 
     "PLAN": {

@@ -74,11 +74,13 @@ type Testimonial = {
             <span>{{ 'MARKETING.HERO.PILL' | translate }}</span>
           </div>
 
+          <!-- Aqui foi modificado o headline para alta conversão como solicitado -->
           <h1 class="h1">
             {{ 'MARKETING.HERO.TITLE.A' | translate }}
             <span class="grad">{{ 'MARKETING.HERO.TITLE.B' | translate }}</span>{{ 'MARKETING.HERO.TITLE.C' | translate }}
           </h1>
 
+          <!-- Aqui foi modificado o subtítulo para alta conversão como solicitado -->
           <p class="sub muted">
             {{ 'MARKETING.HERO.SUB.A' | translate }}<b>{{ 'MARKETING.HERO.SUB.B' | translate }}</b>{{ 'MARKETING.HERO.SUB.C' | translate }}
           </p>
@@ -98,8 +100,9 @@ type Testimonial = {
             </div>
           </div>
 
-          <div class="hero__cta">
+          <div class=”hero__cta”>
             <!-- ✅ agora abre o “Conheça nosso plano” -->
+            <!-- Aqui foi modificado o CTA primário para “Experimentar grátis” como solicitado -->
             <button
               class="cta-primary focus-ring"
               type="button"
@@ -227,6 +230,39 @@ type Testimonial = {
       </div>
     </section>
 
+    <!-- Aqui foi adicionada a secção de onboarding teaser como solicitado -->
+    <section id="onboarding" class="section container" miraRevealOnScroll>
+      <div class="section__head">
+        <span class="kicker">{{ 'MARKETING.ONBOARDING.KICKER' | translate }}</span>
+        <h2 class="h2">{{ 'MARKETING.ONBOARDING.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.ONBOARDING.SUB' | translate }}</p>
+      </div>
+
+      <div class="onboarding-opts">
+        <div class="onboarding-opt">
+          <span class="onboarding-opt__ic" aria-hidden="true">💰</span>
+          <span class="onboarding-opt__t">{{ 'MARKETING.ONBOARDING.OPT1' | translate }}</span>
+        </div>
+        <div class="onboarding-opt">
+          <span class="onboarding-opt__ic" aria-hidden="true">📅</span>
+          <span class="onboarding-opt__t">{{ 'MARKETING.ONBOARDING.OPT2' | translate }}</span>
+        </div>
+        <div class="onboarding-opt">
+          <span class="onboarding-opt__ic" aria-hidden="true">🚀</span>
+          <span class="onboarding-opt__t">{{ 'MARKETING.ONBOARDING.OPT3' | translate }}</span>
+        </div>
+        <div class="onboarding-opt">
+          <span class="onboarding-opt__ic" aria-hidden="true">🧠</span>
+          <span class="onboarding-opt__t">{{ 'MARKETING.ONBOARDING.OPT4' | translate }}</span>
+        </div>
+      </div>
+
+      <div class="onboarding-promise">
+        <span class="onboarding-promise__ic" aria-hidden="true">⚡</span>
+        <span>{{ 'MARKETING.ONBOARDING.PROMISE' | translate }}</span>
+      </div>
+    </section>
+
     <!-- COMO FUNCIONA -->
     <section id="como-funciona" class="section container" miraRevealOnScroll>
       <div class="section__head">
@@ -287,6 +323,38 @@ type Testimonial = {
           </div>
         </mira-ui-card>
       </div>
+    </section>
+
+    <!-- Aqui foi adicionada a secção de insights cruzados de vida como solicitado -->
+    <section id="crossinsights" class="section container" miraRevealOnScroll>
+      <div class="section__head">
+        <span class="kicker">{{ 'MARKETING.CROSSINSIGHTS.KICKER' | translate }}</span>
+        <h2 class="h2">{{ 'MARKETING.CROSSINSIGHTS.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.CROSSINSIGHTS.SUB' | translate }}</p>
+      </div>
+
+      <div class="crossinsights">
+        <mira-ui-card class="ci-card">
+          <div class="ci-card__inner">
+            <span class="ci-card__ic" aria-hidden="true">🌙</span>
+            <p class="ci-card__t">{{ 'MARKETING.CROSSINSIGHTS.I1' | translate }}</p>
+          </div>
+        </mira-ui-card>
+        <mira-ui-card class="ci-card">
+          <div class="ci-card__inner">
+            <span class="ci-card__ic" aria-hidden="true">📆</span>
+            <p class="ci-card__t">{{ 'MARKETING.CROSSINSIGHTS.I2' | translate }}</p>
+          </div>
+        </mira-ui-card>
+        <mira-ui-card class="ci-card">
+          <div class="ci-card__inner">
+            <span class="ci-card__ic" aria-hidden="true">📈</span>
+            <p class="ci-card__t">{{ 'MARKETING.CROSSINSIGHTS.I3' | translate }}</p>
+          </div>
+        </mira-ui-card>
+      </div>
+
+      <p class="crossinsights__note muted">{{ 'MARKETING.CROSSINSIGHTS.NOTE' | translate }}</p>
     </section>
 
     <!-- PROVA / NÚMEROS -->
@@ -360,6 +428,91 @@ type Testimonial = {
           </div>
         </div>
       </mira-ui-card>
+    </section>
+
+    <!-- Aqui foi adicionada a secção de preços como solicitado -->
+    <section id="pricing" class="section container" miraRevealOnScroll>
+      <div class="section__head">
+        <span class="kicker">{{ 'MARKETING.PRICING.KICKER' | translate }}</span>
+        <h2 class="h2">{{ 'MARKETING.PRICING.TITLE' | translate }}</h2>
+        <p class="muted">{{ 'MARKETING.PRICING.SUB' | translate }}</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Free -->
+        <mira-ui-card class="pricing-card">
+          <div class="pricing-card__inner">
+            <div class="pricing-card__name">{{ 'MARKETING.PRICING.FREE.NAME' | translate }}</div>
+            <div class="pricing-card__price">{{ 'MARKETING.PRICING.FREE.PRICE' | translate }}</div>
+            <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.FREE.DESC' | translate }}</div>
+            <ul class="pricing-card__list">
+              <li>{{ 'MARKETING.PRICING.FREE.I1' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.FREE.I2' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.FREE.I3' | translate }}</li>
+            </ul>
+            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
+              {{ 'MARKETING.PRICING.CTA_FREE' | translate }}
+            </button>
+          </div>
+        </mira-ui-card>
+
+        <!-- Pro (destaque) -->
+        <mira-ui-card class="pricing-card pricing-card--pro">
+          <div class="pricing-card__inner">
+            <div class="pricing-card__badge">{{ 'MARKETING.PRICING.PRO.BADGE' | translate }}</div>
+            <div class="pricing-card__name">{{ 'MARKETING.PRICING.PRO.NAME' | translate }}</div>
+            <div class="pricing-card__price">
+              {{ 'MARKETING.PRICING.PRO.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.PRO.PERIOD' | translate }}</span>
+            </div>
+            <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.PRO.DESC' | translate }}</div>
+            <ul class="pricing-card__list">
+              <li>{{ 'MARKETING.PRICING.PRO.I1' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.PRO.I2' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.PRO.I3' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.PRO.I4' | translate }}</li>
+            </ul>
+            <button class="cta-primary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
+              <span class="cta-primary__shine" aria-hidden="true"></span>
+              <span class="cta-primary__text">{{ 'MARKETING.PRICING.CTA_PRO' | translate }}</span>
+              <span class="cta-primary__arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </mira-ui-card>
+
+        <!-- Elite -->
+        <mira-ui-card class="pricing-card">
+          <div class="pricing-card__inner">
+            <div class="pricing-card__name">{{ 'MARKETING.PRICING.ELITE.NAME' | translate }}</div>
+            <div class="pricing-card__price">
+              {{ 'MARKETING.PRICING.ELITE.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.ELITE.PERIOD' | translate }}</span>
+            </div>
+            <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.ELITE.DESC' | translate }}</div>
+            <ul class="pricing-card__list">
+              <li>{{ 'MARKETING.PRICING.ELITE.I1' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.ELITE.I2' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.ELITE.I3' | translate }}</li>
+              <li>{{ 'MARKETING.PRICING.ELITE.I4' | translate }}</li>
+            </ul>
+            <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
+              {{ 'MARKETING.PRICING.CTA_ELITE' | translate }}
+            </button>
+          </div>
+        </mira-ui-card>
+      </div>
+
+      <!-- Founding Users banner -->
+      <div class="founding-banner">
+        <span class="founding-banner__ic" aria-hidden="true">🎁</span>
+        <div class="founding-banner__copy">
+          <strong class="founding-banner__t">{{ 'MARKETING.PRICING.FOUNDING_TITLE' | translate }}</strong>
+          <p class="founding-banner__d muted">{{ 'MARKETING.PRICING.FOUNDING_DESC' | translate }}</p>
+        </div>
+        <button class="cta-primary focus-ring" type="button" (click)="openPlan()">
+          <span class="cta-primary__shine" aria-hidden="true"></span>
+          <span class="cta-primary__text">{{ 'MARKETING.PRICING.FOUNDING_CTA' | translate }}</span>
+          <span class="cta-primary__arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
     </section>
 
     <!-- FAQ -->
@@ -922,6 +1075,169 @@ type Testimonial = {
 
       @media (prefers-reduced-motion: reduce){
         .qa__content, .qa__content > *, .qa summary::after { transition: none !important; }
+      }
+
+      /* Aqui foram adicionados estilos para as secções de alta conversão como solicitado */
+
+      /* KICKER */
+      .kicker {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--brand-2);
+        margin-bottom: 8px;
+        opacity: 0.9;
+      }
+
+      /* ONBOARDING TEASER */
+      .onboarding-opts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .onboarding-opt {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px 14px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: rgba(255,255,255,0.04);
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+      }
+      .onboarding-opt:hover {
+        border-color: rgba(133,94,217,0.45);
+        background: rgba(133,94,217,0.08);
+        transform: translateY(-2px);
+      }
+      .onboarding-opt__ic { font-size: 28px; line-height: 1; }
+      .onboarding-opt__t { font-weight: 700; font-size: 14px; }
+      .onboarding-promise {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border: 1px solid rgba(132,210,244,0.25);
+        border-radius: 14px;
+        background: rgba(132,210,244,0.06);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand-2);
+        max-width: 480px;
+      }
+      .onboarding-promise__ic { font-size: 18px; }
+      @media (max-width: 640px) {
+        .onboarding-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      /* CROSS-INSIGHTS */
+      .crossinsights {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+      }
+      .ci-card { }
+      .ci-card__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 4px;
+      }
+      .ci-card__ic { font-size: 26px; line-height: 1; }
+      .ci-card__t {
+        font-size: 15px;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.35;
+        letter-spacing: -0.2px;
+      }
+      .crossinsights__note {
+        margin-top: 16px;
+        font-size: 13px;
+        font-style: italic;
+      }
+      @media (max-width: 700px) {
+        .crossinsights { grid-template-columns: 1fr; }
+      }
+
+      /* PRICING */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+        align-items: start;
+      }
+      .pricing-card { }
+      .pricing-card__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 4px;
+      }
+      .pricing-card__badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, var(--brand-2), var(--brand));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 2px;
+      }
+      .pricing-card__name { font-size: 18px; font-weight: 900; letter-spacing: -0.3px; }
+      .pricing-card__price {
+        font-size: clamp(26px, 3vw, 34px);
+        font-weight: 950;
+        letter-spacing: -1px;
+        line-height: 1;
+      }
+      .pricing-card__period { font-size: 14px; font-weight: 400; opacity: 0.6; margin-left: 2px; }
+      .pricing-card__desc { font-size: 13px; }
+      .pricing-card__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 8px;
+        font-size: 13px;
+      }
+      .pricing-card__list li::before { content: "✓  "; color: var(--brand-2); font-weight: 700; }
+      .pricing-card__btn { width: 100%; justify-content: center; margin-top: 6px; }
+      .pricing-card--pro {
+        border-color: rgba(133,94,217,0.45) !important;
+        background: rgba(133,94,217,0.06) !important;
+      }
+
+      .founding-banner {
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 24px;
+        border: 1px solid rgba(132,210,244,0.30);
+        border-radius: 20px;
+        background: rgba(132,210,244,0.06);
+        flex-wrap: wrap;
+      }
+      .founding-banner__ic { font-size: 28px; flex-shrink: 0; }
+      .founding-banner__copy { flex: 1; min-width: 200px; }
+      .founding-banner__t { font-size: 15px; font-weight: 900; }
+      .founding-banner__d { font-size: 13px; margin: 2px 0 0; }
+
+      @media (max-width: 760px) {
+        .pricing-grid { grid-template-columns: 1fr; }
+        .founding-banner { flex-direction: column; align-items: flex-start; }
       }
     `,
   ],

@@ -23,14 +23,14 @@
     "HERO": {
       "PILL": "MIRA • Assistente pessoal financeiro",
       "TITLE": {
-        "A": "Clareza no seu dinheiro.",
-        "B": "Sem planilha",
-        "C": ", sem culpa."
+        "A": "A IA que organiza ",
+        "B": "a sua vida inteira",
+        "C": " em minutos"
       },
       "SUB": {
-        "A": "Você registra em segundos, a MIRA organiza por você e te devolve ",
-        "B": "controle",
-        "C": " com uma experiência bonita, simples e prazerosa de usar."
+        "A": "Conecte suas contas, agenda e rotina — e receba ",
+        "B": "decisões inteligentes",
+        "C": " automaticamente."
       },
       "TRUST": {
         "T1": { "K": "Comece rápido", "V": "em poucos minutos" },
@@ -38,9 +38,9 @@
         "T3": { "K": "Acessível", "V": "Foco e teclado" }
       },
       "CTA": {
-        "PRIMARY": "Contratar Mira Agora",
+        "PRIMARY": "Experimentar grátis",
         "SECONDARY": "Ver como funciona",
-        "ARIA_PRIMARY": "Conhecer o plano Mira"
+        "ARIA_PRIMARY": "Experimentar o MIRA gratuitamente"
       },
       "BULLETS": {
         "B1": "Registre gastos e entradas sem esforço",
@@ -184,8 +184,68 @@
 
     "CTA_FINAL": {
       "TITLE": "Pronto pra sentir “meu dinheiro tá sob controle”?",
-      "SUB": "Contrate a MIRA e comece leve. O resto a gente organiza com você.",
-      "BUTTON": "Contratar Mira Agora"
+      "SUB": "Comece grátis. Sem cartão. Sem compromisso.",
+      "BUTTON": "Experimentar grátis"
+    },
+
+    "ONBOARDING": {
+      "KICKER": "Personalizado pra você",
+      "TITLE": "O que você quer melhorar?",
+      "SUB": "Escolha seu foco e em 2 minutos a MIRA analisa a sua vida e te devolve um plano personalizado.",
+      "OPT1": "Dinheiro",
+      "OPT2": "Organização",
+      "OPT3": "Produtividade",
+      "OPT4": "Tudo",
+      "PROMISE": "Em 2 minutos a MIRA analisa a sua vida"
+    },
+    "CROSSINSIGHTS": {
+      "KICKER": "Feature exclusiva",
+      "TITLE": "Insights cruzados de vida",
+      "SUB": "A MIRA cruza seus dados de dinheiro, agenda e rotina — e te devolve padrões que ninguém mais vê.",
+      "I1": "Nos dias que você dorme menos, gasta 23% a mais",
+      "I2": "Quando sua agenda está vazia, você compra mais online",
+      "I3": "Segunda-feira você tem maior produtividade financeira",
+      "NOTE": "Isso ninguém está fazendo bem — e a MIRA faz."
+    },
+    "PRICING": {
+      "KICKER": "Preços simples e transparentes",
+      "TITLE": "Escolha seu plano",
+      "SUB": "Comece grátis. Faça upgrade quando quiser.",
+      "FREE": {
+        "NAME": "Free",
+        "PRICE": "R$ 0",
+        "DESC": "Limitado mas útil",
+        "I1": "Visão geral do mês",
+        "I2": "Insights essenciais",
+        "I3": "Registro manual"
+      },
+      "PRO": {
+        "NAME": "Pro",
+        "PRICE": "R$ 14,90",
+        "PERIOD": "/mês",
+        "BADGE": "Mais popular",
+        "DESC": "IA completa pro seu dinheiro",
+        "I1": "IA completa",
+        "I2": "Cruzamento de dados",
+        "I3": "Alertas inteligentes",
+        "I4": "Painel premium"
+      },
+      "ELITE": {
+        "NAME": "Elite",
+        "PRICE": "R$ 29,90",
+        "PERIOD": "/mês",
+        "DESC": "Vida + negócio, tudo automatizado",
+        "I1": "Tudo do Pro",
+        "I2": "Vida + negócio",
+        "I3": "Automações avançadas",
+        "I4": "Decisões cruzadas"
+      },
+      "CTA_FREE": "Começar grátis",
+      "CTA_PRO": "Experimentar Pro",
+      "CTA_ELITE": "Experimentar Elite",
+      "FOUNDING_TITLE": "Founding Users — preço fixo vitalício",
+      "FOUNDING_DESC": "Garanta já o seu preço vitalício. Só pra os primeiros usuários. Depois sobe.",
+      "FOUNDING_CTA": "Garantir preço founding"
     },
 
     "PLAN": {
