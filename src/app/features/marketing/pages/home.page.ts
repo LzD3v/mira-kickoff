@@ -444,14 +444,18 @@ type Testimonial = {
         <!-- Free -->
         <mira-ui-card class="pricing-card">
           <div class="pricing-card__inner">
-            <div class="pricing-card__name">{{ 'MARKETING.PRICING.FREE.NAME' | translate }}</div>
-            <div class="pricing-card__price">{{ 'MARKETING.PRICING.FREE.PRICE' | translate }}</div>
-            <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.FREE.DESC' | translate }}</div>
+            <div class="pricing-card__top">
+              <div class="pricing-card__name">{{ 'MARKETING.PRICING.FREE.NAME' | translate }}</div>
+              <div class="pricing-card__price">{{ 'MARKETING.PRICING.FREE.PRICE' | translate }}</div>
+              <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.FREE.DESC' | translate }}</div>
+            </div>
+
             <ul class="pricing-card__list">
               <li>{{ 'MARKETING.PRICING.FREE.I1' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.FREE.I2' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.FREE.I3' | translate }}</li>
             </ul>
+
             <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
               {{ 'MARKETING.PRICING.CTA_FREE' | translate }}
             </button>
@@ -460,19 +464,26 @@ type Testimonial = {
 
         <!-- Pro (destaque) -->
         <mira-ui-card class="pricing-card pricing-card--pro">
+          <div class="pricing-card__badge pricing-card__badge--floating">
+            {{ 'MARKETING.PRICING.PRO.BADGE' | translate }}
+          </div>
+
           <div class="pricing-card__inner">
-            <div class="pricing-card__badge">{{ 'MARKETING.PRICING.PRO.BADGE' | translate }}</div>
-            <div class="pricing-card__name">{{ 'MARKETING.PRICING.PRO.NAME' | translate }}</div>
-            <div class="pricing-card__price">
-              {{ 'MARKETING.PRICING.PRO.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.PRO.PERIOD' | translate }}</span>
+            <div class="pricing-card__top">
+              <div class="pricing-card__name">{{ 'MARKETING.PRICING.PRO.NAME' | translate }}</div>
+              <div class="pricing-card__price">
+                {{ 'MARKETING.PRICING.PRO.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.PRO.PERIOD' | translate }}</span>
+              </div>
+              <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.PRO.DESC' | translate }}</div>
             </div>
-            <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.PRO.DESC' | translate }}</div>
+
             <ul class="pricing-card__list">
               <li>{{ 'MARKETING.PRICING.PRO.I1' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.PRO.I2' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.PRO.I3' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.PRO.I4' | translate }}</li>
             </ul>
+
             <button class="cta-primary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
               <span class="cta-primary__shine" aria-hidden="true"></span>
               <span class="cta-primary__text">{{ 'MARKETING.PRICING.CTA_PRO' | translate }}</span>
@@ -484,23 +495,26 @@ type Testimonial = {
         <!-- Elite -->
         <mira-ui-card class="pricing-card">
           <div class="pricing-card__inner">
-            <div class="pricing-card__name">{{ 'MARKETING.PRICING.ELITE.NAME' | translate }}</div>
-            <div class="pricing-card__price">
-              {{ 'MARKETING.PRICING.ELITE.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.ELITE.PERIOD' | translate }}</span>
+            <div class="pricing-card__top">
+              <div class="pricing-card__name">{{ 'MARKETING.PRICING.ELITE.NAME' | translate }}</div>
+              <div class="pricing-card__price">
+                {{ 'MARKETING.PRICING.ELITE.PRICE' | translate }}<span class="pricing-card__period">{{ 'MARKETING.PRICING.ELITE.PERIOD' | translate }}</span>
+              </div>
+              <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.ELITE.DESC' | translate }}</div>
             </div>
-            <div class="pricing-card__desc muted">{{ 'MARKETING.PRICING.ELITE.DESC' | translate }}</div>
+
             <ul class="pricing-card__list">
               <li>{{ 'MARKETING.PRICING.ELITE.I1' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.ELITE.I2' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.ELITE.I3' | translate }}</li>
               <li>{{ 'MARKETING.PRICING.ELITE.I4' | translate }}</li>
             </ul>
+
             <button class="cta-secondary focus-ring pricing-card__btn" type="button" (click)="openPlan()">
               {{ 'MARKETING.PRICING.CTA_ELITE' | translate }}
             </button>
           </div>
         </mira-ui-card>
-      </div>
 
       <!-- Founding Users banner -->
       <div class="founding-banner">
@@ -1205,56 +1219,122 @@ type Testimonial = {
       .pricing-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 20px;
+        gap: 20px;
+        margin-top: 24px;
         align-items: stretch;
       }
-      .pricing-card { height: 100%; display: flex; flex-direction: column; }
+
+      .pricing-card {
+        position: relative;
+        height: 100%;
+        min-height: 430px;
+        display: block;
+        overflow: visible;
+      }
+
       .pricing-card__inner {
+        height: 100%;
         display: flex;
         flex-direction: column;
+        gap: 18px;
+        padding: 28px 24px 24px;
+      }
+
+      .pricing-card__top {
+        display: grid;
         gap: 10px;
-        padding: 4px;
-        flex: 1;
+        min-height: 130px;
+        align-content: start;
       }
-      .pricing-card__badge {
-        display: inline-block;
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        background: linear-gradient(90deg, var(--brand-2), var(--brand));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        margin-bottom: 2px;
+
+      .pricing-card__name {
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: -0.3px;
+        line-height: 1.2;
       }
-      .pricing-card__name { font-size: 18px; font-weight: 900; letter-spacing: -0.3px; }
+
       .pricing-card__price {
         font-size: clamp(26px, 3vw, 34px);
         font-weight: 950;
         letter-spacing: -1px;
         line-height: 1;
       }
-      .pricing-card__period { font-size: 14px; font-weight: 400; opacity: 0.6; margin-left: 2px; }
-      .pricing-card__desc { font-size: 13px; }
+
+      .pricing-card__period {
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0.72;
+        margin-left: 4px;
+      }
+
+      .pricing-card__desc {
+        font-size: 14px;
+        line-height: 1.45;
+        min-height: 42px;
+      }
+
       .pricing-card__list {
         list-style: none;
         margin: 0;
         padding: 0;
         display: grid;
-        gap: 8px;
-        font-size: 13px;
+        gap: 12px;
+        font-size: 15px;
+        line-height: 1.4;
       }
-      .pricing-card__list li::before { content: "✓  "; color: var(--brand-2); font-weight: 700; }
-      .pricing-card__btn { width: 100%; justify-content: center; margin-top: auto; padding-top: 14px; }
+
+      .pricing-card__list li {
+        position: relative;
+        padding-left: 18px;
+      }
+
+      .pricing-card__list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--brand-2);
+        font-weight: 800;
+      }
+
+      .pricing-card__btn {
+        width: 100%;
+        justify-content: center;
+        margin-top: auto;
+      }
+
+      .pricing-card__badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(132,210,244,0.28);
+        background: rgba(132,210,244,0.10);
+        color: var(--brand-2);
+      }
+
+      .pricing-card__badge--floating {
+        position: absolute;
+        top: -12px;
+        left: 24px;
+        z-index: 2;
+      }
+
       .pricing-card--pro {
         border-color: rgba(133,94,217,0.45) !important;
         background: rgba(133,94,217,0.06) !important;
+        box-shadow: 0 18px 44px rgba(133,94,217,0.12);
       }
 
       .founding-banner {
-        margin-top: 24px;
+        margin-top: 28px;
         display: flex;
         align-items: center;
         gap: 16px;
@@ -1264,16 +1344,53 @@ type Testimonial = {
         background: rgba(132,210,244,0.06);
         flex-wrap: wrap;
       }
-      .founding-banner__ic { font-size: 28px; flex-shrink: 0; }
-      .founding-banner__copy { flex: 1; min-width: 200px; }
-      .founding-banner__t { font-size: 15px; font-weight: 900; }
-      .founding-banner__d { font-size: 13px; margin: 2px 0 0; }
+
+      .founding-banner__ic {
+        font-size: 28px;
+        flex-shrink: 0;
+      }
+
+      .founding-banner__copy {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .founding-banner__t {
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .founding-banner__d {
+        font-size: 13px;
+        margin: 2px 0 0;
+      }
 
       @media (max-width: 760px) {
-        .pricing-grid { grid-template-columns: 1fr; }
-        .founding-banner { flex-direction: column; align-items: flex-start; }
-      }
-    `,
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .pricing-card {
+          min-height: auto;
+        }
+
+        .pricing-card__inner {
+          padding: 24px 20px 20px;
+        }
+
+        .pricing-card__badge--floating {
+          left: 20px;
+        }
+        .pricing-card__list {
+          min-height: 152px;
+        }
+
+        .founding-banner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }`,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
