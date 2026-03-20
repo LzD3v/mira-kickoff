@@ -515,6 +515,21 @@ type Testimonial = {
             </button>
           </div>
         </mira-ui-card>
+      </div>
+
+      <!-- Founding Users banner -->
+      <div class="founding-banner">
+        <span class="founding-banner__ic" aria-hidden="true">🎁</span>
+        <div class="founding-banner__copy">
+          <strong class="founding-banner__t">{{ 'MARKETING.PRICING.FOUNDING_TITLE' | translate }}</strong>
+          <p class="founding-banner__d muted">{{ 'MARKETING.PRICING.FOUNDING_DESC' | translate }}</p>
+        </div>
+        <button class="cta-primary focus-ring" type="button" (click)="openPlan()">
+          <span class="cta-primary__shine" aria-hidden="true"></span>
+          <span class="cta-primary__text">{{ 'MARKETING.PRICING.FOUNDING_CTA' | translate }}</span>
+          <span class="cta-primary__arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
 
       <!-- Founding Users banner -->
       <div class="founding-banner">
@@ -1382,15 +1397,16 @@ type Testimonial = {
         .pricing-card__badge--floating {
           left: 20px;
         }
-        .pricing-card__list {
-          min-height: 152px;
-        }
 
         .founding-banner {
           flex-direction: column;
           align-items: flex-start;
         }
-      }`,
+      }
+        .pricing-card__list {
+          min-height: 152px;
+      }
+    `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
